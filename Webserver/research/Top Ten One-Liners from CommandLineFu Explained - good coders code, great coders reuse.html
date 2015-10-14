@@ -1,0 +1,3621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Top Ten One-Liners from CommandLineFu Explained - good coders code, great coders reuse</title>
+
+    <meta name="description" content="I love working in the shell. Mastery of shell lets you get things done in seconds, rather than minutes or hours, if you chose to write a program instead. In this article I'd like to explain the top one-liners from the commandlinefu.com. It's a user-driven website where people get to ...">
+
+    <link rel="stylesheet" type="text/css" href="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/reset.css" media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/catonmat.css" media="screen, projection">
+    <!--[if lte IE 7]>
+    <style type="text/css">
+      #wrapper { margin-top: -1px; }
+    </style>
+    <![endif]-->
+
+    <script src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/plusone.js" async="" type="text/javascript"></script><script src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/widgets.js" id="twitter-wjs"></script><script type="text/javascript" src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/jquery-1.js"></script>
+    <script type="text/javascript" src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/catonmat.js"></script>
+
+    
+
+
+    <link rel="alternate" type="application/atom+xml" title="catonmat feed" href="http://www.catonmat.net/feed/">
+    <link rel="shortcut icon" href="http://www.catonmat.net/favicon.ico" type="image/x-icon"> 
+    <link rel="icon" href="http://www.catonmat.net/favicon.ico" type="image/x-icon"> 
+
+    <meta name="google-site-verification" content="aXAUFOiWFF_OiqrmlUrhZN1sqJf5tnuYdMDpuXc1w8w">
+    <meta name="msvalidate.01" content="CD96F4810C690ED2612624D7D2A0C5E8">
+  <style>@-webkit-keyframes popmydsxhqyugqidgjrtrhnoyeqomlbyuquf {50% {-webkit-transform:scale(1.2);}100% {-webkit-transform:scale(1);}}@keyframes popmydsxhqyugqidgjrtrhnoyeqomlbyuquf {50% {-webkit-transform:scale(1.2);transform:scale(1.2);}100% {-webkit-transform:scale(1);transform:scale(1);}}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;border:solid 2px #fff !important;color:#fff !important;display:block !important;height:auto !important;margin:0 !important;opacity:0.9 !important;padding:7px 10px !important;position:fixed !important;visibility:visible !important;width:auto !important;z-index:2147483647 !important;-moz-border-radius:5px !important;border-radius:5px !important;-moz-box-shadow:0px 0px 20px #000 !important;box-shadow:0px 0px 20px #000 !important;}.mydsxhqyugqidgjrtrhnoyeqomlbyuquf-blocked{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;color:#AAA !important;display:inline !important;text-decoration:line-through !important;}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf br{display:inline-block !important;padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf span{background:transparent !important;padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf div{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;border:0 !important;margin:0 !important;padding:0 !important;width:auto !important;letter-spacing:normal !important;font:13px Arial,Helvetica !important;text-align:left !important;text-shadow:none !important;text-transform:none !important;word-spacing:normal !important;}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf a{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;font-weight:normal !important;background:none !important;text-decoration:underline !important;color:#fff !important;}a#mydsxhqyugqidgjrtrhnoyeqomlbyuquf-gear{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;text-decoration:none !important;position:absolute !important;display:none !important;font-size:20px !important;width:20px !important;height:20px !important;line-height:20px !important;text-align:center !important;background-color:rgba(255,255,255,.8) !important;background-image:url(resource://firefox-at-ghostery-dot-com/ghostery/data/images/gear.svg) !important;background-size:16px 16px !important;background-position:center center !important;background-repeat:no-repeat !important;text-decoration:none !important;}a#mydsxhqyugqidgjrtrhnoyeqomlbyuquf-gear:hover{-webkit-animation-name:popmydsxhqyugqidgjrtrhnoyeqomlbyuquf !important;animation-name:popmydsxhqyugqidgjrtrhnoyeqomlbyuquf !important;-webkit-animation-duration:0.3s !important;animation-duration:0.3s !important;}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf:hover #mydsxhqyugqidgjrtrhnoyeqomlbyuquf-gear{text-decoration:none !important;display:inline-block !important;}#mydsxhqyugqidgjrtrhnoyeqomlbyuquf hr{visibility:hidden !important;padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;height:1em;}@media print{#mydsxhqyugqidgjrtrhnoyeqomlbyuquf{display:none !important;}}</style></head>
+  <body>
+    <div id="container">
+      <div id="header">
+        
+  <div id="tabs">
+  <ul>
+    <li><a href="http://www.catonmat.net/" title="Return to homepage/blog">Home</a></li>
+    <li><a href="http://www.catonmat.net/books/" title="Books that Peteris krumins has written">Books</a></li>
+    <li><a href="http://www.catonmat.net/projects/" title="Projects that Peteris Krumins has done">Projects</a></li>
+    <li><a href="http://www.catonmat.net/sitemap/" title="Catonmat sitemap">Sitemap</a></li>
+    <li><a href="http://www.catonmat.net/feedback/" title="Contact Peteris Krumins/Leave feedback">Feedback</a></li>
+    <li><a href="http://www.catonmat.net/about/" title="About Peteris Krumins">About Me</a></li>
+    <li><a class="advertise" href="http://www.catonmat.net/consulting/" title="Consulting">Consulting</a></li>
+    <li><a class="advertise" href="http://www.catonmat.net/advertise/" title="Advertise on catonmat.net">Advertising</a></li>
+  </ul>
+  <!--
+  <div id="tab-ad">
+  </div>
+  -->
+</div>
+<div class="clear"></div>
+<div id="hspace">
+  <div id="first">
+    <a href="http://www.catonmat.net/" class="wide" title="Return to good coders code, great reuse">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/good-coders-code-great-reuse.gif" alt="good coders code, great reuse">
+    </a>
+    <div id="first-real">
+      <table valign="middle" height="145" width="100%">
+        <tbody><tr>
+          <td>
+            <p class="quote">But in our enthusiasm, we could not resist a
+ radical overhaul of the system, in which all of its major weaknesses 
+have been exposed, analyzed, and replaced with new weaknesses.</p>
+            <!-- <span class="quotes"><a href="/quotes/" title="more programming related quotes">more quotes</a></span>-->
+            <p class="author">Bruce Leverett</p>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div id="second">
+    <div id="second-real">
+      <div id="announcements">
+        <div id="browserling">
+          <p class="title"><a href="http://www.catonmat.net/blog/launching-browserling/" title="I am doing a startup!">I am doing a startup!</a></p>
+          <p class="browserling-logo"><a href="http://www.browserling.com/" title="Cross-browser testing"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/browserling-logo-180px.png" alt="Browserling"></a></p>
+          <p>Cross-browser testing from your browser!</p>
+        </div>
+        <div id="books">
+          <p class="title"><a href="http://www.catonmat.net/blog/perl-one-liners-no-starch-press/">I have written my fourth book!</a>
+          </p><p class="awk-logo"><a href="http://www.catonmat.net/blog/perl-one-liners-no-starch-press/" title="Perl One-Liners by No Starch Press"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/perl-book-no-starch-press-180x61.png" alt="Perl Book"></a></p>
+          <p>Be faster than Larry Wall at command line!</p>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+
+      </div>
+      <div id="wrapper">
+        <div id="content">
+          
+
+
+
+
+
+
+
+
+
+
+<div class="welcome">
+  <div class="twitter">
+    <p><a href="http://twitter.com/pkrumins" title="Peteris Krumins on Twitter"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/twitter-16x16.gif">Follow me on Twitter</a> for my latest adventures!</p>
+  </div>
+</div>
+
+
+
+<div class="page">
+  <div class="header">
+    <span class="category next"><a href="http://www.catonmat.net/category/unix-shell" title="See all posts in category &quot;Unix Shell&quot;">Unix Shell</a></span>
+
+    <span class="commentsc">
+        <a href="http://www.catonmat.net/blog/top-ten-one-liners-from-commandlinefu-explained/#comments" title="74 people have commented on &quot;Top Ten One-Liners from CommandLineFu Explained&quot;"><strong>74</strong> Comments</a>
+    </span>
+
+    <span class="date right">March 18, 2010</span>
+
+    <div class="clear"></div>
+    <div class="hrb"></div>
+    <h1><a href="http://www.catonmat.net/blog/top-ten-one-liners-from-commandlinefu-explained/" title="Top Ten One-Liners from CommandLineFu Explained">Top Ten One-Liners from CommandLineFu Explained</a></h1>
+    <!--
+    <div class="hr lighter"></div>
+    -->
+  </div>
+
+    
+
+<div class="series">
+<form action="/series" method="POST">
+  <div class="snote">
+    This article is part of the article series "<a href="http://www.catonmat.net/series/commandlinefu-one-liners-explained" title="Article series &quot;CommandLineFu One-Liners Explained&quot;">CommandLineFu One-Liners Explained</a>."
+  </div>
+  <div class="snav">
+      <span class="sprev" title="This is the first part in the series (there is no previous article)">&lt;- previous article</span>
+    <span class="toc">
+      <select name="navigate">
+           <option value="/blog/top-ten-one-liners-from-commandlinefu-explained" selected="selected">1. Top Ten One-Liners from CommandLineFu Explained</option>
+           <option value="/blog/the-next-ten-one-liners-from-commandlinefu-explained">2. The Next Ten One-Liners from CommandLineFu Explained</option>
+           <option value="/blog/another-ten-one-liners-from-commandlinefu-explained">3. Another Ten One-Liners from CommandLineFu Explained</option>
+           <option value="/blog/yet-another-ten-one-liners-from-commandlinefu-explained">4. Yet Another Ten One-Liners from CommandLineFu Explained</option>
+      </select>
+      <input value="Go" name="go" type="submit">
+    </span>
+      
+      <span class="snext"><a href="http://www.catonmat.net/blog/the-next-ten-one-liners-from-commandlinefu-explained/" title="The Next Ten One-Liners from CommandLineFu Explained">next article -&gt;</a></span>
+  </div>
+</form>
+</div>
+
+
+  <div class="content">
+    
+
+
+    
+
+    
+
+    
+
+    
+      <div style="margin-bottom: 10px"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/commandlinefu-explained.jpg" alt="CommandLineFu Explained" class="post-icon" align="left"><div style="float: right; margin-right:20px">
+
+<!-- catonmat before article (blue) 336x280, created 1/23/10 -->
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-0433925538517663" data-ad-slot="8733420369"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+<div class="clear"></div>
+</div>
+<p>I love working in the shell. Mastery of shell lets you get things 
+done in seconds, rather than minutes or hours, if you chose to write a 
+program instead. </p>
+<p>In this article I'd like to explain the <a href="http://www.commandlinefu.com/commands/browse/sort-by-votes">top one-liners</a> from the <a href="http://www.commandlinefu.com/">commandlinefu.com</a>. It's a user-driven website where people get to choose the best and most useful shell one-liners.</p>
+<p>But before I do that, I want to take the opportunity and link to a 
+few of my articles that I wrote some time ago on working efficiently in 
+the command line:</p>
+<ul>	<li><a href="http://www.catonmat.net/blog/bash-vi-editing-mode-cheat-sheet/">Working Efficiently in Bash (Part I).</a></li>
+	<li><a href="http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/">Working Efficiently in Bash (Part II).</a></li>
+	<li><a href="http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/">The Definitive Guide to Bash Command Line History.</a></li>
+	<li><a href="http://www.catonmat.net/blog/set-operations-in-unix-shell/">A fun article on Set Operations in the Shell.</a></li>
+	<li><a href="http://www.catonmat.net/blog/solving-google-treasure-hunt-prime-number-problem-four/">Another fun article on Solving Google Treasure Hunt in the Shell.</a></li>
+</ul>
+<p><strong>Update:</strong> <a href="http://rus-linux.net/nlib.php?name=/MyLDP/consol/oneliners.html">Russian translation now available.</a></p>
+<p>And now the explanation of top one-liners from commandlinefu.</p>
+<h2 style="margin-bottom: 10px">#1. Run the last command as root</h2>
+<pre>$ sudo !!</pre>
+<p>We all know what the <code>sudo</code> command does - it runs the 
+command as another user, in this case, it runs the command as superuser 
+because no other user was specified. But what's really interesting is 
+the bang-bang <code>!!</code> part of the command. It's called the <strong>event designator</strong>.
+ An event designator references a command in shell's history. In this 
+case the event designator references the previous command. Writing <code>!!</code> is the same as writing <code>!-1</code>. The <code>-1</code> refers to the last command. You can generalize it, and write <code>!-n</code> to refer to the n-th previous command. To view all your previous commands, type <code>history</code>.</p>
+<p>This one-liner is actually really bash-specific, as event designators are a feature of bash.</p>
+<p>I wrote about event designators in much more detail in my article "<a href="http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/">The Definitive Guide to Bash Command Line History</a>." The article also comes with a printable cheat sheet for working with the history.</p>
+<h2 style="margin-bottom: 10px">#2. Serve the current directory at http://localhost:8000/</h2>
+<pre>$ python -m SimpleHTTPServer</pre>
+<p>This one-liner starts a web server on port 8000 with the contents of 
+current directory on all the interfaces (address 0.0.0.0), not just 
+localhost. If you have "<code>index.html</code>" or "<code>index.htm</code>" files, it will serve those, otherwise it will list the contents of the currently working directory.</p>
+<p>It works because python comes with a standard module called <code>SimpleHTTPServer</code>. The <code>-m</code> argument makes python to search for a module named <code>SimpleHTTPServer.py</code> in all the possible system locations (listed in <code>sys.path</code> and <code>$PYTHONPATH</code>
+ shell variable). Once found, it executes it as a script. If you look at
+ the source code of this module, you'll find that this module tests if 
+it's run as a script <code>if __name__ == '__main__'</code>, and if it is, it runs the <code>test()</code> method that makes it run a web server in the current directory.</p>
+<p>To use a different port, specify it as the next argument:</p>
+<pre>$ python -m SimpleHTTPServer 8080</pre>
+<p>This command runs a HTTP server on all local interfaces on port 8080.</p>
+<h2 style="margin-bottom: 10px">#3. Save a file you edited in vim without the needed permissions</h2>
+<pre>:w !sudo tee %</pre>
+<p>This happens to me way too often. I open a system config file in vim 
+and edit it just to find out that I don't have permissions to save it. 
+This one-liner saves the day. Instead of writing the while to a 
+temporary file <code>:w /tmp/foobar</code> and then moving the temporary file to the right destination <code>mv /tmp/foobar /etc/service.conf</code>, you now just type the one-liner above in vim and it will save the file.</p>
+<p>Here is how it works, if you look at the vim documentation (by typing <code>:he :w</code> in vim), you'll find the reference to the command <code>:w !{cmd}</code> that says that vim runs <code>{cmd}</code> and passes it the contents of the file as standard input. In this one-liner the <code>{cmd}</code> part is the <code>sudo tee %</code> command. It runs <code>tee %</code> as superuser. But wait, what is <code>%</code>?
+ Well, it's a read-only register in vim that contains the filename of 
+the current file! Therefore the command that vim executes becomes <code>tee current_filename</code>, with the current directory being whatever the <code>current_file</code> is in. Now what does <code>tee</code> do? The <code>tee</code>
+ command takes standard input and write it to a file! Rephrasing, it 
+takes the contents of the file edited in vim, and writes it to the file 
+(while being root)! All done!</p>
+<h2 style="margin-bottom: 10px">#4. Change to the previous working directory</h2>
+<pre>$ cd -</pre>
+<p>Everyone knows this, right? The dash "<code>-</code>" is short for "previous working directory." The previous working directory is defined by <code>$OLDPWD</code> shell variable. After you use the <code>cd</code> command, it sets the <code>$OLDPWD</code> environment variable, and then, if you type the short version <code>cd -</code>, it effectively becomes <code>cd $OLDPWD</code> and changes to the previous directory.</p>
+<p>To change to a directory named "<code>-</code>", you have to either cd to the parent directory and then do <code>cd ./-</code> or do <code>cd /full/path/to/-</code>.</p>
+<h2 style="margin-bottom: 10px">#5. Run the previous shell command but replace string "foo" with "bar"</h2>
+<pre>$ ^foo^bar^</pre>
+<p>This is another event designator. This one is for quick substitution. It replaces <code>foo</code> with <code>bar</code> and repeats the last command. It's actually a shortcut for <code>!!:s/foo/bar/</code>. This one-liner applies the <code>s</code> modifier to the <code>!!</code> event designator. As we learned from one-liner #1, the <code>!!</code> event designator stands for the previous command. Now the <code>s</code> modifier stands for substitute (greetings to <a href="http://www.catonmat.net/blog/sed-one-liners-explained-part-one/">sed</a>) and it substitutes the first word with the second word.</p>
+<p>Note that this one-liner replaces just the first word in the previous command. To replace all words, add the <code>g</code> modifer (<code>g</code> for global):</p>
+<pre>$ !!:gs/foo/bar</pre>
+<p>This one-liner is also bash-specific, as event designators are a feature of bash.</p>
+<p>Again, see my article "<a href="http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/">The Definitive Guide to Bash Command Line History</a>." I explain all this stuff in great detail.</p>
+<h2 style="margin-bottom: 10px">#6. Quickly backup or copy a file</h2>
+<pre>$ cp filename{,.bak}</pre>
+<p>This one-liner copies the file named <code>filename</code> to a file named <code>filename.bak</code>. Here is how it works. It uses <strong>brace expansion</strong> to construct a list of arguments for the <code>cp</code> command. Brace expansion is a mechanism by which arbitrary strings may be generated. In this one-liner <code>filename{,.bak}</code> gets brace expanded to <code>filename filename.bak</code> and puts in place of the brace expression. The command becomes <code>cp filename filename.bak</code> and file gets copied.</p>
+<p>Talking more about brace expansion, you can do all kinds of combinatorics with it. Here is a fun application:</p>
+<pre>$ echo {a,b,c}{a,b,c}{a,b,c}</pre>
+<p>It generates all the possible strings 3-letter from the set <code>{a, b, c}</code>:</p>
+<pre>aaa aab aac aba abb abc aca acb acc
+baa bab bac bba bbb bbc bca bcb bcc
+caa cab cac cba cbb cbc cca ccb ccc
+</pre>
+<p>And here is how to generate all the possible 2-letter strings from the set of <code>{a, b, c}</code>:</p>
+<pre>$ echo {a,b,c}{a,b,c}
+</pre>
+<p>It produces:</p>
+<pre>aa ab ac ba bb bc ca cb cc
+</pre>
+<p>If you liked this, you may also like my article where I defined a 
+bunch of set operations (such as intersection, union, symmetry, 
+powerset, etc) by using just shell commands. The article is called "<a href="http://www.catonmat.net/blog/set-operations-in-unix-shell/">Set Operations in the Unix Shell</a>." (And since I have sets in the shell, I will soon write articles on on "<strong>Combinatorics in the Shell</strong>" and "<strong>Algebra in the Shell</strong>". Fun topics to explore. Perhaps even "Topology in the Shell" :))</p>
+<h2 style="margin-bottom: 10px">#7. mtr - traceroute and ping combined</h2>
+<pre>$ mtr google.com</pre>
+<p>MTR, bettern known as "Matt's Traceroute" combines both <code>traceroute</code> and <code>ping</code> command. After each successful hop, it sends a ping request to the found machine, this way it produces output of both <code>traceroute</code> and <code>ping</code>
+ to better understand the quality of link. If it finds out a packet took
+ an alternative route, it displays it, and by default it keeps updating 
+the statistics so you knew what was going on in real time.</p>
+<h2 style="margin-bottom: 10px">#8. Find the last command that begins with "whatever," but avoid running it</h2>
+<pre>$ !whatever:p</pre>
+<p>Another use of event designators. The <code>!whatever</code> designator searches the shell history for the most recently executed command that starts with <code>whatever</code>. But instead of executing it, it prints it. The <code>:p</code> modifier makes it print instead of executing.</p>
+<p>This one-liner is bash-specific, as event designators are a feature of bash.</p>
+<p>Once again, see my article "<a href="http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/">The Definitive Guide to Bash Command Line History</a>." I explain all this stuff in great detail.</p>
+<h2 style="margin-bottom: 10px">#9. Copy your public-key to remote-machine for public-key authentication</h2>
+<pre>$ ssh-copy-id remote-machine</pre>
+<p>This one-liner copies your public-key, that you generated with <code>ssh-keygen</code> (either SSHv1 file identity.pub or SSHv2 file id_rsa.pub) to the <code>remote-machine</code> and places it in <code>~/.ssh/authorized_keys</code>
+ file. This ensures that the next time you try to log into that machine,
+ public-key authentication (commonly referred to as "passwordless 
+authentication.") will be used instead of the regular password 
+authentication.</p>
+<p>If you wished to do it yourself, you'd have to take the following steps:</p>
+<pre>your-machine$ scp ~/.ssh/identity.pub remote-machine:
+your-machine$ ssh remote-machine
+remote-machine$ cat identity.pub &gt;&gt; ~/.ssh/authorized_keys
+</pre>
+<p>This one-liner saves a great deal of typing. Actually I just found out that there was a shorter way to do it:</p>
+<pre>your-machine$ ssh remote-machine 'cat &gt;&gt; .ssh/authorized_keys' &lt; .ssh/identity.pub
+</pre>
+<h2 style="margin-bottom: 10px">#10. Capture video of a linux desktop</h2>
+<pre>$ ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq /tmp/out.mpg</pre>
+<p>A pure coincidence, I have done so much video processing with ffmpeg 
+that I know what most of this command does without looking much in the 
+manual.</p>
+<p>The ffmpeg generally can be descibed as a command that takes a bunch 
+of options and the last option is the output file. In this case the 
+options are <code>-f x11grab -s wxga -r 25 -i :0.0 -sameq</code> and the output file is <code>/tmp/out.mpg</code>.</p>
+<p>Here is what the options mean:</p>
+<ul>	<li><code>-f x11grab</code> makes ffmpeg to set the input video 
+format as x11grab. The X11 framebuffer has a specific format it presents
+ data in and it makes ffmpeg to decode it correctly.</li>
+	<li><code>-s wxga</code> makes ffmpeg to set the size of the video to 
+wxga which is shortcut for 1366x768. This is a strange resolution to 
+use, I'd just write <code>-s 800x600</code>.</li>
+	<li><code>-r 25</code> sets the framerate of the video to 25fps.</li>
+	<li><code>-i :0.0</code> sets the video input file to X11 display 0.0 at localhost.</li>
+	<li><code>-sameq</code> preserves the quality of input stream. It's best to preserve the quality and post-process it later.</li>
+</ul>
+<p>You can also specify ffmpeg to grab display from another x-server by changing the <code>-i :0.0</code> to <code>-i host:0.0</code>.</p>
+<p>If you're interested in ffmpeg, here are my other articles on ffmpeg that I wrote while ago:</p>
+<ul>	<li><a href="http://www.catonmat.net/blog/how-to-extract-audio-tracks-from-youtube-videos/">How to Extract Audio Tracks from YouTube Videos</a></li>
+	<li><a href="http://www.catonmat.net/blog/converting-youtube-flvs-to-a-better-format-with-ffmpeg/">Converting YouTube Flash Videos to a Better Format with ffmpeg</a></li>
+</ul>
+<p>PS. This article was so fun to write, that I decided to write several
+ more parts. Tune in the next time for "The Next Top Ten One-Liners from
+ CommandLineFu Explained" :)</p>
+<p>Have fun. See ya!</p>
+<p>PSS. <a href="http://twitter.com/pkrumins">Follow me on twitter for updates</a>.</p>
+<h2>Sponsor this series!</h2>
+<p><a href="http://www.catonmat.net/feedback/?subject=Interested+in+Sponsoring+Articles">Contact me</a>, if you wish to sponsor any other of my existing posts or future posts!</p>
+
+  </div>
+
+
+  <div class="social">
+    <div class="twitter">
+      <a style="display: block;" href="https://twitter.com/share" class="twitter-share-button"><iframe style="width: 30px; height: 19px; border: 0px none;" id="vkgdtpjlgqkppabamptdqoaqlqnwusihylfn"></iframe></a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+    <div class="facebook">
+      
+      <iframe src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/like.html" scrolling="no" style="border: medium none; overflow: hidden; width: 100px; height: 21px; display: block;" allowtransparency="true" frameborder="0"><iframe style="width: 30px; height: 19px; border: 0px none;" id="hrwufurlilreccmpdpprzxhcacnjsuth"></iframe></iframe>
+    </div>
+    <div class="googleplus">
+      <g:plusone style="display: block;" size="small"><iframe style="width: 30px; height: 19px; border: 0px none;" id="xcsudjtaxdfxpgvwpsxjfqixyhgfbuxuya"></iframe></g:plusone>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <div style="margin-bottom: 0.5em">
+<script async="" src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/adsbygoogle.js"></script>
+<!-- catonmat before article 468x60 blue -->
+<ins class="adsbygoogle" style="display:inline-block;width:468px;height:60px" data-ad-client="ca-pub-0433925538517663" data-ad-slot="9246395270"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  </div>
+
+  <div class="footer">
+      <div class="tags"><a href="http://www.catonmat.net/tags" title="All catonmat tags" class="tags_link">Tags</a>:
+        
+        <a href="http://www.catonmat.net/tag/authorized_keys" title="See all pages tagged &quot;authorized_keys&quot;">authorized_keys</a>, 
+        <a href="http://www.catonmat.net/tag/bash" title="See all pages tagged &quot;bash&quot;">bash</a>, 
+        <a href="http://www.catonmat.net/tag/cd" title="See all pages tagged &quot;cd&quot;">cd</a>, 
+        <a href="http://www.catonmat.net/tag/combinatorics" title="See all pages tagged &quot;combinatorics&quot;">combinatorics</a>, 
+        <a href="http://www.catonmat.net/tag/commandlinefu" title="See all pages tagged &quot;commandlinefu&quot;">commandlinefu</a>, 
+        <a href="http://www.catonmat.net/tag/cp" title="See all pages tagged &quot;cp&quot;">cp</a>, 
+        <a href="http://www.catonmat.net/tag/desktop" title="See all pages tagged &quot;desktop&quot;">desktop</a>, 
+        <a href="http://www.catonmat.net/tag/display" title="See all pages tagged &quot;display&quot;">display</a>, 
+        <a href="http://www.catonmat.net/tag/event-designators" title="See all pages tagged &quot;event designators&quot;">event designators</a>, 
+        <a href="http://www.catonmat.net/tag/ffmpeg" title="See all pages tagged &quot;ffmpeg&quot;">ffmpeg</a>, 
+        <a href="http://www.catonmat.net/tag/history" title="See all pages tagged &quot;history&quot;">history</a>, 
+        <a href="http://www.catonmat.net/tag/identity.pub" title="See all pages tagged &quot;identity.pub&quot;">identity.pub</a>, 
+        <a href="http://www.catonmat.net/tag/id_rsa.pub" title="See all pages tagged &quot;id_rsa.pub&quot;">id_rsa.pub</a>, 
+        <a href="http://www.catonmat.net/tag/linux" title="See all pages tagged &quot;linux&quot;">linux</a>, 
+        <a href="http://www.catonmat.net/tag/mtr" title="See all pages tagged &quot;mtr&quot;">mtr</a>, 
+        <a href="http://www.catonmat.net/tag/oldpwd" title="See all pages tagged &quot;oldpwd&quot;">oldpwd</a>, 
+        <a href="http://www.catonmat.net/tag/one-liners" title="See all pages tagged &quot;one liners&quot;">one liners</a>, 
+        <a href="http://www.catonmat.net/tag/passwordless-authentication" title="See all pages tagged &quot;passwordless authentication&quot;">passwordless authentication</a>, 
+        <a href="http://www.catonmat.net/tag/ping" title="See all pages tagged &quot;ping&quot;">ping</a>, 
+        <a href="http://www.catonmat.net/tag/public-key-authentication" title="See all pages tagged &quot;public key authentication&quot;">public key authentication</a>, 
+        <a href="http://www.catonmat.net/tag/python" title="See all pages tagged &quot;python&quot;">python</a>, 
+        <a href="http://www.catonmat.net/tag/pythonpath" title="See all pages tagged &quot;pythonpath&quot;">pythonpath</a>, 
+        <a href="http://www.catonmat.net/tag/root" title="See all pages tagged &quot;root&quot;">root</a>, 
+        <a href="http://www.catonmat.net/tag/sets" title="See all pages tagged &quot;sets&quot;">sets</a>, 
+        <a href="http://www.catonmat.net/tag/shell" title="See all pages tagged &quot;shell&quot;">shell</a>, 
+        <a href="http://www.catonmat.net/tag/simplehttpserver" title="See all pages tagged &quot;simplehttpserver&quot;">simplehttpserver</a>, 
+        <a href="http://www.catonmat.net/tag/ssh" title="See all pages tagged &quot;ssh&quot;">ssh</a>, 
+        <a href="http://www.catonmat.net/tag/ssh-copy-id" title="See all pages tagged &quot;ssh copy id&quot;">ssh copy id</a>, 
+        <a href="http://www.catonmat.net/tag/ssh-keygen" title="See all pages tagged &quot;ssh keygen&quot;">ssh keygen</a>, 
+        <a href="http://www.catonmat.net/tag/sshv1" title="See all pages tagged &quot;sshv1&quot;">sshv1</a>, 
+        <a href="http://www.catonmat.net/tag/sshv2" title="See all pages tagged &quot;sshv2&quot;">sshv2</a>, 
+        <a href="http://www.catonmat.net/tag/sudo" title="See all pages tagged &quot;sudo&quot;">sudo</a>, 
+        <a href="http://www.catonmat.net/tag/tee" title="See all pages tagged &quot;tee&quot;">tee</a>, 
+        <a href="http://www.catonmat.net/tag/traceroute" title="See all pages tagged &quot;traceroute&quot;">traceroute</a>, 
+        <a href="http://www.catonmat.net/tag/vim" title="See all pages tagged &quot;vim&quot;">vim</a>, 
+        <a href="http://www.catonmat.net/tag/x11" title="See all pages tagged &quot;x11&quot;">x11</a>
+      </div>
+
+    <span class="comment_url">
+        <a href="http://www.catonmat.net/blog/top-ten-one-liners-from-commandlinefu-explained/#comments" title="Comment on &quot;Top Ten One-Liners from CommandLineFu Explained&quot;"><strong>74</strong> Comments</a>
+    </span>
+
+    <span class="views">
+       <strong>1,212,302</strong> Views
+    </span>
+
+    <span class="short_url">
+      Short URL <input size="30" value="http://catonmat.net/p/195" onclick="this.select()" readonly="readonly" type="text">
+    </span>
+  </div>
+
+    
+
+<div class="series">
+<form action="/series" method="POST">
+  <div class="snote">
+    This article is part of the article series "<a href="http://www.catonmat.net/series/commandlinefu-one-liners-explained" title="Article series &quot;CommandLineFu One-Liners Explained&quot;">CommandLineFu One-Liners Explained</a>."
+  </div>
+  <div class="snav">
+      <span class="sprev" title="This is the first part in the series (there is no previous article)">&lt;- previous article</span>
+    <span class="toc">
+      <select name="navigate">
+           <option value="/blog/top-ten-one-liners-from-commandlinefu-explained" selected="selected">1. Top Ten One-Liners from CommandLineFu Explained</option>
+           <option value="/blog/the-next-ten-one-liners-from-commandlinefu-explained">2. The Next Ten One-Liners from CommandLineFu Explained</option>
+           <option value="/blog/another-ten-one-liners-from-commandlinefu-explained">3. Another Ten One-Liners from CommandLineFu Explained</option>
+           <option value="/blog/yet-another-ten-one-liners-from-commandlinefu-explained">4. Yet Another Ten One-Liners from CommandLineFu Explained</option>
+      </select>
+      <input value="Go" name="go" type="submit">
+    </span>
+      
+      <span class="snext"><a href="http://www.catonmat.net/blog/the-next-ten-one-liners-from-commandlinefu-explained/" title="The Next Ten One-Liners from CommandLineFu Explained">next article -&gt;</a></span>
+  </div>
+</form>
+</div>
+
+
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="http://www.catonmat.net/blog/yet-another-ten-one-liners-from-commandlinefu-explained/" title="Yet Another Ten One-Liners from CommandLineFu Explained">Yet Another Ten One-Liners from CommandLineFu Explained</a></li>
+      <li><a href="http://www.catonmat.net/blog/another-ten-one-liners-from-commandlinefu-explained/" title="Another Ten One-Liners from CommandLineFu Explained">Another Ten One-Liners from CommandLineFu Explained</a></li>
+      <li><a href="http://www.catonmat.net/blog/bash-one-liners-explained-part-four/" title="Bash One-Liners Explained, Part IV: Working with history">Bash One-Liners Explained, Part IV: Working with history</a></li>
+      <li><a href="http://www.catonmat.net/blog/quick-previous-command-with-sudo/" title="How to run the previous command with sudo quickly">How to run the previous command with sudo quickly</a></li>
+      <li><a href="http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/" title="The Definitive Guide to Bash Command Line History">The Definitive Guide to Bash Command Line History</a></li>
+      <li><a href="http://www.catonmat.net/blog/awk-book/" title="Announcing my first e-book &quot;Awk One-Liners Explained&quot;">Announcing my first e-book "Awk One-Liners Explained"</a></li>
+      <li><a href="http://www.catonmat.net/blog/bash-one-liners-explained-part-one/" title="Bash One-Liners Explained, Part I: Working with files">Bash One-Liners Explained, Part I: Working with files</a></li>
+      <li><a href="http://www.catonmat.net/blog/sudo-vim/" title="How to save read-only files in vim">How to save read-only files in vim</a></li>
+      <li><a href="http://www.catonmat.net/blog/perl-book/" title="Announcing my third e-book &quot;Perl One-Liners Explained&quot;">Announcing my third e-book "Perl One-Liners Explained"</a></li>
+      <li><a href="http://www.catonmat.net/blog/bash-one-liners-explained-part-five/" title="Bash One-Liners Explained, Part V: Navigating around">Bash One-Liners Explained, Part V: Navigating around</a></li>
+      <li>
+    </li></ul>
+  </div>
+
+  <a name="comments"></a>
+  <div class="comments">
+    <div id="comment_list"><!-- TODO: change id to class -->
+      <h3>Comments</h3>
+        
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2664"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">asv</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2664" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:17</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Great article, picked up a few useful commands.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2664?reply" class="reply" id="reply_a_2664" title="Reply to comment by asv">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2665"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Alex</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2665" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:24</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Thanks for the last one! :)</p>
+<p>A few concerns: it complains when run w/o -r, so it's pretty much 
+required for x11grab.  Also, even 500kb/s gives awful quality if you try
+ to do a screencast, so better keep -sameq, and post-process later.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2665?reply" class="reply" id="reply_a_2665" title="Reply to comment by Alex">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-37490"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.aaronbelfour.com/" title="http://www.aaronbelfour.com" rel="nofollow">Aaron</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/37490" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">February 07, 2012, 13:04</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>You know, content area is one of the most overlooked about areas 
+of a site when it comes to a style. However, it is also a very essential
+ area as far as making a group goes.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/37490?reply" class="reply" id="reply_a_37490" title="Reply to comment by Aaron">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2666"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.catonmat.net/" title="http://www.catonmat.net">Peteris Krumins</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/pkrumins" title="pkrumins on Twitter">pkrumins</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2666" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:28</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Alex, oh. I didn't try it. Just relied on the past experience. 
+Okay, I will note that. That's an ok quality for a small youtube video. 
+:) Was thinking in those terms. I will edit the post to reflect your 
+comment.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2666?reply" class="reply" id="reply_a_2666" title="Reply to comment by Peteris Krumins">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-26525"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.modernrugs.co.uk/" title="http://www.modernrugs.co.uk/" rel="nofollow">Rugs</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/26525" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 26, 2011, 09:13</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I will post a link to this page on my blog. I am sure my visitors will find that very useful.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/26525?reply" class="reply" id="reply_a_26525" title="Reply to comment by Rugs">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2667"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">morphir</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2667" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:30</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Peteris, your articles are awesome. You always provide a lucid explanation when you touch a topic. Keep it up!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2667?reply" class="reply" id="reply_a_2667" title="Reply to comment by morphir">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2668"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/9055b6c1d07708555ec584d03c387f15.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.catonmat.net/" title="http://www.catonmat.net">Peteris Krumins</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/pkrumins" title="pkrumins on Twitter">pkrumins</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2668" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:36</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>morphir, thank you!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2668?reply" class="reply" id="reply_a_2668" title="Reply to comment by Peteris Krumins">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2669"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.shinyphoto.co.uk/" title="http://www.shinyphoto.co.uk/" rel="nofollow">Tim</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2669" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:47</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>An amendment to #9:</p>
+<pre>yourmachine$ ssh remote-machine 'cat &gt;&gt; .ssh/authorized_keys; chmod -R og= .ssh' &lt; .ssh/identity.pub
+</pre>
+<p>If the cat&gt;&gt; had to create the file, your umask would probably have made it world-readable. Hence the extra chmod.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2669?reply" class="reply" id="reply_a_2669" title="Reply to comment by Tim">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2670"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/9055b6c1d07708555ec584d03c387f15.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.catonmat.net/" title="http://www.catonmat.net">Peteris Krumins</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/pkrumins" title="pkrumins on Twitter">pkrumins</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2670" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 11:57</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Tim, since it contains only public keys, it could as well be world readable, couldn't it?</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2670?reply" class="reply" id="reply_a_2670" title="Reply to comment by Peteris Krumins">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2671"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Sam</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2671" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 12:29</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Do you guys know how to make those brace expansions work with scp??</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2671?reply" class="reply" id="reply_a_2671" title="Reply to comment by Sam">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2672"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">JerBear</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2672" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 12:33</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I'm bookmarking and coming back to read more thoroughly.  But a 
+quick remark, command editing (#1, #5, #8) work in tcsh, or even csh 
+just fine.</p>
+<p>But finding out that bash shares that capability may make me switch.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2672?reply" class="reply" id="reply_a_2672" title="Reply to comment by JerBear">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2673"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Will</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2673" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 12:39</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>ctrl + r enables you to seek through your history of commands you've runned and running it again.</p>
+<p>I use this shortcut a lot</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2673?reply" class="reply" id="reply_a_2673" title="Reply to comment by Will">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2674"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.skyrocket.be/" title="http://www.skyrocket.be" rel="nofollow">Chris R.</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2674" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 12:55</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Awsome, picked up some very useful tips for intermediate bash users ... top!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2674?reply" class="reply" id="reply_a_2674" title="Reply to comment by Chris R.">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2675"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.xach.com/" title="http://www.xach.com/" rel="nofollow">Zach Beane</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2675" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 13:10</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I prefer using the "./" prefix when working with files or directories that start with a dash, e.g. "cd ./-".</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2675?reply" class="reply" id="reply_a_2675" title="Reply to comment by Zach Beane">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2676"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">paul</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2676" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 13:57</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>the trouble with the historic editing commands (i.e. your #5 and 
+#8, which as far as i remember, are old csh tricks) is that you don't 
+get to see the command before it runs.  i find (read: "have found") this
+ to be very dangerous -- far better to use "real" commandline editing to
+ retrieve the command you want and make the change and run it.  if 
+you're any good with your editor of choice (emacs or vi), it really 
+won't take many more keystrokes.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2676?reply" class="reply" id="reply_a_2676" title="Reply to comment by paul">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2677"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/666dab85af835c0a586f7740deccb8de.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">paul</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2677" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 14:15</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>re: #9 -- ssh-copy-id will also create the .ssh dir if it doesn't
+ exist (and on a new machine it mayb not), so that's one more step it 
+saves over other methods.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2677?reply" class="reply" id="reply_a_2677" title="Reply to comment by paul">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2678"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.motersho.com/" title="http://www.motersho.com" rel="nofollow">Motersho</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2678" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 15:41</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Thanks for the commands.  I haven't used a couple of those.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2678?reply" class="reply" id="reply_a_2678" title="Reply to comment by Motersho">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2679"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Yoram Stern</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2679" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 16:47</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>The python HTTP server is just GREAT!!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2679?reply" class="reply" id="reply_a_2679" title="Reply to comment by Yoram Stern">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-38347"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Betty</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/38347" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">April 11, 2012, 18:37</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>How do you exit the HTTP server output?</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/38347?reply" class="reply" id="reply_a_38347" title="Reply to comment by Betty">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2680"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">archuser</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2680" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 17:34</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>The screencapture is great. There is a script called ffcast that can automate this.<br>
+http://github.com/lolilolicon/ffcast</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2680?reply" class="reply" id="reply_a_2680" title="Reply to comment by archuser">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2681"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Jeff</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2681" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 18:00</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Great article!  Maybe to be a bit clearer, you could change these couple of sentences for tip #5</p>
+<blockquote><p>Not that this one-liner replaces just the first word in 
+the previous command. To replace all words, add the g modifer (g for 
+global):</p>
+</blockquote>
+<p>to</p>
+<blockquote><p>Note that this one-liner replaces just the first 
+occurrence of FOO in the previous command. To replace all occurrences, 
+add the g modifier (g for global):</p>
+</blockquote>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2681?reply" class="reply" id="reply_a_2681" title="Reply to comment by Jeff">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2682"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://guhan.net/" title="http://guhan.net" rel="nofollow">Guhan Iyer</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2682" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 18:41</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>One of my favorites is:</p>
+<pre>kill -9 `ps -ef | grep search_string | awk '{print $2}'` 
+</pre>
+<p>The above will find and kill a process that matches search string.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2682?reply" class="reply" id="reply_a_2682" title="Reply to comment by Guhan Iyer">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-3071"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">s@my</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3071" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 08, 2010, 17:14</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Very nice, but you should eliminate the process that contain grep:<br>
+<code>kill -9 $(ps -ef|grep search_string|grep -v grep|awk -F " " '{ print $2 }')</code></p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3071?reply" class="reply" id="reply_a_3071" title="Reply to comment by s@my">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 40px">
+  <a name="comment-3153"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Pablo</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3153" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 23, 2010, 01:39</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>You can do it without grep too:</p>
+<p>  kill -9 $(ps -ef | awk '/search pattern/ { print $2 }')</p>
+<p>And to avoid errors if nothing is found:</p>
+<p>  ps -ef | awk '/search pattern/ { print $2 }' | xargs -r kill -9</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3153?reply" class="reply" id="reply_a_3153" title="Reply to comment by Pablo">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 40px">
+  <a name="comment-38675"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/nogravatar.gif" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">beli</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/38675" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 03, 2012, 12:40</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>instead of "grep -v grep"  you can also use "grep [s]earch_string" so the full line would look like:</p>
+<p>kill -9 $(ps -ef | grep [s]earch_string | awk -F " " '{ print $2 }')</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/38675?reply" class="reply" id="reply_a_38675" title="Reply to comment by beli">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2683"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Ustun</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2683" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 18, 2010, 20:23</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Guhan, any advantage over pkill?</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2683?reply" class="reply" id="reply_a_2683" title="Reply to comment by Ustun">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-3154"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/8e62920c3d07cef58b9d539971716edf.png" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Pablo</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3154" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 23, 2010, 01:45</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>pkill belongs to a package called procps, and if i remember 
+correctly it only work on linux based systems. May be killall -s9 
+pattern is a more portable way to do it.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3154?reply" class="reply" id="reply_a_3154" title="Reply to comment by Pablo">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2684"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">mithoviel</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2684" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 00:51</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Keep them coming!  Thanks!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2684?reply" class="reply" id="reply_a_2684" title="Reply to comment by mithoviel">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2685"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">r</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2685" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 10:41</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>@guhan:</p>
+<p>pkill -f search_string</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2685?reply" class="reply" id="reply_a_2685" title="Reply to comment by r">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2686"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">DanL</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2686" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 13:26</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Perhaps guhan, has to work on non-Linux servers as well. </p>
+<p>No pkill/pgrep on AIX, HPUX, or Solaris (for that matter, no ssh-copy-id or even bash on the machines I work on either)</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2686?reply" class="reply" id="reply_a_2686" title="Reply to comment by DanL">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2687"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">jra</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2687" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 14:03</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>pkill and pgrep actually originate from solaris (solaris 7 even, 
+suggests the linux man page for pgrep/pkill), so if your solaris does 
+not have pgrep, your solaris is broken (or really, really old, which 
+pretty much equals to broken I guess :)</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2687?reply" class="reply" id="reply_a_2687" title="Reply to comment by jra">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2688"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">James</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2688" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 16:46</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>kill -9 `ps -ef |awk ' /search_string/ {print $2} '`</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2688?reply" class="reply" id="reply_a_2688" title="Reply to comment by James">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2689"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://angelweed.livejournal.com/" title="http://angelweed.livejournal.com/" rel="nofollow">Yarrow</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2689" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 16:48</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>As JerBear says, event designators are bash-specific only if "bash" includes csh, tcsh, zsh, and probably more.</p>
+<p>Which is good -- more folks can use them!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2689?reply" class="reply" id="reply_a_2689" title="Reply to comment by Yarrow">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2690"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">hcs42</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2690" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 19, 2010, 19:14</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>These commands are awesome, thanks!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2690?reply" class="reply" id="reply_a_2690" title="Reply to comment by hcs42">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2691"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.elgonzo.net/" title="http://www.elgonzo.net" rel="nofollow">elgonzo</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2691" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 20, 2010, 02:02</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>The vi save command via sudo is a gem! Thanks for sharing!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2691?reply" class="reply" id="reply_a_2691" title="Reply to comment by elgonzo">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-15734"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://alexanderrichter.s24blog.at/" title="http://alexanderrichter.s24blog.at" rel="nofollow">Alex</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/alexanderrichter" title="alexanderrichter on Twitter" rel="nofollow">alexanderrichter</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/15734" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 26, 2011, 13:50</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>kill -9 `ps -ef |awk ' /search_string/ {print $2} '`</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/15734?reply" class="reply" id="reply_a_15734" title="Reply to comment by Alex">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2692"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Mike</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2692" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 20, 2010, 14:34</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>#4 <br>
+cd -- - (doesn't work for me on Ubuntu 9.10 &amp; bash version)<br>
+mike@mike-desktop:~$ bash --version<br>
+GNU bash, version 4.0.33(1)-release (x86_64-pc-linux-gnu)</p>
+<p>cannot change to "-" directory</p>
+<p>Any ideas why?</p>
+<p>Thanks</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2692?reply" class="reply" id="reply_a_2692" title="Reply to comment by Mike">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2693"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/9055b6c1d07708555ec584d03c387f15.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.catonmat.net/" title="http://www.catonmat.net">Peteris Krumins</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/pkrumins" title="pkrumins on Twitter">pkrumins</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2693" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 20, 2010, 19:08</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Mike, good catch! I assumed it was the default behavior of the 
+shell commands to escape arguments after seeing --. Now I found out that
+ it was an extension, not guaranteed to work universally. And this is 
+one of the cases where it doesn't work.</p>
+<p>For example, you can do things like rm -- - but you can't cd -- -.</p>
+<p>Therefore you have to use cd ./- or cd /full/path/to/-</p>
+<p>I am updating the article right now to fix this mistake.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2693?reply" class="reply" id="reply_a_2693" title="Reply to comment by Peteris Krumins">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2694"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">sbn</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2694" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 20, 2010, 20:36</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Excellent tips, and wanted to say I really enjoy your blog since discovering it recently. Great work, thanks!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2694?reply" class="reply" id="reply_a_2694" title="Reply to comment by sbn">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2695"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://unixsysadmin.org/" title="http://unixsysadmin.org" rel="nofollow">Brie</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2695" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 20, 2010, 22:57</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>re: #7<br>
+I love mtr. It's really quite handy but I've found that if you want to 
+share the output, you'll need to do a screenshot or use my favorite 
+switch to the command '-r' which generates a report.</p>
+<p>Also, you can easily restart the mtr without ^C and then repeating the command...just push the 'r' key.</p>
+<p>--<br>
+Brie</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2695?reply" class="reply" id="reply_a_2695" title="Reply to comment by Brie">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2696"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Antti Haapala</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2696" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 21, 2010, 16:48</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>All these shell examples work very well in zsh too. However, with
+ sudo !! you can see the command that is about to be run if you are 
+using zsh... just press TAB after !! and it will expand the command from
+ history there.</p>
+<p>Also, another nice trick I discovered today... Many times I have had 
+to download numbered files with wget. I used to use for loop and printf,
+ both of which are cumbersome. In zsh, however, you can type wget 
+http://host/directory/file{0001..1926}.ext to download 1926 files named 
+fileNNNN.ext. Pretty neat. {n..m} kind of works in bash but bash eats 
+the leading zeros, so instead of file0001.ext you will be trying to 
+retrieve file1.ext.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2696?reply" class="reply" id="reply_a_2696" title="Reply to comment by Antti Haapala">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2697"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">argv</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2697" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 23, 2010, 07:17</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>In the *BSD /bin/sh shell I use, cd - works fine to return to the previous directory.  Also, cd -- will cd to $HOME.<br>
+I think the POSIX standard requires that at least the - operand should work with cd.</p>
+<p>As for brace expansion, if you don't use a shell that has it such as 
+bash or zsh, and can't do it quickly with seq or a printf script, then 
+the jot utility in *BSD base distribution can do the job.  It appears 
+specifically designed for these type of tasks.</p>
+<p>commandlinefu has a few good one-liners, but it is very Bash-centric.
+  I'd like to see a collection of fu that's more portability-focused.</p>
+<p>/bin/sh in vi mode is what I use as an interactive shell.  I began 
+this as an experiment, and to my surprise I never went back to another 
+shell.  I have put sh to heavy interactive use and it is more than 
+enough, for me.  The Open Group's Base Specification gives a decent list
+ of all that vi mode can do.  </p>
+<p>When you use /bin/sh as your interactive shell, life becomes a little bit simpler, and, believe it or not, easier.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2697?reply" class="reply" id="reply_a_2697" title="Reply to comment by argv">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2698"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.shinyphoto.co.uk/" title="http://www.shinyphoto.co.uk/" rel="nofollow">Tim</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2698" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">March 24, 2010, 09:25</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Peteris Krumins: no. A lot of the time sshd_config species strict
+ permissions, which includes the authorized_keys file *not* being 
+world-readable.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2698?reply" class="reply" id="reply_a_2698" title="Reply to comment by Tim">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2699"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://patf.net/blogs/index.php?blog=2" title="http://patf.net/blogs/index.php?blog=2" rel="nofollow">Patrick Farrell</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2699" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">April 05, 2010, 13:14</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I accidentally left this comment under the wrong article :).  
+Posting it here too, (sorry Peteris, I'd delete the other one if I 
+could).</p>
+<p>Reading this post, I realized you could use the set expansion stuff 
+for a rudimentary calculator.  I'm not arguing this is a _good_ tool, it
+ just works, for natural numbers.</p>
+<p>For instance, 3*5<br>
+$ echo {1,2,3}{1,2,3,4,5} | wc -w<br>
+15</p>
+<p>Also, here's a way you can print every number from 1 to 99 (I won't print the output, you can try it on your own).</p>
+<p>$ echo {,1,2,3,4,5,6,7,8,9}{0,1,2,3,4,5,6,7,8,9}</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2699?reply" class="reply" id="reply_a_2699" title="Reply to comment by Patrick Farrell">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2769"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Daniel</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2769" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">April 13, 2010, 14:58</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Some good tips I didn't know.</p>
+<p>Daniel.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2769?reply" class="reply" id="reply_a_2769" title="Reply to comment by Daniel">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2853"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Jason</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2853" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">April 23, 2010, 20:22</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>#3  is great -- I am always trying to edit files in /etc and forgetting to become root or use sudo.</p>
+<p>But, based on your explanation, I'm not sure why the following doesn't work:</p>
+<p>:w !sudo cat &gt; %</p>
+<p>It seems that should also be able to write to the file, but I get a permission error when I try it</p>
+<p>:w !sudo cat &gt; %<br>
+/bin/bash: /tmp/root.txt: Permission denied</p>
+<p>shell returned 1</p>
+<p>Any ideas?</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2853?reply" class="reply" id="reply_a_2853" title="Reply to comment by Jason">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-3155"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/8e62920c3d07cef58b9d539971716edf.png" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Pablo</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3155" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 23, 2010, 02:00</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>&gt; is interpreted by your shell (with your rights).</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3155?reply" class="reply" id="reply_a_3155" title="Reply to comment by Pablo">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-2899"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://avz.org.ua/" title="http://avz.org.ua" rel="nofollow">Alex</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/2899" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">April 30, 2010, 07:49</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Concerning tip #7: strictly speaking, mtr is not fully replaces 
+traceroute because mtr use ICMP protocol for sending its probes while 
+traceroute use UDP. This can be important in some firewalled 
+environments.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/2899?reply" class="reply" id="reply_a_2899" title="Reply to comment by Alex">Reply to this comment</a>
+    </div>
+</div>
+
+
+    
+
+  
+
+
+<div class="icomment" style="margin-left: 20px">
+  <a name="comment-35843"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">galaxywatcher</span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/pythonone" title="pythonone on Twitter" rel="nofollow">pythonone</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/35843" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">November 12, 2011, 19:05</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>mtr has the -u switch which allows you to toggle UDP and ICMP ECHO datagrams.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/35843?reply" class="reply" id="reply_a_35843" title="Reply to comment by galaxywatcher">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3017"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.explodemybrain.com/" title="http://www.explodemybrain.com" rel="nofollow">Nootropic Review Blog</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/explodemybrain" title="explodemybrain on Twitter" rel="nofollow">explodemybrain</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3017" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 24, 2010, 01:11</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Wow, great stuff! I'm totally going to use these when screwing around in Ubuntu</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3017?reply" class="reply" id="reply_a_3017" title="Reply to comment by Nootropic Review Blog">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3035"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Fajry</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3035" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 31, 2010, 08:50</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I really liked your article, containing much information that is useful to others.<br>
+thanks for everything</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3035?reply" class="reply" id="reply_a_3035" title="Reply to comment by Fajry">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3036"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/6f0ad3730e0f3f03c8a9c29e485e1e17.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Fajry</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3036" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 31, 2010, 08:52</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>base distribution can do the job. It appears specifically designed for these type of tasks.</p>
+<p>commandlinefu has a few good one-liners, but it is very Bash-centric.
+ I'd like to see a collection of fu that's more portability-focused.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3036?reply" class="reply" id="reply_a_3036" title="Reply to comment by Fajry">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3037"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/6f0ad3730e0f3f03c8a9c29e485e1e17.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Fajry</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3037" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 31, 2010, 08:53</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I love mtr. It's really quite handy but I've found that if you 
+want to share the output, you'll need to do a screenshot or use my 
+favorite switch to the command '-r' which generates a report.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3037?reply" class="reply" id="reply_a_3037" title="Reply to comment by Fajry">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3060"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/6f0ad3730e0f3f03c8a9c29e485e1e17.jpg" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.propeller.com/member/sharklink1/" title="http://www.propeller.com/member/sharklink1/" rel="nofollow">panjul</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3060" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 04, 2010, 07:09</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I watched artkel you made and I conclude that your article was 
+great that I get a lot from here. and your article is helpful in 
+accelerating my job. thank you very much for everything</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3060?reply" class="reply" id="reply_a_3060" title="Reply to comment by panjul">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3151"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">infogrok</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3151" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 22, 2010, 10:09</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>thank you for the explanation.<br>
+Now I really how to use linux.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3151?reply" class="reply" id="reply_a_3151" title="Reply to comment by infogrok">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-3751"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.frasi-celebri.org/" title="http://www.frasi-celebri.org" rel="nofollow">frasi</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/3751" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">August 02, 2010, 14:40</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Perhaps guhan, has to work on non-Linux servers as well.</p>
+<p>No pkill/pgrep on AIX, HPUX, or Solaris (for that matter, no ssh-copy-id or even bash on the machines I work on either)</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/3751?reply" class="reply" id="reply_a_3751" title="Reply to comment by frasi">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4086"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.0x32.cn/" title="http://www.0x32.cn" rel="nofollow">HideHai</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4086" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">August 28, 2010, 12:24</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>thanks ..</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4086?reply" class="reply" id="reply_a_4086" title="Reply to comment by HideHai">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4155"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://moh.softwebia.com/" title="http://moh.softwebia.com" rel="nofollow">Mohamed D.</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4155" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">September 02, 2010, 15:20</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Thanks for #2. :)</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4155?reply" class="reply" id="reply_a_4155" title="Reply to comment by Mohamed D.">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4193"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">vishnu</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4193" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">September 05, 2010, 07:48</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Bur it says fsta:command not found</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4193?reply" class="reply" id="reply_a_4193" title="Reply to comment by vishnu">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4215"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.picklepumpers.com/" title="http://www.picklepumpers.com" rel="nofollow">Pickle Pumpers</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4215" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">September 08, 2010, 10:41</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>ssh-copy-id is not a standard command but is part of Portable 
+OpenSSH. You can download the whole thing from them and just copy that 
+script to your scripts directory though. That worked for in using OS X.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4215?reply" class="reply" id="reply_a_4215" title="Reply to comment by Pickle Pumpers">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4574"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.profischnell.com/" title="http://www.profischnell.com" rel="nofollow">Übersetzungsbüro</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4574" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">October 21, 2010, 06:28</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>#3 is great -- I am always trying to edit files in /etc and forgetting to become root or use sudo.</p>
+<p>But, based on your explanation, I'm not sure why the following doesn't work:</p>
+<p>:w !sudo cat &gt; %</p>
+<p>It seems that should also be able to write to the file, but I get a permission error when I try it</p>
+<p>:w !sudo cat &gt; %<br>
+/bin/bash: /tmp/root.txt: Permission denied</p>
+<p>shell returned 1</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4574?reply" class="reply" id="reply_a_4574" title="Reply to comment by Übersetzungsbüro">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4852"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">statistici pariuri</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4852" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">October 30, 2010, 15:42</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>I am really enjoying reading your well written articles. I think 
+you spend numerous effort and time updating your blog. I have bookmarked
+ it and I am taking a look ahead to reading new articles. Please keep up
+ the good articles!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4852?reply" class="reply" id="reply_a_4852" title="Reply to comment by statistici pariuri">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-4855"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.smartdefine.org/" title="http://www.smartdefine.org" rel="nofollow">Define</a></span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/smartdefine" title="smartdefine on Twitter" rel="nofollow">smartdefine</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/4855" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">November 01, 2010, 01:55</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>If only I would know sudo !! earlier:S</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/4855?reply" class="reply" id="reply_a_4855" title="Reply to comment by Define">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-5192"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">moopet</span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/muppling" title="muppling on Twitter" rel="nofollow">muppling</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/5192" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">November 05, 2010, 13:40</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Thanks for this. Funnily enough the two that were unfamiliar to 
+me were the simple commands mtr and ssh-copy-id. Shows how you can be 
+familiar with lots of "clever stuff" but have no clue that these great, 
+forehead-slappingly obvious tools even exist.<br>
+I just had to go show them off to someone else in the office!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/5192?reply" class="reply" id="reply_a_5192" title="Reply to comment by moopet">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-32377"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">WillPalm</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/32377" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">August 22, 2011, 09:47</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Fantastic information and great story. Very happy to read about it!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/32377?reply" class="reply" id="reply_a_32377" title="Reply to comment by WillPalm">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-35849"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">ranjan</span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/ranjan" title="ranjan on Twitter" rel="nofollow">ranjan</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/35849" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">November 13, 2011, 06:59</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>This blog has definitely changed my perspective on this subject. 
+There's no way I would've thought about it this way if I hadn't come 
+across your blog. All I was doing was cruising the web and I found your 
+blog and all of a sudden my views have changed. Good on you, man!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/35849?reply" class="reply" id="reply_a_35849" title="Reply to comment by ranjan">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-37466"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">pandeeswaran</span>
+
+      
+      <span class="twitter"><a href="http://twitter.com/pandeesh" title="pandeesh on Twitter" rel="nofollow">pandeesh</a></span>
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/37466" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">February 05, 2012, 15:51</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>But , the set expansion technique always expecting more than 1 value.<br>
+e.g:<br>
+echo {1}{2} returns {1}{2} where we expect 12.<br>
+It can be simply achieved by echo 12.But Set expansion always expect more than 1 value.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/37466?reply" class="reply" id="reply_a_37466" title="Reply to comment by pandeeswaran">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-38331"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">nawaz</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/38331" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">April 10, 2012, 17:06</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>very good article. i am really impressed! ! !</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/38331?reply" class="reply" id="reply_a_38331" title="Reply to comment by nawaz">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-38864"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">johndavid</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/38864" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 17, 2012, 12:49</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Once again a very helpful post. I have been reading many of the 
+advice and posts on this website and find that they are very helpful and
+ interesting as well as all comments. Thanks for the great advice so 
+far.</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/38864?reply" class="reply" id="reply_a_38864" title="Reply to comment by johndavid">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-39294"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Thorsen</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/39294" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">June 19, 2012, 07:30</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>@bell<br>
+I'm puzzled how your:</p>
+<p>kill -9 $(ps -ef | grep [s]earch_string | awk -F " " '{ print $2 }')</p>
+<p>works. I mean the "[s]earch_string" bit.</p>
+<p>I can see that it results in the grep process being dropped from the result, but just can't see why this is :)</p>
+<p>Could you explain? Cheers!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/39294?reply" class="reply" id="reply_a_39294" title="Reply to comment by Thorsen">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-40735"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Fred</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/40735" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">October 02, 2012, 21:37</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>These are already explained on commandlinefu. Why plagiarise?</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/40735?reply" class="reply" id="reply_a_40735" title="Reply to comment by Fred">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-41034"></a>
+  <div class="gravatar">
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/nogravatar.gif" height="40" width="40">
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Achar Locais</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/41034" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">October 26, 2012, 23:12</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>These are already explained on commandlinefu</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/41034?reply" class="reply" id="reply_a_41034" title="Reply to comment by Achar Locais">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-47077"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      <span class="name">Joe Walsh</span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/47077" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">February 08, 2014, 14:52</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Hi Peteris, thanks for your great website. Only learned of it in the past few weeks.</p>
+<p>Re #5: As a previous poster pointed out, this is an old csh trick 
+that I've known about for over two decades. And the third carat (^) is 
+not needed, at least in csh. So which part of that trick is 
+bash-specific? The globalized replacement feature, perhaps?</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/47077?reply" class="reply" id="reply_a_47077" title="Reply to comment by Joe Walsh">Reply to this comment</a>
+    </div>
+</div>
+
+
+  
+
+
+<div class="icomment" style="margin-left: 0px">
+  <a name="comment-50032"></a>
+  <div class="gravatar">
+    
+  </div>
+  <div class="userinfo">
+    <div>
+      
+      <span class="name"><a href="http://www.bardomed.pl/" title="http://www.bardomed.pl/" rel="nofollow">Bardo</a></span>
+
+
+
+        <span class="permalink"><a href="http://www.catonmat.net/c/50032" title="Permanent link to the comment">Permalink</a></span>
+    </div>
+    <div>
+      <span class="time">May 21, 2014, 14:54</span>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="comment_text">
+    <p>Great! Thanks!</p>
+
+  </div>
+
+    <div class="comment_reply">
+      <a href="http://www.catonmat.net/c/50032?reply" class="reply" id="reply_a_50032" title="Reply to comment by Bardo">Reply to this comment</a>
+    </div>
+</div>
+
+
+
+
+        <script>
+          catonmat.init_comments('page', '');
+        </script>
+    </div>
+
+    <div class="add">
+      <h3>Leave a new comment</h3>
+      
+
+<div id="comment_form">
+    <div id="comment_error" class="hidden"></div>
+
+    <div id="comment_preview" class="hidden"></div>
+
+  <form action="/blog/top-ten-one-liners-from-commandlinefu-explained" method="POST">
+    <input name="page_id" id="page_id" value="195" type="hidden">
+    <input name="parent_id" id="parent_id" value="" type="hidden">
+
+    <p>
+      <label for="name" class="name">Name:</label>
+      <input tabindex="1" name="name" id="name" maxlength="64" size="30" type="text">
+    </p>
+    <div class="clear"></div>
+
+    <p>
+      <label for="email" class="email">E-mail:</label>
+      <input tabindex="2" name="email" id="email" maxlength="128" size="30" type="text">
+      <span class="small">(<a href="#" id="why_email_a" title="Why do I need your email?">why do I need your e-mail?</a>)</span>
+    </p>
+    <div class="clear"></div>
+
+    <div id="why_email_explain" class="hidden">
+      <p>
+        It would be nice if you left your e-mail address. Sometimes I 
+want to send a private message, or just thank for the great comment. 
+Having your e-mail really helps.
+      </p>
+      <p><b>I will never ever spam you.</b></p>
+    </div>
+
+    <p>
+      <label for="twitter" class="twitter">Twitter:</label>
+      <input tabindex="3" name="twitter" id="twitter" maxlength="128" size="30" type="text">
+      <span class="small">(Your twitter name, if you have one. (I'm <a href="http://twitter.com/pkrumins">@pkrumins</a>, btw.))</span>
+    </p>
+    <div class="clear"></div>
+
+    <p class="website">
+      <label for="website" class="website">Website:</label>
+      <input tabindex="4" name="website" id="website" maxlength="256" size="50" type="text">
+    </p>
+    <div class="clear"></div>
+
+    <div class="c">
+      <label for="comment" class="comment">Comment:</label>
+      <div class="a">
+        <p></p>
+        <textarea tabindex="5" name="comment" rows="8" cols="50" id="comment"></textarea>
+        <script>
+          if ($.browser.safari) {
+            /* i can't solve the 2px offset bug in chrome via css manipulations */
+            $('#comment_form .a').css('margin-left', '94px');
+
+            /* i also can't solve a problem of labels being offset by 3px in vertical direction */
+            $('#comment_form label').css('margin-top','3px')
+          }
+        </script>
+        <div class="comment-help-link"><a href="#" id="ch">Comment Help</a></div>
+        <div class="clear"></div>
+        <div id="comment_help" class="hidden">
+          <p>* use <code>&lt;pre&gt;...&lt;/pre&gt;</code> to insert a plain code snippet.</p>
+          <p>
+            * use <code>&lt;pre lang="<strong>lang</strong>"&gt;...&lt;/pre&gt;</code> to insert a syntax highlighted code snippet.<br>
+            For example, <code>&lt;pre lang="<strong>python</strong>"&gt;...&lt;/pre&gt;</code> will insert Python highlighted code.
+          </p>
+          <p>* use <code>&lt;code&gt;...&lt;/code&gt;</code> to highlight a variable or a single shell command.</p>
+          <p>* use <code>&lt;a href="url" nospam&gt;title&lt;/a&gt;</code> to insert links.</p>
+          <p>* use other HTML tags, such as, <code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, <code>&lt;blockquote&gt;</code>, <code>&lt;sup&gt;</code>, <code>&lt;sub&gt;</code> for text formatting.</p>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="e">
+      <p>
+        <input name="captcha_nr" value="9" type="hidden">
+        
+        Type the word "<b>quake3_195</b>": <input tabindex="6" name="commentc" size="10" type="text"> (just to make sure you're a human)
+      </p>
+
+      <p>
+        <input tabindex="6" id="preview" name="preview" value="Preview comment" type="submit">
+        <input tabindex="7" id="submit" name="submit" value="Submit comment" type="submit">
+      </p>
+
+      <p>
+        <span id="comment_please">Please <b>preview</b> the comment before submitting to make sure it's OK.<br></span>
+      </p>
+    </div>
+
+  </form>
+</div>
+
+
+      <script>
+        catonmat.init_why_email();
+        catonmat.init_comment_help();
+        catonmat.init_preview_comment();
+        catonmat.init_submit_comment('');
+      </script>
+    </div>
+  </div>
+
+  <div class="after_comments_ads">
+    <h3>Advertisements</h3>
+    <div class="after_comments_ad300">
+      <script async="" src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/adsbygoogle.js"></script>
+      <!-- catonmat after comments -->
+      <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-0433925538517663" data-ad-slot="2261906812"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    <div class="clear">
+    </div>
+  </div>
+</div>
+
+
+
+
+        </div>
+        <div id="sidebar">
+          
+  <!-- begin sidebar.tmpl.html -->
+
+<div class="item search">
+  <form name="search" action="/search" method="GET">
+    <input name="q" type="text">
+    <input name="submit" value="Search" type="submit">
+  </form>
+</div>
+
+<!-- About the site -->
+<div class="item aboutsite">
+  <div class="title">About the site:</div>
+  <div class="content">
+    <p>
+      <a href="http://www.catonmat.net/about/" title="About Peteris Krumins">
+        <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/peteris-krumins-small.jpg" alt="Peteris Krumins" class="peter">
+      </a>
+      Peteris Krumins' blog about programming, hacking, software reuse, 
+software ideas, computer security, browserling, google and technology.
+    </p>
+    <div class="hr"></div>
+    <p class="contact smallmargin">Reach me at:</p>
+    <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/peter-catonmat-net.gif" class="eml">
+    <p class="contact">Or meet me on:</p>
+    <div class="social">
+      <ul>
+        <li class="twitter"><a href="http://www.twitter.com/pkrumins" title="Peteris Krumins on Twitter"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/twitter-16x16.gif">Twitter</a></li>
+        <li class="facebook"><a href="http://www.facebook.com/pkrumins" title="Peteris Krumins on Facebook"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/facebook-16x16.gif">Facebook</a></li>
+        <!-- TODO: exchange plurk with github -->
+        <li class="plurk almost-last"><a href="http://www.plurk.com/pkrumins" title="Peteris Krumins on Plurk"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/plurk-16x16.gif">Plurk</a></li>
+        <li class="more"><a href="#" id="a-more-contacts" class="more" title="More ways to contact Peteris Krumins"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/more-10x10.gif" class="more">more</a></li>
+      </ul>
+      <div class="clear"></div>
+      <script>
+        catonmat.init_toggle_contacts();
+      </script>
+    </div>
+    <div class="social hidden" id="div-more-contacts">
+      <ul>
+        <li class="github"><a href="http://www.github.com/pkrumins" title="Peteris Krumins programming projects on GitHub"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/github-16x16.gif">GitHub</a></li>
+        <li class="linkedin"><a href="http://www.linkedin.com/in/pkrumins" title="Peteris Krumins CV on LinkedIn"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/linkedin-16x16.gif">LinkedIn</a></li>
+        <li class="friendfeed"><a href="http://www.friendfeed.com/pkrumins" title="Peteris Krumins on FriendFeed"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/friendfeed-16x16.gif">FriendFeed</a></li>
+      </ul>
+      <div class="clear"></div>
+      <div style="padding-bottom: 5px"></div>
+      <ul>
+        <li><a href="http://google.com/profiles/peteris.krumins" title="Peteris Krumins on Google Plus"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/google-plus-16x16.png">Google Plus</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Subscribe to my posts -->
+<div class="item subscribe">
+  <div class="title">Subscribe to my posts:</div>
+  <div class="content">
+    <p>Subscribe through an RSS feed:</p>
+    <p class="feed">
+      <a href="http://feeds2.feedburner.com/catonmat" rel="alternate" type="application/rss+xml" class="rss" title="Catonmat RSS Feed">
+        <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/rss-feed-16x16.png" class="rss">
+        <img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/feedcounter-crontab.gif" class="counter" height="19" width="88">
+      </a>
+      <span class="rss">(<a href="http://www.catonmat.net/what-is-rss/" title="What is an RSS feed?">what is rss?</a>)</span>
+    </p>
+    <div class="hr"></div>
+    <p>Subscribe through email:</p>
+    <!-- begin generated by feedburner.com -->
+    <p>
+      </p><form style="border:1px solid #ccc;padding:3px;text-align:center;" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=catonmat', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+        <p>Enter your email address:</p>
+        <p>
+          <input style="width:140px" name="email" type="text">
+        </p>
+        <input value="catonmat" name="uri" type="hidden">
+        <input name="loc" value="en_US" type="hidden">
+        <p>
+          <input value="Subscribe" type="submit">
+        </p>
+        <p>
+          Delivered by <a href="http://feedburner.google.com/" target="_blank">FeedBurner</a>
+        </p>
+      </form>
+    <p></p>
+    <!-- end generated by feedburner.com -->
+  </div>
+</div>
+
+
+<div class="item">
+  <div class="title">My Amazon Wish List</div>
+  <div class="content">
+    <p>I love to read science books. They make my day and I get ideas for awesome blog posts, such as <a href="http://www.catonmat.net/blog/busy-beaver/">Busy Beaver</a>, <a href="http://www.catonmat.net/blog/on-functors/">On Functors</a>, <a href="http://www.catonmat.net/blog/recursive-regular-expressions/">Recursive Regular Expressions</a> and <a href="http://www.catonmat.net/archive">many others</a>.</p>
+
+    <p>Take a look at my <a href="http://www.amazon.com/registry/wishlist/QDKYO6OQUU4O?reveal=unpurchased&amp;filter=all&amp;sort=priority&amp;layout=standard" title="Peteris Krumins Amazon Wish List"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/amazon-16x16.gif" style="position: relative; top: 5px; padding-right: 5px">Amazon wish list</a>, if you're curious about what I have planned reading next, and want to surprise me. :)</p>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">My Books</div>
+  <div class="content">
+    <ul>
+      <li><a href="http://www.catonmat.net/blog/awk-book/" title="Awk Programming Book">Awk Programming Book</a></li>
+      <li><a href="http://www.catonmat.net/blog/sed-book/" title="Sed Programming Book">Sed Programming Book</a></li>
+      <li><a href="http://www.catonmat.net/blog/perl-book/" title="Perl Programming Book">Perl Programming Book</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">My Other Websites</div>
+  <div class="content">
+    <ul>
+      <li><a href="http://freescienceonline.blogspot.com/">Free Science Online</a></li>
+      <li><a href="http://www.freesciencelectures.com/">Free Science Videos</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">Top Ten Articles:</div>
+  <div class="content">
+    <ul>
+     <li><a href="http://www.catonmat.net/blog/top-ten-one-liners-from-commandlinefu-explained/" title="Read &quot;Top Ten One-Liners from CommandLineFu Explained&quot; (has been read 1,212,302 times)">Top Ten One-Liners from CommandLineFu Explained</a></li>
+     <li><a href="http://www.catonmat.net/blog/my-job-interview-at-google/" title="Read &quot;My Job Interview at Google&quot; (has been read 1,044,269 times)">My Job Interview at Google</a></li>
+     <li><a href="http://www.catonmat.net/blog/sed-one-liners-explained-part-one/" title="Read &quot;Famous Sed One-Liners Explained, Part I: File Spacing, Numbering and Text Conversion and Substitution&quot; (has been read 937,295 times)">Famous Sed One-Liners Explained, Part I: File Spacing, Numbering and Text Conversion and Substitution</a></li>
+     <li><a href="http://www.catonmat.net/blog/mit-introduction-to-algorithms-part-one/" title="Read &quot;MIT's Introduction to Algorithms, Lectures 1 and 2: Analysis of Algorithms&quot; (has been read 875,974 times)">MIT's Introduction to Algorithms, Lectures 1 and 2: Analysis of Algorithms</a></li>
+     <li><a href="http://www.catonmat.net/blog/awk-one-liners-explained-part-one/" title="Read &quot;Awk One-Liners Explained, Part I: File Spacing, Numbering and Calculations&quot; (has been read 739,835 times)">Awk One-Liners Explained, Part I: File Spacing, Numbering and Calculations</a></li>
+     <li><a href="http://www.catonmat.net/blog/the-definitive-guide-to-bash-command-line-history/" title="Read &quot;The Definitive Guide to Bash Command Line History&quot; (has been read 716,489 times)">The Definitive Guide to Bash Command Line History</a></li>
+     <li><a href="http://www.catonmat.net/blog/linux-socks5-proxy/" title="Read &quot;Turn any Linux computer into SOCKS5 proxy in one command&quot; (has been read 689,691 times)">Turn any Linux computer into SOCKS5 proxy in one command</a></li>
+     <li><a href="http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/" title="Read &quot;Low Level Bit Hacks You Absolutely Must Know&quot; (has been read 639,258 times)">Low Level Bit Hacks You Absolutely Must Know</a></li>
+     <li><a href="http://www.catonmat.net/http-proxy-in-nodejs/" title="Read &quot;A HTTP Proxy Server in 20 Lines of node.js Code&quot; (has been read 625,133 times)">A HTTP Proxy Server in 20 Lines of node.js Code</a></li>
+     <li><a href="http://www.catonmat.net/blog/bash-vi-editing-mode-cheat-sheet/" title="Read &quot;Working Productively in Bash's Vi Command Line Editing Mode (with Cheat Sheet)&quot; (has been read 598,601 times)">Working Productively in Bash's Vi Command Line Editing Mode (with Cheat Sheet)</a></li>
+    </ul>
+    <p class="moreinfo">
+      <a href="http://www.catonmat.net/archive?sorted_by=views" title="Top catonmat articles">See all top articles</a>
+    </p>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">Top Ten Downloads:</div>
+  <div class="content">
+    <ul>
+    <li><a href="http://www.catonmat.net/download/bash-history-cheat-sheet.pdf" title="Download &quot;bash history cheat sheet (.pdf)&quot;">bash history cheat sheet (.pdf)</a> (<span title="Total 199,970 downloads">199,970</span>)</li>
+    <li><a href="http://www.catonmat.net/download/perl1line.txt" title="Download &quot;perl1line.txt&quot;">perl1line.txt</a> (<span title="Total 196,546 downloads">196,546</span>)</li>
+    <li><a href="http://www.catonmat.net/download/awk.cheat.sheet.pdf" title="Download &quot;awk cheat sheet (.pdf)&quot;">awk cheat sheet (.pdf)</a> (<span title="Total 195,638 downloads">195,638</span>)</li>
+    <li><a href="http://www.catonmat.net/download/sed.stream.editor.cheat.sheet.pdf" title="Download &quot;sed stream editor cheat sheet (.pdf)&quot;">sed stream editor cheat sheet (.pdf)</a> (<span title="Total 144,569 downloads">144,569</span>)</li>
+    <li><a href="http://www.catonmat.net/download/screen.cheat.sheet.pdf" title="Download &quot;screen cheat sheet (.pdf)&quot;">screen cheat sheet (.pdf)</a> (<span title="Total 134,974 downloads">134,974</span>)</li>
+    <li><a href="http://www.catonmat.net/download/perl.pack.unpack.printf.cheat.sheet.pdf" title="Download &quot;perl's pack/unpack and printf cheat sheet (.pdf)&quot;">perl's pack/unpack and printf cheat sheet (.pdf)</a> (<span title="Total 133,442 downloads">133,442</span>)</li>
+    <li><a href="http://www.catonmat.net/download/bash-vi-editing-mode-cheat-sheet.pdf" title="Download &quot;bash vi editing mode cheat sheet (.pdf)&quot;">bash vi editing mode cheat sheet (.pdf)</a> (<span title="Total 126,877 downloads">126,877</span>)</li>
+    <li><a href="http://www.catonmat.net/download/perl.predefined.variables.pdf" title="Download &quot;perl's special variable cheat sheet (.pdf)&quot;">perl's special variable cheat sheet (.pdf)</a> (<span title="Total 117,570 downloads">117,570</span>)</li>
+    <li><a href="http://www.catonmat.net/download/awk.cheat.sheet.txt" title="Download &quot;awk cheat sheet (.txt)&quot;">awk cheat sheet (.txt)</a> (<span title="Total 114,518 downloads">114,518</span>)</li>
+    <li><a href="http://www.catonmat.net/download/david_pogue-bill_gates_song.mp3" title="Download &quot;the bill gates song.mp3 (musical geek friday #8)&quot;">the bill gates song.mp3 (musical geek friday #8)</a> (<span title="Total 96,668 downloads">96,668</span>)</li>
+    </ul>
+    <p class="moreinfo">
+      <a href="http://www.catonmat.net/downloads" title="All catonmat downloads">See all downloads</a>
+    </p>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">Recent Articles:</div>
+  <div class="content">
+    <ul>
+     <li><a href="http://www.catonmat.net/blog/june-has-launched/" title="Read &quot;June, company I advise, has launched!&quot; (was published on October 12, 2015)">June, company I advise, has launched!</a></li>
+     <li><a href="http://www.catonmat.net/blog/cartoon-where-do-you-want-to-go-today/" title="Read &quot;New cartoon - Where do you want to go today?&quot; (was published on October 07, 2015)">New cartoon - Where do you want to go today?</a></li>
+     <li><a href="http://www.catonmat.net/blog/hotel-webdev-cartoon/" title="Read &quot;Hotel: A new webdev cartoon &quot; (was published on October 01, 2015)">Hotel: A new webdev cartoon </a></li>
+     <li><a href="http://www.catonmat.net/blog/bar-webdev-cartoon/" title="Read &quot;Bar: A new webdev cartoon&quot; (was published on September 29, 2015)">Bar: A new webdev cartoon</a></li>
+     <li><a href="http://www.catonmat.net/blog/lol-browserling-com/" title="Read &quot;Announcing a new webcomic - lol.browserling.com&quot; (was published on September 28, 2015)">Announcing a new webcomic - lol.browserling.com</a></li>
+     <li><a href="http://www.catonmat.net/blog/more-new-original-web-dev-jokes/" title="Read &quot;More New, Original Web Dev Jokes&quot; (was published on September 18, 2015)">More New, Original Web Dev Jokes</a></li>
+     <li><a href="http://www.catonmat.net/blog/browserling-bug-hunter/" title="Read &quot;Announcing Browserling's Bug Hunter&quot; (was published on September 14, 2015)">Announcing Browserling's Bug Hunter</a></li>
+     <li><a href="http://www.catonmat.net/blog/haskell-curry-bird-watching/" title="Read &quot;Haskell Curry loved watching birds&quot; (was published on September 10, 2015)">Haskell Curry loved watching birds</a></li>
+     <li><a href="http://www.catonmat.net/blog/has-gary-vee-bought-ny-jets-yet/" title="Read &quot;HasGaryVeeBoughtNYJetsYet.com&quot; (was published on September 09, 2015)">HasGaryVeeBoughtNYJetsYet.com</a></li>
+     <li><a href="http://www.catonmat.net/blog/one-weird-old-productivity-tip/" title="Read &quot;One Weird Old Productivity Tip&quot; (was published on September 09, 2015)">One Weird Old Productivity Tip</a></li>
+    </ul>
+    <p class="moreinfo">
+      <a href="http://www.catonmat.net/archive" title="All catonmat articles">See more detailed list of recent articles</a>
+    </p>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">Article Categories:</div>
+  <div class="content">
+    <ul>
+      
+      <li><a href="http://www.catonmat.net/category/awk-programming" title="Awk Programming: AWK is a very important UNIX programming language for manipulating text very quickly. I have mastered it and now I am teaching others.">Awk Programming</a> (<span title="There are 8 articles in &quot;Awk Programming&quot; category">8</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/stackvm-startup" title="Browserling Startup: Articles about my and James Halliday startup - Browserling (earlier called StackVM) - which brings virtual machines to the web!">Browserling Startup</a> (<span title="There are 41 articles in &quot;Browserling Startup&quot; category">41</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/cheat-sheets" title="Cheat Sheets: All kinds of programming and computer science cheat sheets - vt100/ansi cheat sheet, shell emacs editing mode cheat sheet, iptables cheat sheets and many many others.">Cheat Sheets</a> (<span title="There are 13 articles in &quot;Cheat Sheets&quot; category">13</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/computer-science" title="Computer Science: I love computer science.">Computer Science</a> (<span title="There are 9 articles in &quot;Computer Science&quot; category">9</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/hackers-approach" title="Hacker's Approach: Using the hacker's approach one can develop cool software in a matter of hours without really going into details how it all works but using the right pieces and putting them together. Also a real hacker would be able to do the right things with the wrong tools.">Hacker's Approach</a> (<span title="There are 8 articles in &quot;Hacker's Approach&quot; category">8</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/howto" title="Howto: Howto guides - howto download youtube videos, how to upload them, how to be a real hacker, how to become immortal, etc ;)">Howto</a> (<span title="There are 12 articles in &quot;Howto&quot; category">12</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/idea-for-later" title="Idea for Later: Ideas that I want to build at some time later.">Idea for Later</a> (<span title="There are 1 articles in &quot;Idea for Later&quot; category">1</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/interviews" title="Interviews: Interviews with me, Peteris Krumins.">Interviews</a> (<span title="There are 6 articles in &quot;Interviews&quot; category">6</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/introduction-to-algorithms" title="Introduction to Algorithms: Analysis of MIT's &quot;Introduction to Algorithms&quot; video lectures. Contains embedded videos with timestamped list of topics and scanned lecture notes.">Introduction to Algorithms</a> (<span title="There are 15 articles in &quot;Introduction to Algorithms&quot; category">15</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/linear-algebra" title="Linear Algebra: Analysis of MIT's &quot;Linear Algebra&quot; course. Contains embedded videos with timestamped list of topics and scanned lecture notes.">Linear Algebra</a> (<span title="There are 6 articles in &quot;Linear Algebra&quot; category">6</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/mathematics" title="Mathematics: A good computer scientist has to know mathematics.">Mathematics</a> (<span title="There are 1 articles in &quot;Mathematics&quot; category">1</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/misc" title="Misc: Articles that don't fit in other categories. They include interviews and blogging related stuff.">Misc</a> (<span title="There are 23 articles in &quot;Misc&quot; category">23</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/musical-geek-friday" title="Musical Geek Friday: Really funny and geeky songs I found in my mp3 collection.">Musical Geek Friday</a> (<span title="There are 17 articles in &quot;Musical Geek Friday&quot; category">17</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/my-favorite-books" title="My Favorite Books: My favorite software development books, programming books, coding books and science books.">My Favorite Books</a> (<span title="There are 4 articles in &quot;My Favorite Books&quot; category">4</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/nodejs-modules" title="Node.js Modules: Article series &quot;node.js modules you should know about.&quot;">Node.js Modules</a> (<span title="There are 15 articles in &quot;Node.js Modules&quot; category">15</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/perl-programming" title="Perl Programming: Perl is one of the best languages ever invented. I have mastered it and now I am teaching others.">Perl Programming</a> (<span title="There are 16 articles in &quot;Perl Programming&quot; category">16</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/programming" title="Programming: I love programming. Language I know are python, perl, haskell, scheme, awk, c++  and others.">Programming</a> (<span title="There are 36 articles in &quot;Programming&quot; category">36</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/projects" title="Projects: All the various projects that I have done, they include digpicz, reddit media, reddit river, and others.">Projects</a> (<span title="There are 13 articles in &quot;Projects&quot; category">13</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/security" title="Security: Computer security is a field close to my heart.">Security</a> (<span title="There are 4 articles in &quot;Security&quot; category">4</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/the-new-catonmat" title="The New Catonmat: Everything about the new catonmat website.">The New Catonmat</a> (<span title="There are 1 articles in &quot;The New Catonmat&quot; category">1</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/tools" title="Tools: Tools - small programs that do great things. Actually this category is not very useful, I am going to merge it with some other category soon.">Tools</a> (<span title="There are 1 articles in &quot;Tools&quot; category">1</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/unix-shell" title="Unix Shell: This category contains various articles on how to work in Unix shell.">Unix Shell</a> (<span title="There are 29 articles in &quot;Unix Shell&quot; category">29</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/video-lectures" title="Video Lectures: I love watching video lectures, they make me smarter and I love it. I also like to write about what I just saw, so here are some of the lectures I have seen.">Video Lectures</a> (<span title="There are 18 articles in &quot;Video Lectures&quot; category">18</span>)</li>
+      
+      <li><a href="http://www.catonmat.net/category/visual-math-friday" title="Visual Math Friday: I have collected hundreds of visual math proofs. In these articles I explain them and prove their correctness.">Visual Math Friday</a> (<span title="There are 1 articles in &quot;Visual Math Friday&quot; category">1</span>)</li>
+    </ul>
+    <p class="moreinfo">
+      <a href="http://www.catonmat.net/categories" title="Detailed catonmat category information">See more detailed category information</a>
+    </p>
+  </div>
+</div>
+
+<div class="item list">
+  <div class="title">Article Archive:</div>
+  <div class="content">
+    <ul>
+     <li><a href="http://www.catonmat.net/archive/2015/10" title="All articles written in October, 2015" rel="nofollow">October, 2015</a> (<span title="3 articles were published in October, 2015">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/09" title="All articles written in September, 2015" rel="nofollow">September, 2015</a> (<span title="9 articles were published in September, 2015">9</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/08" title="All articles written in August, 2015" rel="nofollow">August, 2015</a> (<span title="1 articles were published in August, 2015">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/07" title="All articles written in July, 2015" rel="nofollow">July, 2015</a> (<span title="2 articles were published in July, 2015">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/06" title="All articles written in June, 2015" rel="nofollow">June, 2015</a> (<span title="2 articles were published in June, 2015">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/05" title="All articles written in May, 2015" rel="nofollow">May, 2015</a> (<span title="1 articles were published in May, 2015">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/04" title="All articles written in April, 2015" rel="nofollow">April, 2015</a> (<span title="6 articles were published in April, 2015">6</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/03" title="All articles written in March, 2015" rel="nofollow">March, 2015</a> (<span title="1 articles were published in March, 2015">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/02" title="All articles written in February, 2015" rel="nofollow">February, 2015</a> (<span title="1 articles were published in February, 2015">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2015/01" title="All articles written in January, 2015" rel="nofollow">January, 2015</a> (<span title="1 articles were published in January, 2015">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/12" title="All articles written in December, 2014" rel="nofollow">December, 2014</a> (<span title="1 articles were published in December, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/11" title="All articles written in November, 2014" rel="nofollow">November, 2014</a> (<span title="1 articles were published in November, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/10" title="All articles written in October, 2014" rel="nofollow">October, 2014</a> (<span title="2 articles were published in October, 2014">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/09" title="All articles written in September, 2014" rel="nofollow">September, 2014</a> (<span title="1 articles were published in September, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/08" title="All articles written in August, 2014" rel="nofollow">August, 2014</a> (<span title="1 articles were published in August, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/07" title="All articles written in July, 2014" rel="nofollow">July, 2014</a> (<span title="1 articles were published in July, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/06" title="All articles written in June, 2014" rel="nofollow">June, 2014</a> (<span title="1 articles were published in June, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/05" title="All articles written in May, 2014" rel="nofollow">May, 2014</a> (<span title="1 articles were published in May, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/04" title="All articles written in April, 2014" rel="nofollow">April, 2014</a> (<span title="1 articles were published in April, 2014">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/03" title="All articles written in March, 2014" rel="nofollow">March, 2014</a> (<span title="3 articles were published in March, 2014">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/02" title="All articles written in February, 2014" rel="nofollow">February, 2014</a> (<span title="3 articles were published in February, 2014">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2014/01" title="All articles written in January, 2014" rel="nofollow">January, 2014</a> (<span title="5 articles were published in January, 2014">5</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/12" title="All articles written in December, 2013" rel="nofollow">December, 2013</a> (<span title="1 articles were published in December, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/11" title="All articles written in November, 2013" rel="nofollow">November, 2013</a> (<span title="1 articles were published in November, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/10" title="All articles written in October, 2013" rel="nofollow">October, 2013</a> (<span title="1 articles were published in October, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/09" title="All articles written in September, 2013" rel="nofollow">September, 2013</a> (<span title="1 articles were published in September, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/08" title="All articles written in August, 2013" rel="nofollow">August, 2013</a> (<span title="1 articles were published in August, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/07" title="All articles written in July, 2013" rel="nofollow">July, 2013</a> (<span title="1 articles were published in July, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/06" title="All articles written in June, 2013" rel="nofollow">June, 2013</a> (<span title="1 articles were published in June, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/05" title="All articles written in May, 2013" rel="nofollow">May, 2013</a> (<span title="1 articles were published in May, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/04" title="All articles written in April, 2013" rel="nofollow">April, 2013</a> (<span title="1 articles were published in April, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/03" title="All articles written in March, 2013" rel="nofollow">March, 2013</a> (<span title="1 articles were published in March, 2013">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/02" title="All articles written in February, 2013" rel="nofollow">February, 2013</a> (<span title="2 articles were published in February, 2013">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2013/01" title="All articles written in January, 2013" rel="nofollow">January, 2013</a> (<span title="4 articles were published in January, 2013">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/12" title="All articles written in December, 2012" rel="nofollow">December, 2012</a> (<span title="1 articles were published in December, 2012">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/11" title="All articles written in November, 2012" rel="nofollow">November, 2012</a> (<span title="3 articles were published in November, 2012">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/10" title="All articles written in October, 2012" rel="nofollow">October, 2012</a> (<span title="4 articles were published in October, 2012">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/09" title="All articles written in September, 2012" rel="nofollow">September, 2012</a> (<span title="3 articles were published in September, 2012">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/08" title="All articles written in August, 2012" rel="nofollow">August, 2012</a> (<span title="2 articles were published in August, 2012">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/07" title="All articles written in July, 2012" rel="nofollow">July, 2012</a> (<span title="2 articles were published in July, 2012">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/06" title="All articles written in June, 2012" rel="nofollow">June, 2012</a> (<span title="1 articles were published in June, 2012">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/05" title="All articles written in May, 2012" rel="nofollow">May, 2012</a> (<span title="4 articles were published in May, 2012">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/04" title="All articles written in April, 2012" rel="nofollow">April, 2012</a> (<span title="4 articles were published in April, 2012">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/03" title="All articles written in March, 2012" rel="nofollow">March, 2012</a> (<span title="2 articles were published in March, 2012">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/02" title="All articles written in February, 2012" rel="nofollow">February, 2012</a> (<span title="1 articles were published in February, 2012">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2012/01" title="All articles written in January, 2012" rel="nofollow">January, 2012</a> (<span title="4 articles were published in January, 2012">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/12" title="All articles written in December, 2011" rel="nofollow">December, 2011</a> (<span title="15 articles were published in December, 2011">15</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/11" title="All articles written in November, 2011" rel="nofollow">November, 2011</a> (<span title="3 articles were published in November, 2011">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/10" title="All articles written in October, 2011" rel="nofollow">October, 2011</a> (<span title="2 articles were published in October, 2011">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/09" title="All articles written in September, 2011" rel="nofollow">September, 2011</a> (<span title="2 articles were published in September, 2011">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/08" title="All articles written in August, 2011" rel="nofollow">August, 2011</a> (<span title="3 articles were published in August, 2011">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/07" title="All articles written in July, 2011" rel="nofollow">July, 2011</a> (<span title="1 articles were published in July, 2011">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/06" title="All articles written in June, 2011" rel="nofollow">June, 2011</a> (<span title="2 articles were published in June, 2011">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/05" title="All articles written in May, 2011" rel="nofollow">May, 2011</a> (<span title="1 articles were published in May, 2011">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/04" title="All articles written in April, 2011" rel="nofollow">April, 2011</a> (<span title="1 articles were published in April, 2011">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/03" title="All articles written in March, 2011" rel="nofollow">March, 2011</a> (<span title="2 articles were published in March, 2011">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/02" title="All articles written in February, 2011" rel="nofollow">February, 2011</a> (<span title="2 articles were published in February, 2011">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2011/01" title="All articles written in January, 2011" rel="nofollow">January, 2011</a> (<span title="1 articles were published in January, 2011">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/12" title="All articles written in December, 2010" rel="nofollow">December, 2010</a> (<span title="2 articles were published in December, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/11" title="All articles written in November, 2010" rel="nofollow">November, 2010</a> (<span title="1 articles were published in November, 2010">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/10" title="All articles written in October, 2010" rel="nofollow">October, 2010</a> (<span title="2 articles were published in October, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/09" title="All articles written in September, 2010" rel="nofollow">September, 2010</a> (<span title="1 articles were published in September, 2010">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/08" title="All articles written in August, 2010" rel="nofollow">August, 2010</a> (<span title="2 articles were published in August, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/07" title="All articles written in July, 2010" rel="nofollow">July, 2010</a> (<span title="2 articles were published in July, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/06" title="All articles written in June, 2010" rel="nofollow">June, 2010</a> (<span title="2 articles were published in June, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/05" title="All articles written in May, 2010" rel="nofollow">May, 2010</a> (<span title="2 articles were published in May, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/04" title="All articles written in April, 2010" rel="nofollow">April, 2010</a> (<span title="2 articles were published in April, 2010">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/03" title="All articles written in March, 2010" rel="nofollow">March, 2010</a> (<span title="5 articles were published in March, 2010">5</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/02" title="All articles written in February, 2010" rel="nofollow">February, 2010</a> (<span title="5 articles were published in February, 2010">5</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2010/01" title="All articles written in January, 2010" rel="nofollow">January, 2010</a> (<span title="7 articles were published in January, 2010">7</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/12" title="All articles written in December, 2009" rel="nofollow">December, 2009</a> (<span title="6 articles were published in December, 2009">6</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/11" title="All articles written in November, 2009" rel="nofollow">November, 2009</a> (<span title="6 articles were published in November, 2009">6</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/10" title="All articles written in October, 2009" rel="nofollow">October, 2009</a> (<span title="2 articles were published in October, 2009">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/09" title="All articles written in September, 2009" rel="nofollow">September, 2009</a> (<span title="3 articles were published in September, 2009">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/08" title="All articles written in August, 2009" rel="nofollow">August, 2009</a> (<span title="2 articles were published in August, 2009">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/07" title="All articles written in July, 2009" rel="nofollow">July, 2009</a> (<span title="4 articles were published in July, 2009">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/06" title="All articles written in June, 2009" rel="nofollow">June, 2009</a> (<span title="1 articles were published in June, 2009">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/05" title="All articles written in May, 2009" rel="nofollow">May, 2009</a> (<span title="1 articles were published in May, 2009">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/04" title="All articles written in April, 2009" rel="nofollow">April, 2009</a> (<span title="1 articles were published in April, 2009">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/03" title="All articles written in March, 2009" rel="nofollow">March, 2009</a> (<span title="2 articles were published in March, 2009">2</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/02" title="All articles written in February, 2009" rel="nofollow">February, 2009</a> (<span title="7 articles were published in February, 2009">7</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2009/01" title="All articles written in January, 2009" rel="nofollow">January, 2009</a> (<span title="4 articles were published in January, 2009">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/12" title="All articles written in December, 2008" rel="nofollow">December, 2008</a> (<span title="8 articles were published in December, 2008">8</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/11" title="All articles written in November, 2008" rel="nofollow">November, 2008</a> (<span title="7 articles were published in November, 2008">7</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/10" title="All articles written in October, 2008" rel="nofollow">October, 2008</a> (<span title="4 articles were published in October, 2008">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/09" title="All articles written in September, 2008" rel="nofollow">September, 2008</a> (<span title="5 articles were published in September, 2008">5</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/08" title="All articles written in August, 2008" rel="nofollow">August, 2008</a> (<span title="9 articles were published in August, 2008">9</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/07" title="All articles written in July, 2008" rel="nofollow">July, 2008</a> (<span title="14 articles were published in July, 2008">14</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/06" title="All articles written in June, 2008" rel="nofollow">June, 2008</a> (<span title="4 articles were published in June, 2008">4</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/05" title="All articles written in May, 2008" rel="nofollow">May, 2008</a> (<span title="5 articles were published in May, 2008">5</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/04" title="All articles written in April, 2008" rel="nofollow">April, 2008</a> (<span title="8 articles were published in April, 2008">8</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/03" title="All articles written in March, 2008" rel="nofollow">March, 2008</a> (<span title="3 articles were published in March, 2008">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/02" title="All articles written in February, 2008" rel="nofollow">February, 2008</a> (<span title="1 articles were published in February, 2008">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2008/01" title="All articles written in January, 2008" rel="nofollow">January, 2008</a> (<span title="1 articles were published in January, 2008">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2007/12" title="All articles written in December, 2007" rel="nofollow">December, 2007</a> (<span title="1 articles were published in December, 2007">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2007/11" title="All articles written in November, 2007" rel="nofollow">November, 2007</a> (<span title="1 articles were published in November, 2007">1</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2007/10" title="All articles written in October, 2007" rel="nofollow">October, 2007</a> (<span title="3 articles were published in October, 2007">3</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2007/09" title="All articles written in September, 2007" rel="nofollow">September, 2007</a> (<span title="5 articles were published in September, 2007">5</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2007/08" title="All articles written in August, 2007" rel="nofollow">August, 2007</a> (<span title="10 articles were published in August, 2007">10</span>)</li>
+     <li><a href="http://www.catonmat.net/archive/2007/07" title="All articles written in July, 2007" rel="nofollow">July, 2007</a> (<span title="9 articles were published in July, 2007">9</span>)</li>
+    </ul>
+    <p class="moreinfo">
+      <a href="http://www.catonmat.net/archive" title="All catonmat articles">See more detailed list of all articles</a>
+    </p>
+  </div>
+</div>
+
+<div class="item">
+  <div class="title">Advertisements</div>
+  <div class="content">
+    <script async="" src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/adsbygoogle.js"></script>
+    <!-- 160x600, catonmat sidebar, created 2/15/09 -->
+    <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-0433925538517663" data-ad-slot="2288848838"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+
+<!-- end sidebar.tmpl.html -->
+
+
+
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="footer">
+        
+  <center>
+<a href="http://www.amazon.com/The-Little-Schemer-4th-Edition/dp/0262560992?tag=catonmat-20"><img src="Top%20Ten%20One-Liners%20from%20CommandLineFu%20Explained%20-%20good%20coders%20code,%20great%20coders%20reuse-Dateien/jelly-stains.gif"></a>
+<br>
+<a href="http://www.catonmat.net/advertise">(advertise on catonmat)</a>
+</center>
+
+
+      </div>
+    </div>
+
+<!-- google analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  var id1 = (1093316+16)/4;
+  var id2 = (81-4)/77;
+
+  _gaq.push(['_set' + 'Account', 'U' + 'A-' + id1 + '-' + id2]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<!-- google plus -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=3189873;
+var sc_invisible=1;
+var sc_security="dc7255a7";
+</script>
+
+<noscript><div class="statcounter"><a title="tumblr tracker" class="statcounter" href="http://statcounter.com/tumblr/"><img class="statcounter" src="http://c.statcounter.com/3189873/0/dc7255a7/1/" alt="tumblr tracker" /></a></div></noscript>
+<!-- End of StatCounter Code -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

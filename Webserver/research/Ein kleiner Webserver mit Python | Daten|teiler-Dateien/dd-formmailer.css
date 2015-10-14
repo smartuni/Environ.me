@@ -1,0 +1,276 @@
+/* CSS File for Dagon Design Formmailer Script */
+/* http://www.dagondesign.com */
+
+/* COLOR/BORDERS CSS */
+
+form.ddfm h1,
+form.ddfm h2 {
+	color: #606060;
+}
+
+form.ddfm legend, 
+form.ddfm label, 
+form.ddfm label.fmtextlblwide {
+	color: #606060;
+}
+
+form.ddfm .fmcheck p, 
+form.ddfm .fmradio p,
+form.ddfm textarea, 
+form.ddfm .fmfullblock, 
+form.ddfm .fmhalfblock, 
+form.ddfm .fmselect, 
+form.ddfm input.fmtext,
+form.ddfm input.fmverify,
+form.ddfm textarea.fmtextwide,
+form.ddfm .submit,
+form.ddfm .credits {
+	color: #404040;
+}
+
+form.ddfm .required {
+	color: #FF0000;
+}
+
+.ddfmerrors {
+	color: #FF0000;
+}
+
+/* TEXT CSS */
+
+.ddfmwrap {
+	font-size: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+form.ddfm h1,
+form.ddfm h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+
+form.ddfm h1 {
+	font-size: 140%;
+}
+
+form.ddfm h2 {
+	font-size: 115%;
+}
+
+form.ddfm legend, 
+form.ddfm label, 
+form.ddfm label.fmtextlblwide {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+form.ddfm .credits {
+	font-size: 90%;
+}
+
+form.ddfm legend {
+	font-size: 110%;
+}
+
+.ddfmerrors {
+	font-weight: bold;
+}
+
+
+
+
+/* STRUCTURE CSS */
+
+.ddfmwrap {
+	margin: 0px 0px 0px 0px;
+	width: 450px;
+}
+
+.ddfmwrap p.fieldwrap {
+	padding: 1px;
+	margin: 1px;
+	clear: left;
+}
+
+form.ddfm {
+	text-align: left;
+	padding: 10px;
+	width: 430px; 
+}
+
+form.ddfm fieldset {
+	padding: 0 10px 2px 10px;
+	margin: 0 0 13px 0;
+	display: block;
+}
+
+form.ddfm legend {
+	padding: 0 6px 0 6px;
+	margin: 0 0 0 10px;	 
+}
+
+form.ddfm label {
+	display: block; 
+	float: left; 
+	width: 26%; 
+	text-align: right;
+	margin: 0 10px 0 0; 
+	padding-bottom: 15px;
+	clear: left;  
+}
+
+form.ddfm label.fmtextlblwide {
+	display: block;  
+	float: left; 
+	text-align: left;
+	margin: 0 10px 0 1px; 
+	padding-bottom: 8px; 
+	width: 100%;
+}
+
+form.ddfm select.fmselect {
+	float: left; 
+	display: block;
+	width: 65%; 
+	margin-bottom: 15px;  
+	padding: 3px; 
+}
+
+form.ddfm .fmcheck {
+	width: 65%; 
+	float: left;
+	display: block;  
+	margin-bottom: 15px;
+}
+
+form.ddfm .fmradio {
+	width: 65%;
+	float: left;
+	display: block;
+	margin-bottom: 15px;
+}
+
+form.ddfm .fmcheck p {
+	padding: 0;
+	margin: 0 0 5px 0;
+	line-height: 140%;
+}
+
+form.ddfm .fmradio p {
+	padding: 0;
+	margin: 0 0 5px 0;
+	line-height: 140%;
+}
+
+form.ddfm textarea {
+	float: left; 
+	position: relative;
+	width: 65%;
+	margin-bottom: 15px;
+	padding: 3px;
+}
+
+
+/*
+	display: block; 
+	float: left; 
+	width: 26%; 
+	text-align: right;
+	margin: 0 10px 0 0; 
+	padding-bottom: 15px;
+	clear: left;  */
+
+form.ddfm .fmfullblock {
+	padding-left: 0px;
+	float: left; 
+	width: 100%;
+	margin-bottom: 13px;
+	display: block;
+}
+
+form.ddfm .fmhalfblock {
+	width: 65%;
+	padding-left: 29%;
+	margin-bottom: 13px;
+	float: left; 
+	display: block;
+}
+
+form.ddfm input.fmverify {
+	float: left; 
+	width: 22%;
+	margin-bottom: 15px; 
+	padding: 3px;
+	position: relative;
+	display: block;
+}
+
+form.ddfm img {
+	margin: 1px 0 0 10px; 
+    float: left;
+}
+
+form.ddfm input.fmfile,
+form.ddfm input.fmtext {
+	float: left; 
+	display: block;
+	width: 65%;
+	margin-bottom: 15px;  
+	padding: 3px;
+}
+
+form.ddfm textarea.fmtextwide {
+	display: block;
+	float: left;
+	width: 93%;
+	margin-right: 2px;
+	margin-bottom: 15px; 
+	padding: 3px;
+}
+
+form.ddfm .credits {
+	text-align: right;
+	margin-top: 7px;
+	width: 97%;
+}
+
+form.ddfm .submit {
+	text-align: right;
+	clear: both; 
+	width: 97%;
+}
+
+.ddfmwrap .ddfmerrors {
+	display: block; 
+	float: left; 
+	width: 27%; 
+	text-align: right;
+	margin: 0 10px 0 0; 
+	padding-bottom: 15px;
+}
+
+.ddfmwrap .errorlist {
+	float: left; 
+	display: block;
+	width: 65%;
+	margin-bottom: 15px;  
+	padding: 3px;
+	text-align: left;
+}
+
+.ddfmwrap .recaptcha {
+	width: 100%;
+	text-align: right;
+	clear: both; 
+	height: 120px;
+	margin-right: 7px;
+	padding-bottom: 10px;
+}
+
+.ddfmwrap .recaptcha-inner {
+	float: right;
+	margin-right: 3px;
+}
