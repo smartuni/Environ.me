@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <title>Page title</title>
+</head>
+<body>
+    <header>
+        <h1>Page title</h1>
+    </header>
+    <nav>
+        <!-- Navigation -->
+    </nav>
+    <section id="intro">
+        <!-- Introduction -->
+    </section>
+    <section>
+        <!-- Main content area -->
+
+	<button onclick="JavaScript:">
+		Click Me!
+	</button>
+
+	<!-- Example 2 -->
+	<button onclick="JavaScript:alert('You will love this book!')">
+		<img src="/pix/web_graphics/free_website_graphics/icons/books/book13.gif" alt="Read book">
+		<br>Read Book!
+	</button>
+
+    </section>
+    <aside>
+        <!-- Sidebar -->
+    </aside>
+    <footer>
+        <!-- Footer -->
+    </footer>
+ 
+</body>
+</html>
