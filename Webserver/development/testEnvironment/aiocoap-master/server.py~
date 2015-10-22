@@ -14,6 +14,9 @@ import asyncio
 import aiocoap.resource as resource
 import aiocoap
 
+import sqlite3
+conn = sqlite3.connect('example.db')
+
 
 class BlockResource(resource.Resource):
     """
@@ -39,6 +42,33 @@ class BlockResource(resource.Resource):
         payload = ("I've accepted the new payload. You may inspect it here in "\
                 "Python's repr format:\n\n%r"%self.content).encode('utf8')
         return aiocoap.Message(code=aiocoap.CHANGED, payload=payload)
+
+#############################################
+#######       added the sql statements check if this is the correct place
+
+c = conn.cursor()
+
+# Create table
+try:
+	c.execute('''CREATE TABLE stocks(date text, trans text, symbol text, qty real, price real)''')
+except Exception as e:
+	print('Failed to fetch resource:')
+        print(e)
+
+
+# Insert a row of data
+try:
+	c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+except Exception as e:
+	print('Failed to fetch resource:')
+        print(e)
+
+# Save (commit) the changes
+conn.commit()
+
+# We can also close the connection if we are done with it.
+# Just be sure any changes have been committed or they will be lost.
+conn.close()
 
 
 class SeparateLargeResource(resource.Resource):
@@ -78,7 +108,7 @@ class TimeResource(resource.ObservableResource):
 
     @asyncio.coroutine
     def render_get(self, request):
-        payload = datetime.datetime.now().strftime("%Y-%m-%d %M:%H").encode('ascii')
+        payload = datetime.datetime.now().strftime("%Y-%m-%d %H:%M").encode('ascii')
         return aiocoap.Message(code=aiocoap.CONTENT, payload=payload)
 
 #class CoreResource(resource.Resource):

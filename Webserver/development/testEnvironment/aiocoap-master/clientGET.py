@@ -11,6 +11,9 @@
 import logging
 import asyncio
 
+import sqlite3
+conn = sqlite3.connect('example.db')
+
 from aiocoap import *
 
 logging.basicConfig(level=logging.INFO)
@@ -47,6 +50,9 @@ def main():
     else:
         print('Result: %s\n%r'%(response2.code, response2.payload))
 
+    c = conn.cursor()
+    for row in c.execute('SELECT * FROM stocks ORDER BY price'):
+    	print(row)
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
