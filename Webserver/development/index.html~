@@ -16,7 +16,7 @@
     <section>
         <!-- Main content area -->
 
-	<button onclick="JavaScript:">
+	<button onclick>
 		Click Me!
 	</button>
 
