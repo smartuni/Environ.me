@@ -53,7 +53,7 @@ try:
 	c.execute('''CREATE TABLE stocks(date text, trans text, symbol text, qty real, price real)''')
 except Exception as e:
 	print('Failed to fetch resource:')
-        print(e)
+	print(e)
 
 
 # Insert a row of data
@@ -61,7 +61,7 @@ try:
 	c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
 except Exception as e:
 	print('Failed to fetch resource:')
-        print(e)
+	print(e)
 
 # Save (commit) the changes
 conn.commit()

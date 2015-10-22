@@ -56,7 +56,7 @@ except Exception as e:
 	print(e)
 
 
-# Insert a row of data
+# Insert a row of data when the clientPUT ist restartet
 try:
 	c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
 except Exception as e:
