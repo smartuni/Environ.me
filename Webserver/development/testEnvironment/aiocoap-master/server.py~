@@ -15,7 +15,7 @@ import aiocoap.resource as resource
 import aiocoap
 
 import sqlite3
-conn = sqlite3.connect('example.db')
+
 
 
 class BlockResource(resource.Resource):
@@ -37,38 +37,43 @@ class BlockResource(resource.Resource):
 
     @asyncio.coroutine
     def render_put(self, request):
-        print('PUT payload: %s' % request.payload)
+	#############################################
+	#######       added the sql statements check if this is the correct place
+        conn = sqlite3.connect('data.db')
+        c = conn.cursor()
+
+	# Create table
+        try:
+        	c.execute('''CREATE TABLE room(bla text,blaa text,blaaa text)''')
+        except Exception as e:
+        	print('Failed to fetch resource:')
+        	print(e)
+
+        insert = 'INSERT INTO room VALUES (?,?,?)'
+
+        test2= request.payload.decode("utf-8")
+        test = "Blume" 
+	# Insert a row of data when the clientPUT ist restartet
+        try:
+        	c.execute(insert, (test,test, test))
+#        	c.execute(insert)
+        except Exception as e:
+        	print('Failed to Insert:')
+        	print(e)
+
+	# Save (commit) the changes
+        conn.commit()
+
+	# We can also close the connection if we are done with it.
+	# Just be sure any changes have been committed or they will be lost.
+        conn.close()
+        print('PUT payload: %s' % request.payload[0])
         self.content = request.payload
         payload = ("I've accepted the new payload. You may inspect it here in "\
                 "Python's repr format:\n\n%r"%self.content).encode('utf8')
         return aiocoap.Message(code=aiocoap.CHANGED, payload=payload)
 
-#############################################
-#######       added the sql statements check if this is the correct place
 
-c = conn.cursor()
-
-# Create table
-try:
-	c.execute('''CREATE TABLE stocks(date text, trans text, symbol text, qty real, price real)''')
-except Exception as e:
-	print('Failed to fetch resource:')
-	print(e)
-
-
-# Insert a row of data
-try:
-	c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
-except Exception as e:
-	print('Failed to fetch resource:')
-	print(e)
-
-# Save (commit) the changes
-conn.commit()
-
-# We can also close the connection if we are done with it.
-# Just be sure any changes have been committed or they will be lost.
-conn.close()
 
 
 class SeparateLargeResource(resource.Resource):
@@ -109,6 +114,7 @@ class TimeResource(resource.ObservableResource):
     @asyncio.coroutine
     def render_get(self, request):
         payload = datetime.datetime.now().strftime("%Y-%m-%d %H:%M").encode('ascii')
+
         return aiocoap.Message(code=aiocoap.CONTENT, payload=payload)
 
 #class CoreResource(resource.Resource):
@@ -147,6 +153,8 @@ def main():
     root.add_resource(('time',), TimeResource())
 
     root.add_resource(('other', 'block'), BlockResource())
+
+    #root.add_resource(('other', 'temperature'), BlockResource())
 
     root.add_resource(('other', 'separate'), SeparateLargeResource())
 

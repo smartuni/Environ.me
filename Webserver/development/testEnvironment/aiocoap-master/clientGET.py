@@ -13,6 +13,7 @@ import asyncio
 
 import sqlite3
 conn = sqlite3.connect('example.db')
+connData = sqlite3.connect('data.db')
 
 from aiocoap import *
 
@@ -23,7 +24,7 @@ def main():
     protocol = yield from Context.create_client_context()
 
     request = Message(code=GET)
-    request.set_request_uri('coap://localhost/time')
+   # request.set_request_uri('coap://localhost/time')
 
 
     request2 = Message(code=GET)
@@ -50,9 +51,14 @@ def main():
     else:
         print('Result: %s\n%r'%(response2.code, response2.payload))
 
-    c = conn.cursor()
-    for row in c.execute('SELECT * FROM stocks ORDER BY price'):
+#    c = conn.cursor()
+#    for row in c.execute('SELECT * FROM stocks ORDER BY price'):
+#    	print(row)
+
+    c = connData.cursor()
+    for row in c.execute('SELECT * FROM room'):
     	print(row)
+    	    	    	
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
