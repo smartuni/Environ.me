@@ -13,7 +13,8 @@
 #define DEBUG
 #define BUFFER_SIZE       (256)
 #define MSG_QUEUE_SIZE    (64)
-#define PORT              (5683)
+#define SERVER_PORT       (5683)
+#define CLIENT_PORT       (5684)
 #define MAX_RESPONSE_SIZE (64)
 
 static void start_server(void);
@@ -23,6 +24,10 @@ static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  coap_packet_t *outpkt,
 				  uint8_t id_hi, uint8_t id_lo);
 static int request_temperature(int argc, char **argv);
+static void dumpHeader(coap_header_t *hdr);
+static void dump(const uint8_t *buf, size_t buflen, bool bare);
+static void dumpOptions(coap_option_t *opts, size_t numopt);
+static void dumpPacket(coap_packet_t *pkt);
 
 static const shell_command_t shell_commands[] =
 {
@@ -39,7 +44,8 @@ const coap_endpoint_t endpoints[] =
 // static vars
 static char thread_stack[THREAD_STACKSIZE_DEFAULT];
 static int server_socket = -1;
-static uint8_t buffer[BUFFER_SIZE];
+static int client_socket = -1;
+static uint8_t server_buffer[BUFFER_SIZE];
 static uint8_t client_buffer[BUFFER_SIZE];
 static msg_t msg_queue[MSG_QUEUE_SIZE];
 static uint8_t scratch_raw[BUFFER_SIZE];
@@ -85,19 +91,18 @@ static void start_server(void) {
  */
 static void *server(void *arg) {
     struct sockaddr_in6 server_addr;
-    uint16_t port;
+    uint16_t server_port = (uint16_t)SERVER_PORT;
+    uint16_t client_port = (uint16_t)CLIENT_PORT;
     arg = arg;
     msg_init_queue(msg_queue, MSG_QUEUE_SIZE);
     server_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-    /* parse port */
-    port = (uint16_t)PORT;
-    if (port == 0) {
+    if (server_port == 0 || client_port == 0) {
         puts("ERROR: invalid port specified");
         return NULL;
     }
     server_addr.sin6_family = AF_INET6;
     memset(&server_addr.sin6_addr, 0, sizeof(server_addr.sin6_addr));
-    server_addr.sin6_port = htons(port);
+    server_addr.sin6_port = htons(server_port);
     if (server_socket < 0) {
         puts("ERROR: initializing socket");
         server_socket = 0;
@@ -109,15 +114,16 @@ static void *server(void *arg) {
         puts("ERROR: binding socket");
         return NULL;
     }
-    printf("INFO:  started CoAP server on port %" PRIu16 "\n", port);
+    printf("INFO:  started CoAP server on port %" PRIu16 "\n", server_port);
     while (1) {
         int recv_len;
+	size_t buffer_size = sizeof(server_buffer);
 	int rc;
         struct sockaddr_in6 client_addr;
         socklen_t client_addr_len = sizeof(struct sockaddr_in6);
 	coap_packet_t inpkt;
         // blocking receive, waiting for data
-        if ((recv_len = recvfrom(server_socket, buffer, sizeof(buffer), 0,
+        if ((recv_len = recvfrom(server_socket, server_buffer, buffer_size, 0,
 				 (struct sockaddr *)&client_addr,
 				 &client_addr_len)) < 0) {
             puts("ERROR: on receive");
@@ -127,26 +133,28 @@ static void *server(void *arg) {
         }
         else { // CoAP part
 	    puts("INFO:  redeived packet: ");
-	    coap_dump(buffer, recv_len, true);
+	    dump(server_buffer, recv_len, true);
 	    puts("\n");
-	    if (0 != (rc = coap_parse(&inpkt, buffer, recv_len))) {
+	    if (0 != (rc = coap_parse(&inpkt, server_buffer, recv_len))) {
 		printf("Bad packet rc=%d\n", rc);
 	    }
 	    else {
-		size_t send_len = sizeof(buffer);
 		coap_packet_t outpkt;
 		puts("content:");
-		coap_dumpPacket(&inpkt);
+		dumpPacket(&inpkt);
 		coap_handle_req(&scratch_buffer, &inpkt, &outpkt);
-		if (0 != (rc = coap_build(buffer, &send_len, &outpkt))) {
+		if (0 != (rc = coap_build(server_buffer, &buffer_size,
+					  &outpkt))) {
 		    printf("ERROR: coap_build failed rc=%d\n", rc);
 		}
 		else {
 		    puts("INFO:  sending packet: ");
-		    coap_dump(buffer, send_len, true);
+		    dump(server_buffer, buffer_size, true);
 		    puts("\ncontent:");
-		    coap_dumpPacket(&outpkt);
-		    if (sendto(server_socket, buffer, send_len, 0,
+		    dumpPacket(&outpkt);
+		    // send response on different port
+		    client_addr.sin6_port = htons(client_port);
+		    if (sendto(server_socket, server_buffer, buffer_size, 0,
 			       (struct sockaddr *)&client_addr,
 			       sizeof(client_addr)) < 0) {
 			puts("ERROR: sending data");
@@ -171,12 +179,13 @@ static int get_temperature_handle(coap_rw_buffer_t *scratch,
 }
 
 static int request_temperature(int argc, char **argv) {
-    struct sockaddr_in6 dst_addr;
-    size_t dst_addr_len = sizeof(dst_addr);
-    uint16_t port;
-    int client_socket;
-    size_t buffer_len = sizeof(client_buffer);
-    size_t request_len;
+    struct sockaddr_in6 server_addr;
+    size_t server_addr_len = sizeof(server_addr);
+    struct sockaddr_in6 client_addr;
+    size_t client_addr_len = sizeof(client_addr);
+    uint16_t server_port = (uint16_t)SERVER_PORT;
+    uint16_t client_port = (uint16_t)CLIENT_PORT;
+    size_t buffer_size = sizeof(client_buffer);
     int rc;
     int recv_len;
     coap_packet_t inpkt;
@@ -184,17 +193,30 @@ static int request_temperature(int argc, char **argv) {
 	puts("INFO:  usage: temperature <addr>");
 	return 1;
     }
-    dst_addr.sin6_family = AF_INET6;
-    if (inet_pton(AF_INET6, argv[1], &dst_addr.sin6_addr) != 1) {
+    if (server_port == 0 || client_port == 0) {
+        puts("ERROR: invalid port specified");
+        return 1;
+    }
+    client_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+    if (client_socket < 0) {
+        puts("ERROR: initializing socket");
+        server_socket = 0;
+        return 1;
+    }
+    server_addr.sin6_family = AF_INET6;
+    if (inet_pton(AF_INET6, argv[1], &server_addr.sin6_addr) != 1) {
 	puts("ERROR: unable to parse destination address");
 	return 1;
     }
-    port = (uint16_t)PORT;
-    dst_addr.sin6_port = htons(port);
-    client_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-    if (client_socket < 0) {
-	puts("ERROR: socket initialization failed");
-	return 1;
+    server_addr.sin6_port = htons(server_port);
+    client_addr.sin6_family = AF_INET6;
+    memset(&client_addr.sin6_addr, 0, sizeof(client_addr.sin6_addr));
+    client_addr.sin6_port = htons(client_port);
+    if (bind(client_socket, (struct sockaddr *)&client_addr,
+	     client_addr_len) < 0) {
+        client_socket = -1;
+        puts("ERROR: binding socket");
+        return 1;
     }
     puts("INFO:  creating CoAP GET request");
     coap_header_t request_hdr = {
@@ -205,11 +227,11 @@ static int request_temperature(int argc, char **argv) {
 	.id = {(message_id & 0xFF), ((message_id >> 8) & 0xFF)}
     };
     coap_buffer_t payload_buf = {
-	.p = (const uint8_t *){0},
+	.p = (const uint8_t *)NULL,
 	.len = 0
     };
     coap_buffer_t token_buf = {
-	.p = (const uint8_t *){0},
+	.p = (const uint8_t *)NULL,
 	.len = 0
     };
     coap_packet_t request_pkt = {
@@ -227,42 +249,84 @@ static int request_temperature(int argc, char **argv) {
 	};
 	request_pkt.opts[i] = path_option;
     }
-    request_len = sizeof(request_pkt);
-    if (request_len > buffer_len) {
-	printf("ERROR: buffer to small. request_len = %d, buffer_len = %d\n",
-	       (int)request_len, (int)buffer_len);
-	return 1;
-    }
     puts("DEBUG: building coap package");
-    if (0 != (rc = coap_build(client_buffer, &buffer_len, &request_pkt))) {
+    if (0 != (rc = coap_build(client_buffer, &buffer_size, &request_pkt))) {
 	printf("ERROR: coap_build failed rc=%d\n", rc);
 	return 1;
     }
     puts("INFO:  sending packet: ");
-    coap_dump(client_buffer, request_len, true);
+    dump(client_buffer, buffer_size, true);
     puts("\ncontent:");
-    coap_dumpPacket(&request_pkt);
-    if (sendto(client_socket, client_buffer, buffer_len, 0,
-	       (struct sockaddr *)&dst_addr, dst_addr_len) < 0) {
+    dumpPacket(&request_pkt);
+    if (sendto(client_socket, client_buffer, buffer_size, 0,
+	       (struct sockaddr *)&server_addr, server_addr_len) < 0) {
 	puts("ERROR: sending data");
     }
     // blocking receive, waiting for data
-    if ((recv_len = recvfrom(client_socket, client_buffer, buffer_len, 0,
-			     (struct sockaddr *)&dst_addr,
-			     &dst_addr_len)) < 0) {
+    if ((recv_len = recvfrom(client_socket, client_buffer, buffer_size, 0,
+			     (struct sockaddr *)&server_addr,
+			     &server_addr_len)) < 0) {
         puts("ERROR: on receive");
     } else if (recv_len == 0) {
         puts("INFO:  peer did shut down");
     } else { // CoAP part
 	puts("INFO:  redeived packet: ");
-	coap_dump(client_buffer, recv_len, true);
+	dump(client_buffer, recv_len, true);
 	puts("\n");
 	if (0 != (rc = coap_parse(&inpkt, client_buffer, recv_len))) {
 	    printf("Bad packet rc=%d\n", rc);
         } else {
 	    puts("\ncontent:");
-	    coap_dumpPacket(&inpkt);
+	    dumpPacket(&inpkt);
 	}
     }
     return 0;
+}
+
+void dumpHeader(coap_header_t *hdr)
+{
+    printf("Header:\n");
+    printf("  ver  0x%02X\n", hdr->ver);
+    printf("  t    0x%02X\n", hdr->t);
+    printf("  tkl  0x%02X\n", hdr->tkl);
+    printf("  code 0x%02X\n", hdr->code);
+    printf("  id   0x%02X%02X\n", hdr->id[0], hdr->id[1]);
+}
+
+
+void dump(const uint8_t *buf, size_t buflen, bool bare)
+{
+    if (bare)
+    {
+        while(buflen--)
+            printf("%02X%s", *buf++, (buflen > 0) ? " " : "");
+    }
+    else
+    {
+        printf("Dump: ");
+        while(buflen--)
+            printf("%02X%s", *buf++, (buflen > 0) ? " " : "");
+        printf("\n");
+    }
+}
+
+void dumpOptions(coap_option_t *opts, size_t numopt)
+{
+    size_t i;
+    printf(" Options:\n");
+    for (i=0;i<numopt;i++)
+    {
+        printf("  0x%02X [ ", opts[i].num);
+        dump(opts[i].buf.p, opts[i].buf.len, true);
+        printf(" ]\n");
+    }
+}
+
+void dumpPacket(coap_packet_t *pkt)
+{
+    dumpHeader(&pkt->hdr);
+    dumpOptions(pkt->opts, pkt->numopts);
+    printf("Payload: ");
+    dump(pkt->payload.p, pkt->payload.len, true);
+    printf("\n");
 }
