@@ -1,0 +1,366 @@
+/*
+Theme Name: Dirtylicious
+Theme URI: http://templates.arcsin.se/
+Version: 1.0
+Description: A soft-colored, bright and somewhat dirty two-column theme. Based on the <a href="http://templates.arcsin.se/">free website template</a> Dirtylicious. Also available as <a href="http://templates.arcsin.se/dirtylicious-joomla-template/">Joomla template</a>.
+Author: Viktor Persson
+Author URI: http://arcsin.se
+*/
+
+/* standard elements */
+html {min-height: 100%;}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {color: #048;}
+a:hover {color: #06C;}
+a img {border: none;}
+
+body {
+	background: #E7E7E2 url('img/body.jpg') no-repeat center top;
+	color: #444;
+	font: normal 62.5%/1.6em Tahoma,sans-serif;
+	padding-top: 64px;
+}
+
+p,code,ul,ol {padding-bottom: 1.2em;}
+
+li {
+	list-style: none;
+	font-family: "Lucida Sans Unicode",sans-serif;
+}
+
+h1 {font: normal 1.8em Tahoma,sans-serif;}
+h2 {font: normal 1.6em sans-serif;}
+h3 {font: bold 1em Tahoma,sans-serif;}
+
+h1,h2,h3 {padding-top: 6px; color: #553; margin-bottom: 4px;}
+
+code {
+	color: grey;
+	font-size: 12px;
+        white-space: pre;
+
+}
+
+
+ pre {
+	color: grey;
+	font-size: 12px;
+        white-space: pre;
+        margin: 12px;
+}
+/*  
+
+	border-left: 6px solid #CCC;
+	color: #666;
+	display: block;
+	font: normal 1em Tahoma,sans-serif;
+	line-height: 1.6em;
+	margin-bottom: 12px;
+	padding: 8px 10px;
+	white-space: pre;
+}
+*/
+
+blockquote {
+	background: url('img/quote.gif') no-repeat;
+	display: block;
+	font-weight: bold;
+	padding-left: 28px;
+}
+
+/* misc */
+#menu {margin: 0% 0% 3% 0%;}
+.clearer {clear: both; font-size: 0;}
+.left {float: left;}
+.right {float: right;}
+
+/* structure */
+.inner-container {
+	border: 2px solid #D7D7D2;
+	background: #FFF;
+	font-size: 1.2em;
+	margin: 0 auto;
+	padding: 10px;
+	width: 780px;
+}
+
+.outer-container {
+	background: url('img/container.jpg') no-repeat center bottom;
+	padding-bottom: 64px;
+}
+
+/* headere & title */
+.header {
+	background: #222 url('img/header.jpg') no-repeat;
+	height: 160px;
+	margin-bottom: 5px;
+	padding-left: 15px;
+	text-align: left;
+}
+.header .title {
+	color: #FFF;
+	padding-top: 45px;
+}
+.header .title .sitename a {
+	border-bottom: 1px dashed #657382;
+	color: #FFF;
+	font: normal 3em sans-serif;
+	padding-bottom: 2px;
+	text-decoration: none;
+}
+.header .title a:hover {border-color: #F60;}
+.header .title .slogan {
+	font: normal 1.1em Verdana,sans-serif;
+	padding-top: 6px;
+}
+
+/* path */
+.path {
+	background: #949490;
+	color: #FFF;
+	font: normal 1.1em Verdana,sans-serif;
+	padding: 8px 12px;
+}
+.path li,.path ul {display: inline;}
+.path a {
+	color: #FAFAFA;
+	text-decoration: none;
+	margin-right: 16px;
+}
+.path a:hover {
+	color: #FFE;
+	text-decoration: underline;
+}
+
+/* main */
+.main {
+	background: url('img/main.gif') repeat-y;
+	border-top: 4px solid #FFF;
+	padding: 8px 12px 0 0;
+}
+
+/* content */
+.content {
+	float: left;
+	width: 538px;
+	padding-left: 12px;
+	text-align: justify;
+}
+.content .descr {
+	color: #664;
+	font-size: 0.9em;
+	margin-bottom: 6px;
+}
+.content li {
+	line-height: 1.4em;
+	list-style: url('img/li.gif');
+	margin-left: 18px;
+}
+.content p {font-family: "Lucida Sans Unicode",sans-serif;}
+
+/* navigation */
+.navigation {
+	float: right;
+	width: 195px;
+}
+
+.navigation h2 {
+	color: #5A5A43;
+	font: bold 1.1em Tahoma,sans-serif;
+	line-height: 30px;
+	margin: 0;
+	padding-left: 12px;
+}
+.navigation ul {
+	padding: 0;
+	border-top: 1px solid #EAEADA;
+}
+.navigation li {border-bottom: 1px solid #EAEADA;}
+.navigation li a {
+	font-size: 1.1em;
+	color: #554;
+	display: block;
+	padding: 8px 0 8px 5%;
+	text-decoration: none;
+	width: 95%;
+}
+.navigation li a:hover {
+	background: #F0F0EB;
+	color: #654;	
+}
+
+/* footer */
+.footer {
+	background: #949490;
+	color: #F7F7F2;
+	font: bold 1em sans-serif;
+	margin-top: 5px;
+	padding: 10px 12px;
+}
+.footer a {
+	color: #F7F7F2;
+	text-decoration: none;
+}
+.footer a:hover {color: #FFC;}
+
+/* posts */
+.post h1 a {
+	border-bottom: 1px dashed #AAA;
+	color: #664;
+	text-decoration: none;
+}
+.post h1 a:hover {
+	border-color: #F60;
+	color: #553;
+}
+
+.post {
+        margin: 6px 0px 2px;
+        padding-bottom: 20px;      
+}
+
+.post .info{
+	background: #F5F5F5;
+	border: 1px solid #E3E4E4;
+	color: #666;
+	margin: 2px 0 4px;
+	padding: 5px 10px;
+}
+.post img {
+/*	border: 4px solid #DDD; */
+	margin: 2px 4px;
+}
+/*.post a img {border: 4px solid #DDD;}
+.post a:hover img {border-color: #CCC;}*/
+
+.info a {text-decoration: none;}
+.info a:hover {text-decoration: underline;}
+
+/* comments */
+.content ol li {
+	background: none;
+}
+
+.commentlist {margin: 0; padding: 0;}
+.commentlist li {
+	margin-bottom: 1.2em;
+	list-style: decimal;
+}
+#commentform {
+	margin: 1em 0;
+	background: #FAFAFA;
+	width: 480px;
+}
+.commentmetadata {padding: 2px 0 4px;}
+.commentmetadata a {
+	color: #444;
+	text-decoration: none;
+}
+.commentmetadata a:hover {text-decoration: underline;}
+
+textarea.styled {width: 480px;}
+
+.styled {
+	font-size: 1.1em;
+	background: #F8F7F6;
+	border: 1px solid #D6D3D3;
+}
+.styled:hover {
+	background: #FFF;
+	border: 1px solid #D6D3D3;
+}
+.styled:focus {
+	background: #FFF;
+	border: 1px solid #939793;
+}
+#commentform input {margin-bottom: 3px;}
+
+/* calendar */
+#wp-calendar {color:#A0A0A0;}
+
+.navigation table caption {border-bottom-color:#000;}
+
+.navigation table thead tr {
+  border-bottom-color:#000;
+  color:#A53512;
+}
+
+.navigation table th {border-bottom-color:#000;}
+
+.navigation table td#today {
+  border-color:#000;
+  color:#A53512;
+}
+
+.navigation table td a {
+  border-bottom-color:#000;
+  background-color:#EDF3DE;
+}
+
+.navigation table tfoot {border-top-color:#000;}
+
+.navigation table tfoot a {background:none;}
+
+/* calendar
+--------------------------------------------------*/
+#wp-calendar {
+  display:inline-table;
+  border-collapse:collapse;
+  width:185px;
+  margin:0px 10px 0 10px;
+  text-align:center;
+}
+
+.navigation table caption {
+  margin: -5px 10px 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid;
+  letter-spacing: 0.1em;
+}
+
+.navigation table thead tr {border-bottom:1px solid;}
+
+.navigation table th {border-bottom:1px solid;}
+
+.navigation table td {
+  width: 225px; /* maximaize width; honestly, I don't know much about tables... */
+  padding: 1px;
+  font-size: 0.9em;
+}
+
+.navigation table td#today {
+  padding: 0;
+  border: 1px solid;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.navigation table td a {
+  display: block;
+  border-bottom: 1px solid;
+  font-weight: bold;
+  font-size: 1.15em;
+}
+
+.navigation table tfoot {border-top:1px solid;}
+.navigation table tfoot a {
+  border: none;
+  font-weight: bold;
+}
+.navigation table tfoot #prev a {text-align:left;}
+.navigation table tfoot #next a {text-align:center;}
+
+#searchform {padding: 10px;}
+
+.google {
+	border-left: 6px solid #FFF;
+	float: left;
+	width: 790px;
+	margin-left: -22px;
+	margin-top: -8px;
+}
