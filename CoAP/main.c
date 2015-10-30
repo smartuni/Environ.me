@@ -50,7 +50,7 @@ static uint8_t client_buffer[BUFFER_SIZE];
 static msg_t msg_queue[MSG_QUEUE_SIZE];
 static uint8_t scratch_raw[BUFFER_SIZE];
 static coap_rw_buffer_t scratch_buffer = {scratch_raw,  sizeof(scratch_raw)};
-static uint8_t response[MAX_RESPONSE_SIZE] = "";
+static char *response = "22.5 C";
 static uint16_t message_id = 1;
 
 /**
@@ -143,6 +143,8 @@ static void *server(void *arg) {
 		puts("content:");
 		dumpPacket(&inpkt);
 		coap_handle_req(&scratch_buffer, &inpkt, &outpkt);
+		puts("outpkt before build:");
+		dumpPacket(&outpkt);
 		if (0 != (rc = coap_build(server_buffer, &buffer_size,
 					  &outpkt))) {
 		    printf("ERROR: coap_build failed rc=%d\n", rc);
@@ -170,10 +172,9 @@ static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  const coap_packet_t *inpkt,
 				  coap_packet_t *outpkt,
 				  uint8_t id_hi, uint8_t id_lo) {
-    char *temperature = "20";
-    memcpy((void*)response, temperature, strlen((char*)response));
-    return coap_make_response(scratch, outpkt, response,
-			      strlen((char*)response), id_hi, id_lo,
+    puts("INFO:  handling temperature response");
+    return coap_make_response(scratch, outpkt, (const uint8_t *)response,
+			      strlen(response), id_hi, id_lo,
 			      &inpkt->tok, COAP_RSPCODE_CONTENT,
 			      COAP_CONTENTTYPE_TEXT_PLAIN);
 }
