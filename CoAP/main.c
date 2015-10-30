@@ -13,8 +13,7 @@
 #define DEBUG
 #define BUFFER_SIZE       (256)
 #define MSG_QUEUE_SIZE    (64)
-#define SERVER_PORT       (5683)
-#define CLIENT_PORT       (5684)
+#define PORT              (5683)
 #define MAX_RESPONSE_SIZE (64)
 
 static void start_server(void);
@@ -91,18 +90,17 @@ static void start_server(void) {
  */
 static void *server(void *arg) {
     struct sockaddr_in6 server_addr;
-    uint16_t server_port = (uint16_t)SERVER_PORT;
-    uint16_t client_port = (uint16_t)CLIENT_PORT;
+    uint16_t port = (uint16_t)PORT;
     arg = arg;
     msg_init_queue(msg_queue, MSG_QUEUE_SIZE);
     server_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-    if (server_port == 0 || client_port == 0) {
+    if (port == 0) {
         puts("ERROR: invalid port specified");
         return NULL;
     }
     server_addr.sin6_family = AF_INET6;
     memset(&server_addr.sin6_addr, 0, sizeof(server_addr.sin6_addr));
-    server_addr.sin6_port = htons(server_port);
+    server_addr.sin6_port = htons(port);
     if (server_socket < 0) {
         puts("ERROR: initializing socket");
         server_socket = 0;
@@ -114,7 +112,7 @@ static void *server(void *arg) {
         puts("ERROR: binding socket");
         return NULL;
     }
-    printf("INFO:  started CoAP server on port %" PRIu16 "\n", server_port);
+    printf("SERVER:  started CoAP server on port %" PRIu16 "\n", port);
     while (1) {
         int recv_len;
 	size_t buffer_size = sizeof(server_buffer);
@@ -129,10 +127,11 @@ static void *server(void *arg) {
             puts("ERROR: on receive");
         }
         else if (recv_len == 0) {
-            puts("INFO:  peer did shut down");
+            puts("SERVER:  peer did shut down");
         }
         else { // CoAP part
-	    puts("INFO:  redeived packet: ");
+	    printf("SERVER:  redeived packet on port %" PRIu16 ": ",
+		   client_addr.sin6_port);
 	    dump(server_buffer, recv_len, true);
 	    puts("\n");
 	    if (0 != (rc = coap_parse(&inpkt, server_buffer, recv_len))) {
@@ -143,19 +142,16 @@ static void *server(void *arg) {
 		puts("content:");
 		dumpPacket(&inpkt);
 		coap_handle_req(&scratch_buffer, &inpkt, &outpkt);
-		puts("outpkt before build:");
-		dumpPacket(&outpkt);
 		if (0 != (rc = coap_build(server_buffer, &buffer_size,
 					  &outpkt))) {
 		    printf("ERROR: coap_build failed rc=%d\n", rc);
 		}
 		else {
-		    puts("INFO:  sending packet: ");
+		    printf("SERVER:  sending packet on port %" PRIu16 ": ",
+			   port);
 		    dump(server_buffer, buffer_size, true);
 		    puts("\ncontent:");
 		    dumpPacket(&outpkt);
-		    // send response on different port
-		    client_addr.sin6_port = htons(client_port);
 		    if (sendto(server_socket, server_buffer, buffer_size, 0,
 			       (struct sockaddr *)&client_addr,
 			       sizeof(client_addr)) < 0) {
@@ -184,8 +180,7 @@ static int request_temperature(int argc, char **argv) {
     size_t server_addr_len = sizeof(server_addr);
     struct sockaddr_in6 client_addr;
     size_t client_addr_len = sizeof(client_addr);
-    uint16_t server_port = (uint16_t)SERVER_PORT;
-    uint16_t client_port = (uint16_t)CLIENT_PORT;
+    uint16_t port = (uint16_t)PORT;
     size_t buffer_size = sizeof(client_buffer);
     int rc;
     int recv_len;
@@ -194,14 +189,14 @@ static int request_temperature(int argc, char **argv) {
 	puts("INFO:  usage: temperature <addr>");
 	return 1;
     }
-    if (server_port == 0 || client_port == 0) {
+    if (port == 0) {
         puts("ERROR: invalid port specified");
         return 1;
     }
     client_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (client_socket < 0) {
         puts("ERROR: initializing socket");
-        server_socket = 0;
+        client_socket = 0;
         return 1;
     }
     server_addr.sin6_family = AF_INET6;
@@ -209,17 +204,17 @@ static int request_temperature(int argc, char **argv) {
 	puts("ERROR: unable to parse destination address");
 	return 1;
     }
-    server_addr.sin6_port = htons(server_port);
+    server_addr.sin6_port = htons(port);
     client_addr.sin6_family = AF_INET6;
     memset(&client_addr.sin6_addr, 0, sizeof(client_addr.sin6_addr));
-    client_addr.sin6_port = htons(client_port);
+    client_addr.sin6_port = htons(port);
     if (bind(client_socket, (struct sockaddr *)&client_addr,
 	     client_addr_len) < 0) {
         client_socket = -1;
         puts("ERROR: binding socket");
         return 1;
     }
-    puts("INFO:  creating CoAP GET request");
+    puts("CLIENT:  creating CoAP GET request");
     coap_header_t request_hdr = {
 	.ver = 1,
 	.t = COAP_TYPE_CON,
@@ -242,7 +237,7 @@ static int request_temperature(int argc, char **argv) {
 	.payload = payload_buf
     };
     for (int i = 0; i < temperature_path.count; i++) {
-	puts("DEBUG: creating path option");
+	puts("CLIENT: creating path option");
 	coap_option_t path_option = {
 	    .num = COAP_OPTION_URI_PATH,
 	    .buf = {.p = (const uint8_t *)temperature_path.elems[i],
@@ -250,12 +245,13 @@ static int request_temperature(int argc, char **argv) {
 	};
 	request_pkt.opts[i] = path_option;
     }
-    puts("DEBUG: building coap package");
+    puts("CLIENT: building coap package");
     if (0 != (rc = coap_build(client_buffer, &buffer_size, &request_pkt))) {
 	printf("ERROR: coap_build failed rc=%d\n", rc);
 	return 1;
     }
-    puts("INFO:  sending packet: ");
+    printf("CLIENT:  sending packet on port %" PRIu16 ": ",
+	   port);
     dump(client_buffer, buffer_size, true);
     puts("\ncontent:");
     dumpPacket(&request_pkt);
@@ -263,25 +259,28 @@ static int request_temperature(int argc, char **argv) {
 	       (struct sockaddr *)&server_addr, server_addr_len) < 0) {
 	puts("ERROR: sending data");
     }
-    // blocking receive, waiting for data
-    if ((recv_len = recvfrom(client_socket, client_buffer, buffer_size, 0,
-			     (struct sockaddr *)&server_addr,
-			     &server_addr_len)) < 0) {
-        puts("ERROR: on receive");
-    } else if (recv_len == 0) {
-        puts("INFO:  peer did shut down");
-    } else { // CoAP part
-	puts("INFO:  redeived packet: ");
-	dump(client_buffer, recv_len, true);
-	puts("\n");
-	if (0 != (rc = coap_parse(&inpkt, client_buffer, recv_len))) {
-	    printf("Bad packet rc=%d\n", rc);
-        } else {
-	    puts("\ncontent:");
-	    dumpPacket(&inpkt);
+    while (1) {
+	// blocking receive, waiting for data
+	if ((recv_len = recvfrom(client_socket, client_buffer, buffer_size, 0,
+				 (struct sockaddr *)&server_addr,
+				 &server_addr_len)) < 0) {
+	    puts("ERROR: on receive");
+	} else if (recv_len == 0) {
+	    puts("CLIENT:  peer did shut down");
+	} else { // CoAP part
+	    if (0 != (rc = coap_parse(&inpkt, client_buffer, recv_len))) {
+		printf("Bad packet rc=%d\n", rc);
+		return 1;
+	    } else if (inpkt.hdr.code != MAKE_RSPCODE(0, COAP_METHOD_GET)) {
+		printf("CLIENT:  redeived packet on port %" PRIu16 ": ",
+		       server_addr.sin6_port);
+		dump(client_buffer, recv_len, true);
+		puts("\ncontent:");
+		dumpPacket(&inpkt);
+		return 0;
+	    }
 	}
     }
-    return 0;
 }
 
 void dumpHeader(coap_header_t *hdr)
