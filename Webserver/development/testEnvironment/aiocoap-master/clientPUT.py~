@@ -29,7 +29,7 @@ def main():
 
     yield from asyncio.sleep(2)
 
-    payload = b"The quick brown fox jumps over the lazy dog.\n" * 30
+    payload = "ID1;2015-10-23;22;50"
     request = Message(code=PUT, payload=payload)
     request.opt.uri_host = '127.0.0.1'
     request.opt.uri_path = ("other", "block")
@@ -37,6 +37,14 @@ def main():
     response = yield from context.request(request).response
 
     print('Result: %s\n%r'%(response.code, response.payload))
+
+    count = 0
+    while (count < 9):
+
+
+    	#sleep(2)
+
+    	count = count + 1
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
