@@ -55,7 +55,7 @@ class BlockResource(resource.Resource):
         test = "Blume" 
 	# Insert a row of data when the clientPUT ist restartet
         try:
-        	c.execute(insert, (test,test, test))
+        	c.execute(insert, (test2,test, test))
 #        	c.execute(insert)
         except Exception as e:
         	print('Failed to Insert:')
