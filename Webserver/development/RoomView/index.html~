@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Meine erste Homepage</title>
+</head>
+<body>
+ 
+
+
+
+
+
+
+
+ <canvas id="viewport" width="5000" height="5000">
+            Dein Browser unterstützt das Canvas-Element nicht.
+        </canvas>
+        <script type="text/javascript">
+            var canvas = document.getElementById("viewport");
+            var context = canvas.getContext("2d");
+
+
+		base_image = new Image();
+		base_image.src = './raumplan_finkenau_eg.png';
+		base_image.onload = function(){
+		context.drawImage(base_image, 200, 80);
+		context.fillStyle = "#FF0000";
+        	context.beginPath();
+        	context.arc(600, 150, 5, 0, Math.PI * 2, true);
+        	context.closePath();
+        	context.fill();
+		}
+	
+          
+        </script>
+<!--
+<img src="./raumplan_finkenau_eg.png" width="70%" 
+  height="auto" alt="die 3 lustigen 2">
+
+
+<script>
+    var thermometer = new RGraph.Thermometer({
+        id: 'cvs',
+        min: 0,
+        max: 1,
+        value: 0.94,
+        options: {
+            titleSide: 'Load value',
+            scaleVisible: true,
+            scaleDecimals: 2,
+            gutterLeft: 60,
+            gutterRight: 60
+        }
+    }).draw();
+</script>
+-->
+
+</body>
+</html>
