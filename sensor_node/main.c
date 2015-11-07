@@ -4,6 +4,7 @@
 #include "shell.h"
 
 #include "server.h"
+#include "sensors.h"
 
 static const shell_command_t shell_commands[] =
 {
@@ -22,6 +23,14 @@ int main(void) {
     printf("[main] You are running RIOT on a(n) %s board.\n", RIOT_BOARD);
     printf("[main] This board features a(n) %s MCU.\n", RIOT_MCU);
     puts("[main] ================");
+
+    // Initializse sensors
+    if (!init_sensors()) {
+	puts("[main] ERROR: sensor initializition failed");
+	return -1;
+    }
+
+    get_temperature();
 
     // start CoAP server
     start_server();

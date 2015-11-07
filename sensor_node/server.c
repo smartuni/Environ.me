@@ -10,6 +10,8 @@
 #include "coap.h"
 // own header
 #include "server.h"
+// sensors header
+#include "sensors.h"
 
 static void *server(void *arg);
 static int get_temperature_handle(coap_rw_buffer_t *scratch,
@@ -33,7 +35,7 @@ static msg_t msg_queue[MSG_QUEUE_SIZE];
 static uint8_t server_buffer[BUFFER_SIZE];
 static uint8_t scratch_raw[BUFFER_SIZE];
 static coap_rw_buffer_t scratch_buffer = {scratch_raw,  sizeof(scratch_raw)};
-static char *response = "22.5 C";
+static char response[RSP_BUFFER_SIZE];
 
 /**
  * @brief start CoAP server thread
@@ -130,7 +132,10 @@ static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  const coap_packet_t *inpkt,
 				  coap_packet_t *outpkt,
 				  uint8_t id_hi, uint8_t id_lo) {
+    int temperature;
     puts("[coap_server] INFO:  handling temperature response");
+    temperature = get_temperature();
+    sprintf(response, "%d", temperature);
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
 			      strlen(response), id_hi, id_lo,
 			      &inpkt->tok, COAP_RSPCODE_CONTENT,
