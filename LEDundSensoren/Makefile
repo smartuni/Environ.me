@@ -2,7 +2,7 @@
 APPLICATION = test
 
 # If no BOARD is found in the environment, use this default:
-BOARD ?= phytec
+BOARD ?= pba-d-01-kw2x
 
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../..
@@ -15,8 +15,8 @@ CFLAGS += -DDEVELHELP
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
 
-include $(RIOTBASE)/Makefile.include
-
 USEMODULE +=xtimer
-USEMODULE += tmp006
+
 USEMODULE += hdc1000
+USEMODULE += tcs37727
+include $(RIOTBASE)/Makefile.include
