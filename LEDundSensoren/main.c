@@ -23,120 +23,136 @@
 #include <stdlib.h>
 #include "board.h"
 #include "xtimer.h"
+#include "thread.h"
 #include "hdc1000.h"
-#include "periph/spi.h"
+//#include "periph/spi.h"
 #include "periph/gpio.h"
 #include "ledcontrol.h"
 
 
+char t2_stack[THREAD_STACKSIZE_MAIN];
+char t3_stack[THREAD_STACKSIZE_MAIN];
+char t4_stack[THREAD_STACKSIZE_MAIN];
+
+unsigned int colorArray[30];
+
+void *second_thread(void *arg)			//sendet 20fps ans led band
+{
+    (void) arg;
+    
+    while(1)
+    {
+    	sendeArray(colorArray);
+    	xtimer_usleep(50000);
+    }
+    
+    return NULL;
+}
+
+
+void *third_thread(void *arg)			//verändert das led-color-array
+{
+    (void) arg;
+    int index = 0;
+    xtimer_sleep(1);
+    
+    while(1)
+	{
+		/*
+		if(index>0)
+		{
+			writeLed(colorArray,index-1,0,0,0);
+		}*/
+		resetArray(colorArray);
+		writeLed(colorArray,index,0,10,0);
+		writeLed(colorArray,index+1,0,50,0);
+		writeLed(colorArray,index+2,0,10,0);
+		index++;
+		if(index==28)
+		{
+			resetArray(colorArray);
+			index=0;
+		}
+		
+		xtimer_usleep(50000);
+
+	}
+    return NULL;
+}
+
+void *fourth_thread(void *arg)			//init hdc1000 und temp auslesen
+{
+    	(void) arg;
+   	hdc1000_t devHdc;
+
+
+	uint16_t rawtemp, rawhum;
+	int temp, hum;
+	
+    	if (hdc1000_init(&devHdc, 0, HDC1000_I2C_ADDRESS) == 0) {
+        	puts("HDC1000 OK\n");
+	}
+	else {
+		puts("HDC1000 Failed");
+		return NULL;
+	}
+
+	
+    	while(1)
+	{
+		if (hdc1000_startmeasure(&devHdc)) {
+            		puts("HDC1000 Start measure failed.");
+            		return NULL;
+		}
+		xtimer_usleep(HDC1000_CONVERSION_TIME);	//26000us
+
+		hdc1000_read(&devHdc, &rawtemp, &rawhum);
+		printf("HDC1000 Raw data T: %5i   RH: %5i\n", rawtemp, rawhum);
+
+		hdc1000_convert(rawtemp, rawhum,  &temp, &hum);
+		printf("HDC1000 Data T: %d   RH: %d\n\n", temp, hum);
+		xtimer_sleep(1);
+
+	}
+    return NULL;
+}
+
 
 int main(void)
 {
-
-        hdc1000_t devHdc;
-
-
-        uint16_t rawtemp, rawhum;
-        int temp, hum;
-
-       
-
-        int retVal=0;
-       
-        unsigned int colorArray[30];
-        resetArray(colorArray);
-//      writeLed(colorArray,0,0,127,0);
-       
-
-
-        puts("\nHello World!");
-
-        printf("You are running RIOT on a(n) %s board.\n", RIOT_BOARD);
-        printf("This board features a(n) %s MCU.\n\n", RIOT_MCU);
-       
-
-       
-        if (hdc1000_init(&devHdc, 0, HDC1000_I2C_ADDRESS) == 0) {
-        puts("HDC1000 OK\n");
-        }
-        else {
-                puts("HDC1000 Failed");
-                return -1;
-        }
-       
-        // DIO 11, auf dem board, neben der rgb-led, 6. von oben
-        retVal=gpio_init(1, GPIO_DIR_OUT, GPIO_PULLDOWN);
-        if(retVal!=0)
-        {
-                puts("GPIO_init pin Failed");
-                return -1;
-        }
-       
-        sendeArray(colorArray);
-
-        int increment=0;
-        int flag=0;
-        while (1)
-        {
-        //      increment=0;
-        //      sendeArray(colorArray);
-                xtimer_usleep(10000);
-                if(flag==1)
-                {
-                        if(increment>0)
-                        {
-                                writeLed(colorArray,increment-1,0,0,0);
-                        }
-                       
-                        writeLed(colorArray,increment,50,0,0);
-                        writeLed(colorArray,increment+1,0,50,0);
-                        writeLed(colorArray,increment+2,0,0,50);
-                        sendeArray(colorArray);
-                        increment++;
-                }
-                else
-                {
-                        xtimer_usleep(200000);
-                }
-               
-               
-                if(increment>27)
-                {
-                        increment=0;
-                        resetArray(colorArray);
-                        sendeArray(colorArray);
-                }
-
-
-               
-         if (hdc1000_startmeasure(&devHdc)) {
-                         puts("HDC1000 Start measure failed.");
-                         return -1;
-                }
-                xtimer_usleep(HDC1000_CONVERSION_TIME); //26000us
-
-                hdc1000_read(&devHdc, &rawtemp, &rawhum);
-                printf("HDC1000 Raw data T: %5i   RH: %5i\n", rawtemp, rawhum);
-
-                hdc1000_convert(rawtemp, rawhum,  &temp, &hum);
-                printf("HDC1000 Data T: %d   RH: %d\n\n", temp, hum);
-
-                if(temp>2590)
-                {
-                        flag=1;
-                }
-                if(temp<2590)
-                {
-                        flag=0;
-                        increment=0;
-                        resetArray(colorArray);
-                        sendeArray(colorArray);
-                }
-//              xtimer_usleep(100000);
-               
-
-        }
-
-       
-        return 0;
+	int retVal = 0;
+	
+	// DIO 11, auf dem board, neben der rgb-led, 6. von oben
+	retVal = gpio_init(1, GPIO_DIR_OUT, GPIO_PULLDOWN);
+	
+	if(retVal!=0)
+	{
+		puts("GPIO_init pin Failed");
+		return -1;
+	}
+	
+	resetArray(colorArray);
+	
+	(void) thread_create(
+            t2_stack, sizeof(t2_stack),
+            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            second_thread, NULL, "nr2");
+            
+        
+        (void) thread_create(
+            t3_stack, sizeof(t3_stack),
+            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            third_thread, NULL, "nr3");
+   
+    	
+    	(void) thread_create(
+            t4_stack, sizeof(t4_stack),
+            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            fourth_thread, NULL, "nr4");
+    	
+    	while(1)
+    	{
+    		xtimer_sleep(1);
+    	}
+    	return 0;
 }
