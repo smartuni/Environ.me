@@ -23,7 +23,6 @@
 #include <stdlib.h>
 #include "board.h"
 #include "xtimer.h"
-#include "tmp006.h"
 #include "hdc1000.h"
 #include "periph/spi.h"
 #include "periph/gpio.h"
