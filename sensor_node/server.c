@@ -19,6 +19,7 @@
 #define RSP_BUFFER_SIZE   (64)
 
 static void *server(void *arg);
+static int send_rsp(char *client_addr_str, uint8_t *rsp, size_t rsp_len);
 static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  const coap_packet_t *inpkt,
 				  coap_packet_t *outpkt,
@@ -74,7 +75,7 @@ static void *server(void *arg) {
     }
     server_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (server_socket < 0) {
-        puts("[coap_server] ERROR: initializing socket");
+        puts("[coap_server] ERROR: initializing server socket failed");
         server_socket = 0;
         return NULL;
     }
@@ -84,7 +85,7 @@ static void *server(void *arg) {
     if (bind(server_socket, (struct sockaddr *)&server_addr,
 	     sizeof(server_addr)) < 0) {
         server_socket = -1;
-        puts("[coap_server] ERROR: binding socket");
+        puts("[coap_server] ERROR: binding socket failed");
         return NULL;
     }
     printf("[coap_server] INFO:  started CoAP server on port %" PRIu16 "\n",
@@ -95,11 +96,12 @@ static void *server(void *arg) {
 	int rc;
         struct sockaddr_in6 client_addr;
         socklen_t client_addr_len = sizeof(struct sockaddr_in6);
+        char client_addr_str[IPV6_ADDR_MAX_STR_LEN];
         // blocking receive, waiting for data
         if ((recv_len = recvfrom(server_socket, server_buffer, buffer_size, 0,
 				 (struct sockaddr *)&client_addr,
 				 &client_addr_len)) < 0) {
-            puts("[coap_server] ERROR: on receive");
+            puts("[coap_server] ERROR: receive failed");
         }
         else if (recv_len == 0) {
             puts("[coap_server] INFO:  peer did shut down");
@@ -108,13 +110,15 @@ static void *server(void *arg) {
 	    coap_packet_t inpkt;
 	    puts("[coap_server] INFO:  received packet: ");
 	    dump(server_buffer, recv_len, true);
-	    puts("\n");
+	    inet_ntop(AF_INET6, &(client_addr.sin6_addr), client_addr_str,
+		      sizeof(client_addr_str));
+	    printf("\nFrom: %s\n", client_addr_str);
 	    if (0 != (rc = coap_parse(&inpkt, server_buffer, recv_len))) {
 		printf("[coap_server] ERROR: bad packet rc=%d\n", rc);
 	    }
 	    else {
 		coap_packet_t outpkt;
-		puts("content:");
+		puts("Content:");
 		dumpPacket(&inpkt);
 		coap_handle_req(&scratch_buffer, &inpkt, &outpkt);
 		if (0 != (rc = coap_build(server_buffer, &buffer_size,
@@ -125,18 +129,45 @@ static void *server(void *arg) {
 		else {
 		    puts("[coap_server] INFO:  sending packet");
 		    dump(server_buffer, buffer_size, true);
-		    puts("\ncontent:");
+		    puts("\nContent:");
 		    dumpPacket(&outpkt);
-		    if (sendto(server_socket, server_buffer, buffer_size, 0,
-			       (struct sockaddr *)&client_addr,
-			       sizeof(client_addr)) < 0) {
-			puts("[coap_server] ERROR: sending data");
-		    }
+		    send_rsp(client_addr_str, server_buffer, buffer_size);
 		}
 	    }
         }
     }
     return NULL;
+}
+
+    static int send_rsp(char *client_addr_str, uint8_t *rsp, size_t rsp_len) {
+    struct sockaddr_in6 client_addr;
+    size_t client_addr_len = sizeof(client_addr);
+    int rsp_socket = -1;
+    uint16_t port;
+    port = (uint16_t)PORT;
+    if (port == 0) {
+        puts("[coap_server] ERROR: invalid port specified");
+        return 1;
+    }
+    client_addr.sin6_family = AF_INET6;
+    memset(&client_addr.sin6_addr, 0, sizeof(client_addr.sin6_addr));
+    if (inet_pton(AF_INET6, client_addr_str, &client_addr.sin6_addr) != 1) {
+	puts("[coap_server] ERROR: unable to parse client address");
+	return 1;
+    }
+    client_addr.sin6_port = htons(port);
+    rsp_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+    if (rsp_socket < 0) {
+        puts("[coap_server] ERROR: initializing rsp socket failed");
+        rsp_socket = 0;
+        return 1;
+    }
+    if(sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)&client_addr,
+	      client_addr_len) < 0) {
+	puts("[coap_server] ERROR: sending response failed");
+    }
+    close(rsp_socket);
+    return 0;
 }
 
 static int get_temperature_handle(coap_rw_buffer_t *scratch,

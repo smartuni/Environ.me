@@ -82,7 +82,6 @@ static void *client_recv(void *arg) {
     puts("bind");
     if (bind(client_socket, (struct sockaddr *)&client_addr,
 	     client_addr_len) < 0) {
-        client_socket = -1;
         puts("[client_recv] ERROR: binding socket");
         return NULL;
     }
@@ -119,6 +118,7 @@ static void *client_recv(void *arg) {
 
 static int request_temperature(int argc, char **argv) {
     int client_socket = -1;
+    struct sockaddr_in6 client_addr;
     struct sockaddr_in6 server_addr;
     size_t server_addr_len = sizeof(server_addr);
     size_t buffer_size = sizeof(client_buffer);
@@ -139,11 +139,14 @@ static int request_temperature(int argc, char **argv) {
         client_socket = 0;
         return 1;
     }
+    client_addr.sin6_family = AF_INET6;
     server_addr.sin6_family = AF_INET6;
+    memset(&client_addr.sin6_addr, 0, sizeof(client_addr.sin6_addr));
     if (inet_pton(AF_INET6, argv[1], &server_addr.sin6_addr) != 1) {
 	puts("[main] ERROR: unable to parse destination address");
 	return 1;
     }
+    client_addr.sin6_port = htons(port);
     server_addr.sin6_port = htons(port);
     puts("[main] INFO:  creating CoAP GET request");
     coap_header_t request_hdr = {
@@ -189,6 +192,7 @@ static int request_temperature(int argc, char **argv) {
 	       (struct sockaddr *)&server_addr, server_addr_len) < 0) {
 	puts("[main] ERROR: sending data");
     }
+    close(client_socket);
     return 0;
 }
 
