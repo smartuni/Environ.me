@@ -159,7 +159,7 @@ static int get_humidity_handle(coap_rw_buffer_t *scratch,
 			       uint8_t id_hi, uint8_t id_lo) {
     int humidity;
     puts("[coap_server] INFO:  handling humidity response");
-    temperature = get_humidity();
+    humidity = get_humidity();
     sprintf(response, "%d", humidity);
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
 			      strlen(response), id_hi, id_lo,
