@@ -13,20 +13,31 @@
 // sensors header
 #include "sensors.h"
 
+#define BUFFER_SIZE       (256)
+#define MSG_QUEUE_SIZE    (64)
+#define PORT              (5683)
+#define RSP_BUFFER_SIZE   (64)
+
 static void *server(void *arg);
 static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  const coap_packet_t *inpkt,
 				  coap_packet_t *outpkt,
 				  uint8_t id_hi, uint8_t id_lo);
+static int get_humidity_handle(coap_rw_buffer_t *scratch,
+			       const coap_packet_t *inpkt,
+			       coap_packet_t *outpkt,
+			       uint8_t id_hi, uint8_t id_lo);
 static void dumpHeader(coap_header_t *hdr);
 static void dump(const uint8_t *buf, size_t buflen, bool bare);
 static void dumpOptions(coap_option_t *opts, size_t numopt);
 static void dumpPacket(coap_packet_t *pkt);
 
 static const coap_endpoint_path_t temperature_path = {1, {"temperature"}};
+static const coap_endpoint_path_t humidity_path = {1, {"humidity"}};
 const coap_endpoint_t endpoints[] =
 {
     {COAP_METHOD_GET, get_temperature_handle, &temperature_path, "ct=0"},
+    {COAP_METHOD_GET, get_humidity_handle, &humidity_path, "ct=0"},
     {(coap_method_t)0, NULL, NULL, NULL}
 };
 
@@ -142,8 +153,21 @@ static int get_temperature_handle(coap_rw_buffer_t *scratch,
 			      COAP_CONTENTTYPE_TEXT_PLAIN);
 }
 
-void dumpHeader(coap_header_t *hdr)
-{
+static int get_humidity_handle(coap_rw_buffer_t *scratch,
+			       const coap_packet_t *inpkt,
+			       coap_packet_t *outpkt,
+			       uint8_t id_hi, uint8_t id_lo) {
+    int humidity;
+    puts("[coap_server] INFO:  handling humidity response");
+    temperature = get_humidity();
+    sprintf(response, "%d", humidity);
+    return coap_make_response(scratch, outpkt, (const uint8_t *)response,
+			      strlen(response), id_hi, id_lo,
+			      &inpkt->tok, COAP_RSPCODE_CONTENT,
+			      COAP_CONTENTTYPE_TEXT_PLAIN);
+}
+
+void dumpHeader(coap_header_t *hdr) {
     printf("Header:\n");
     printf("  ver  0x%02X\n", hdr->ver);
     printf("  t    0x%02X\n", hdr->t);
@@ -153,36 +177,31 @@ void dumpHeader(coap_header_t *hdr)
 }
 
 
-void dump(const uint8_t *buf, size_t buflen, bool bare)
-{
-    if (bare)
-    {
-        while(buflen--)
+void dump(const uint8_t *buf, size_t buflen, bool bare) {
+    if (bare) {
+        while(buflen--) {
             printf("%02X%s", *buf++, (buflen > 0) ? " " : "");
-    }
-    else
-    {
+	}
+    } else {
         printf("Dump: ");
-        while(buflen--)
+        while(buflen--) {
             printf("%02X%s", *buf++, (buflen > 0) ? " " : "");
+	}
         printf("\n");
     }
 }
 
-void dumpOptions(coap_option_t *opts, size_t numopt)
-{
+void dumpOptions(coap_option_t *opts, size_t numopt) {
     size_t i;
     printf(" Options:\n");
-    for (i=0;i<numopt;i++)
-    {
+    for (i=0;i<numopt;i++) {
         printf("  0x%02X [ ", opts[i].num);
         dump(opts[i].buf.p, opts[i].buf.len, true);
         printf(" ]\n");
     }
 }
 
-void dumpPacket(coap_packet_t *pkt)
-{
+void dumpPacket(coap_packet_t *pkt) {
     dumpHeader(&pkt->hdr);
     dumpOptions(pkt->opts, pkt->numopts);
     printf("Payload: ");

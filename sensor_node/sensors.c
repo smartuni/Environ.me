@@ -6,10 +6,8 @@
 #include "hdc1000.h"
 
 static hdc1000_t devHdc;
-static uint16_t rawtemp;
-static uint16_t rawhum;
-static int temp;
-static int hum;
+
+static void hdc1000_measure(int *temp, int *hum);
 
 int init_sensors(void) {
     // temperature sensor
@@ -23,13 +21,28 @@ int init_sensors(void) {
 }
 
 int get_temperature(void) {
+    int temp;
+    int hum;
+    hdc1000_measure(&temp, &hum);
+    return temp;
+}
+
+int get_humidity(void) {
+    int temp;
+    int hum;
+    hdc1000_measure(&temp, &hum);
+    return hum;
+}
+
+void hdc1000_measure(int *temp, int *hum) {
+    int rawtemp;
+    int rawhum;
     if (hdc1000_startmeasure(&devHdc)) {
 	puts("[sensors] HDC1000 starting measure failed");
 	return -1;
     }
     xtimer_usleep(HDC1000_CONVERSION_TIME); //26000us
     hdc1000_read(&devHdc, &rawtemp, &rawhum);
-    hdc1000_convert(rawtemp, rawhum,  &temp, &hum);
+    hdc1000_convert(rawtemp, rawhum,  temp, hum);
     printf("[sensors] INFO: HDC1000 Data T: %d   RH: %d\n", temp, hum);
-    return temp;
 }
