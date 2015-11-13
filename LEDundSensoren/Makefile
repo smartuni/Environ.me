@@ -20,3 +20,4 @@ include $(RIOTBASE)/Makefile.include
 USEMODULE +=xtimer
 
 USEMODULE += hdc1000
+USEMODULE += tcs37727
