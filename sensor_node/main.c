@@ -26,11 +26,12 @@ int main(void) {
 
     // Initializse sensors
     if (!init_sensors()) {
-	puts("[main] ERROR: sensor initializition failed");
+	puts("[main] ERROR: Sensor initializition failed");
 	return -1;
     }
 
     get_temperature();
+    get_illuminance();
 
     // start CoAP server
     start_server();

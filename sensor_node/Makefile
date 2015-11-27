@@ -26,6 +26,7 @@ USEMODULE += shell_commands
 USEMODULE += ps
 # Add sensor modules
 USEMODULE += hdc1000
+USEMODULE += tcs37727
 # Timer
 USEMODULE += xtimer
 

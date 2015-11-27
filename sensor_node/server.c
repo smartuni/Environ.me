@@ -28,6 +28,10 @@ static int get_humidity_handle(coap_rw_buffer_t *scratch,
 			       const coap_packet_t *inpkt,
 			       coap_packet_t *outpkt,
 			       uint8_t id_hi, uint8_t id_lo);
+static int get_illuminance_handle(coap_rw_buffer_t *scratch,
+				  const coap_packet_t *inpkt,
+				  coap_packet_t *outpkt,
+				  uint8_t id_hi, uint8_t id_lo);
 static void dumpHeader(coap_header_t *hdr);
 static void dump(const uint8_t *buf, size_t buflen, bool bare);
 static void dumpOptions(coap_option_t *opts, size_t numopt);
@@ -35,10 +39,12 @@ static void dumpPacket(coap_packet_t *pkt);
 
 static const coap_endpoint_path_t temperature_path = {1, {"temperature"}};
 static const coap_endpoint_path_t humidity_path = {1, {"humidity"}};
+static const coap_endpoint_path_t illuminance_path = {1, {"illuminance"}};
 const coap_endpoint_t endpoints[] =
 {
     {COAP_METHOD_GET, get_temperature_handle, &temperature_path, "ct=0"},
     {COAP_METHOD_GET, get_humidity_handle, &humidity_path, "ct=0"},
+    {COAP_METHOD_GET, get_illuminance_handle, &illuminance_path, "ct=0"},
     {(coap_method_t)0, NULL, NULL, NULL}
 };
 
@@ -70,12 +76,12 @@ static void *server(void *arg) {
     msg_init_queue(msg_queue, MSG_QUEUE_SIZE);
     port = (uint16_t)PORT;
     if (port == 0) {
-        puts("[coap_server] ERROR: invalid port specified");
+        puts("[coap_server] ERROR: Invalid port specified");
         return NULL;
     }
     server_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (server_socket < 0) {
-        puts("[coap_server] ERROR: initializing server socket failed");
+        puts("[coap_server] ERROR: Initializing server socket failed");
         server_socket = 0;
         return NULL;
     }
@@ -85,10 +91,10 @@ static void *server(void *arg) {
     if (bind(server_socket, (struct sockaddr *)&server_addr,
 	     sizeof(server_addr)) < 0) {
         server_socket = -1;
-        puts("[coap_server] ERROR: binding socket failed");
+        puts("[coap_server] ERROR: Binding socket failed");
         return NULL;
     }
-    printf("[coap_server] INFO:  started CoAP server on port %" PRIu16 "\n",
+    printf("[coap_server] INFO: Started CoAP server on port %" PRIu16 "\n",
 	   port);
     while (1) {
         int recv_len;
@@ -101,20 +107,20 @@ static void *server(void *arg) {
         if ((recv_len = recvfrom(server_socket, server_buffer, buffer_size, 0,
 				 (struct sockaddr *)&client_addr,
 				 &client_addr_len)) < 0) {
-            puts("[coap_server] ERROR: receive failed");
+            puts("[coap_server] ERROR: Receive failed");
         }
         else if (recv_len == 0) {
-            puts("[coap_server] INFO:  peer did shut down");
+            puts("[coap_server] INFO: Peer did shut down");
         }
         else { // CoAP part
 	    coap_packet_t inpkt;
-	    puts("[coap_server] INFO:  received packet: ");
+	    puts("[coap_server] INFO: Received packet: ");
 	    dump(server_buffer, recv_len, true);
 	    inet_ntop(AF_INET6, &(client_addr.sin6_addr), client_addr_str,
 		      sizeof(client_addr_str));
 	    printf("\nFrom: %s\n", client_addr_str);
 	    if (0 != (rc = coap_parse(&inpkt, server_buffer, recv_len))) {
-		printf("[coap_server] ERROR: bad packet rc=%d\n", rc);
+		printf("[coap_server] ERROR: Bad packet rc=%d\n", rc);
 	    }
 	    else {
 		coap_packet_t outpkt;
@@ -127,7 +133,7 @@ static void *server(void *arg) {
 			   rc);
 		}
 		else {
-		    puts("[coap_server] INFO:  sending packet");
+		    puts("[coap_server] INFO: Sending packet");
 		    dump(server_buffer, buffer_size, true);
 		    puts("\nContent:");
 		    dumpPacket(&outpkt);
@@ -146,25 +152,25 @@ static void *server(void *arg) {
     uint16_t port;
     port = (uint16_t)PORT;
     if (port == 0) {
-        puts("[coap_server] ERROR: invalid port specified");
+        puts("[coap_server] ERROR: Invalid port specified");
         return 1;
     }
     client_addr.sin6_family = AF_INET6;
     memset(&client_addr.sin6_addr, 0, sizeof(client_addr.sin6_addr));
     if (inet_pton(AF_INET6, client_addr_str, &client_addr.sin6_addr) != 1) {
-	puts("[coap_server] ERROR: unable to parse client address");
+	puts("[coap_server] ERROR: Unable to parse client address");
 	return 1;
     }
     client_addr.sin6_port = htons(port);
     rsp_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (rsp_socket < 0) {
-        puts("[coap_server] ERROR: initializing rsp socket failed");
+        puts("[coap_server] ERROR: Initializing rsp socket failed");
         rsp_socket = 0;
         return 1;
     }
     if(sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)&client_addr,
 	      client_addr_len) < 0) {
-	puts("[coap_server] ERROR: sending response failed");
+	puts("[coap_server] ERROR: Sending response failed");
     }
     close(rsp_socket);
     return 0;
@@ -175,7 +181,7 @@ static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  coap_packet_t *outpkt,
 				  uint8_t id_hi, uint8_t id_lo) {
     int temperature;
-    puts("[coap_server] INFO:  handling temperature response");
+    puts("[coap_server] INFO: Handling temperature response");
     temperature = get_temperature();
     sprintf(response, "%d", temperature);
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
@@ -189,9 +195,23 @@ static int get_humidity_handle(coap_rw_buffer_t *scratch,
 			       coap_packet_t *outpkt,
 			       uint8_t id_hi, uint8_t id_lo) {
     int humidity;
-    puts("[coap_server] INFO:  handling humidity response");
+    puts("[coap_server] INFO: Handling humidity response");
     humidity = get_humidity();
     sprintf(response, "%d", humidity);
+    return coap_make_response(scratch, outpkt, (const uint8_t *)response,
+			      strlen(response), id_hi, id_lo,
+			      &inpkt->tok, COAP_RSPCODE_CONTENT,
+			      COAP_CONTENTTYPE_TEXT_PLAIN);
+}
+
+static int get_illuminance_handle(coap_rw_buffer_t *scratch,
+				  const coap_packet_t *inpkt,
+				  coap_packet_t *outpkt,
+				  uint8_t id_hi, uint8_t id_lo) {
+    long illuminance;
+    puts("[coap_server] INFO: Handling illuminance response");
+    illuminance = get_illuminance();
+    sprintf(response, "%ld", illuminance);
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
 			      strlen(response), id_hi, id_lo,
 			      &inpkt->tok, COAP_RSPCODE_CONTENT,
