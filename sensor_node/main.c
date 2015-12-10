@@ -5,9 +5,19 @@
 
 #include "server.h"
 #include "sensors.h"
+#include "ledcontrol.h"
+
+static int measure_temperature(int argc, char **argv);
+static int measure_humidity(int argc, char **argv);
+static int measure_illuminance(int argc, char **argv);
+static int control_led(int argc, char **argv);
 
 static const shell_command_t shell_commands[] =
 {
+    {"temperature", "measure the temperature", measure_temperature},
+    {"humidity",    "measure the humidity",    measure_humidity},
+    {"illuminance", "measure the illuminance", measure_illuminance},
+    {"led",         "control the led band",    control_led},
     {NULL, NULL, NULL}
 };
 
@@ -18,7 +28,7 @@ static const shell_command_t shell_commands[] =
  */
 int main(void) {
     // some initial infos
-    puts("[main] Envron.me - Sensor node!");
+    puts("[main] Environ.me - Sensor node!");
     puts("[main] ================");
     printf("[main] You are running RIOT on a(n) %s board.\n", RIOT_BOARD);
     printf("[main] This board features a(n) %s MCU.\n", RIOT_MCU);
@@ -30,8 +40,8 @@ int main(void) {
 	return -1;
     }
 
-    get_temperature();
-    get_illuminance();
+    // start LED control
+    start_led_control();
 
     // start CoAP server
     start_server();
@@ -40,5 +50,42 @@ int main(void) {
     char line_buf[SHELL_DEFAULT_BUFSIZE];
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 
+    return 0;
+}
+
+static int measure_temperature(int argc, char **argv) {
+    printf("[main] INFO:  Temperature = %d / 100 degree Celsius\n",
+	   get_temperature());
+    return 0;
+}
+
+static int measure_humidity(int argc, char **argv) {
+    printf("[main] INFO:  Humidity = %d / 100 Percent\n",
+	   get_humidity());
+    return 0;
+}
+
+static int measure_illuminance(int argc, char **argv) {
+    printf("[main] INFO:  Illuminance = %ld lux\n",
+	   get_illuminance());
+    return 0;
+}
+
+static int control_led(int argc, char **argv) {
+    if (argc != 2) {
+	puts("[main] INFO:  Usage: led <mode>");
+	puts("[main] INFO:         mode = 0 (off), 1 (left), 2 (right)");
+	return 1;
+    }
+    switch (argv[1][0]) {
+        case '1':
+	    set_led(1);
+	    break;
+        case '2':
+	    set_led(2);
+	    break;
+        default:
+	    set_led(0);
+    }
     return 0;
 }
