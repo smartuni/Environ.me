@@ -19,7 +19,9 @@
 #define RSP_BUFFER_SIZE   (64)
 
 static void *server(void *arg);
-static int send_rsp(char *client_addr_str, uint8_t *rsp, size_t rsp_len);
+//static int send_rsp(char *client_addr_str, uint8_t *rsp, size_t rsp_len);
+static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp,
+		    size_t rsp_len);
 static int get_temperature_handle(coap_rw_buffer_t *scratch,
 				  const coap_packet_t *inpkt,
 				  coap_packet_t *outpkt,
@@ -137,7 +139,8 @@ static void *server(void *arg) {
 		    dump(server_buffer, buffer_size, true);
 		    puts("\nContent:");
 		    dumpPacket(&outpkt);
-		    send_rsp(client_addr_str, server_buffer, buffer_size);
+		    //send_rsp(client_addr_str, server_buffer, buffer_size);
+		    send_rsp(&client_addr, server_buffer, buffer_size);
 		}
 	    }
         }
@@ -145,10 +148,12 @@ static void *server(void *arg) {
     return NULL;
 }
 
-    static int send_rsp(char *client_addr_str, uint8_t *rsp, size_t rsp_len) {
-    struct sockaddr_in6 client_addr;
-    size_t client_addr_len = sizeof(client_addr);
+//static int send_rsp(char *client_addr_str, uint8_t *rsp, size_t rsp_len) {
+static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_len) {
+    //struct sockaddr_in6 client_addr;
+    size_t client_addr_len = sizeof(*client_addr);
     int rsp_socket = -1;
+    /*
     uint16_t port;
     port = (uint16_t)PORT;
     if (port == 0) {
@@ -162,13 +167,15 @@ static void *server(void *arg) {
 	return 1;
     }
     client_addr.sin6_port = htons(port);
+    */
     rsp_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (rsp_socket < 0) {
         puts("[coap_server] ERROR: Initializing rsp socket failed");
         rsp_socket = 0;
         return 1;
     }
-    if(sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)&client_addr,
+    //if(sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)&client_addr,
+    if(sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)client_addr,
 	      client_addr_len) < 0) {
 	puts("[coap_server] ERROR: Sending response failed");
     }
@@ -232,7 +239,7 @@ void dump(const uint8_t *buf, size_t buflen, bool bare) {
     if (bare) {
         while(buflen--) {
             printf("%02X%s", *buf++, (buflen > 0) ? " " : "");
-	}
+	    }
     } else {
         printf("Dump: ");
         while(buflen--) {
