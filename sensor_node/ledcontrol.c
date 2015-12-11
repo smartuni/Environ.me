@@ -6,6 +6,7 @@
 #include "msg.h"
 #include "xtimer.h"
 #include "ledcontrol.h"
+#include "board.h"
 
 #define MSG_QUEUE_SIZE (64)
 #define LED_ARRAY_SIZE (30)
@@ -102,17 +103,71 @@ void set_led(uint32_t new_mode) {
 }
 
 static void send_zero(void) {
-    gpio_set(1);
-    gpio_clear(1);
-    gpio_clear(1);
-    gpio_clear(1);
+    	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	for(int i=0;i<16;i++)
+	{
+		LED_R_ON;
+	}
 }
 
 static void send_one(void) {
-    gpio_set(1);
-    gpio_set(1);
-    gpio_clear(1);
-    gpio_clear(1);
+    LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	for(int i=0;i<16;i++)
+	{
+		LED_R_ON;
+	}
 }
 
 static void send_array(uint32_t array[]) {
