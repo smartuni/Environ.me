@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "periph/spi.h"
 #include "periph/gpio.h"
+#include "board.h"
 
 void sendHigh(int dev)
 {
