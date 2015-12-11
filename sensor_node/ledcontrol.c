@@ -30,7 +30,7 @@ static uint32_t led_array[LED_ARRAY_SIZE];
  */
 void start_led_control(void) {
     led_control_pid = thread_create(thread_stack, sizeof(thread_stack),
-				    THREAD_PRIORITY_MAIN, CREATE_STACKTEST,
+				    THREAD_PRIORITY_MAIN, THREAD_CREATE_STACKTEST,
 				    led_control, NULL, "led_control");
 }
 
