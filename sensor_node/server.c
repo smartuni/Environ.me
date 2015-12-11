@@ -62,7 +62,7 @@ static char response[RSP_BUFFER_SIZE];
  */
 void start_server(void) {
     thread_create(thread_stack, sizeof(thread_stack), THREAD_PRIORITY_MAIN,
-		  CREATE_STACKTEST, server, NULL, "coap_server");
+		  THREAD_CREATE_STACKTEST, server, NULL, "coap_server");
 }
 
 /**

@@ -23,7 +23,7 @@ static kernel_pid_t led_control_pid;
 static char thread_stack[THREAD_STACKSIZE_DEFAULT];
 static msg_t msg_queue[MSG_QUEUE_SIZE];
 static uint32_t led_array[LED_ARRAY_SIZE];
-
+static uint32_t mode = LED_MODE_OFF;
 /**
  * @brief start led control thread
  */
@@ -40,7 +40,7 @@ void start_led_control(void) {
  */
 static void *led_control(void *arg) {
     (void) arg;
-    uint32_t mode = LED_MODE_OFF;
+    // uint32_t mode = LED_MODE_OFF;
     msg_t msg;
     int index = 0;
     msg_init_queue(msg_queue, MSG_QUEUE_SIZE);
@@ -54,7 +54,7 @@ static void *led_control(void *arg) {
 			       (unsigned int) mode);
 	    }
 		if (mode == LED_MODE_LEFT) {
-		    if (index > (LED_ARRAY_SIZE - 2))) {
+		    if (index > (LED_ARRAY_SIZE - 3)) {
 				index = 0;
 		    }
 		    write_led(led_array, index,       0, 10, 0);
@@ -63,7 +63,7 @@ static void *led_control(void *arg) {
 		    index++;
 		} else if (mode == LED_MODE_RIGHT) {
 		    if (index < 2) {
-				index = LED_ARRAY_SIZE;
+				index = LED_ARRAY_SIZE - 1;
 		    }
 		    write_led(led_array, index,       0, 10, 0);
 		    write_led(led_array, (index - 1), 0, 50, 0);
@@ -101,13 +101,7 @@ static void send_zero(void) {
 	LED_R_OFF;
 	LED_R_OFF;
 	LED_R_OFF;
-	LED_R_OFF;
-	LED_R_OFF;
-	LED_R_OFF;
-	LED_R_OFF;
-	LED_R_OFF;
-	LED_R_OFF;
-	LED_R_OFF;
+	
 	
 	for(int i=0;i<16;i++)
 	{
