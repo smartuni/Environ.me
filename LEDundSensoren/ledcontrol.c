@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "periph/spi.h"
 #include "periph/gpio.h"
+#include "board.h"
 
 void sendHigh(int dev)
 {
@@ -49,20 +50,72 @@ void sendArray(unsigned int array[], int dev)
 
 void sendeNull(void)
 {
-	gpio_set(1);
-//	gpio_set(1);
-	gpio_clear(1);
-	gpio_clear(1);
-	gpio_clear(1);
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	for(int i=0;i<16;i++)
+	{
+		LED_R_ON;
+	}
 }
 
 void sendeEins(void)
 {
-	gpio_set(1);
-	gpio_set(1);
-//	gpio_set(1);
-	gpio_clear(1);
-	gpio_clear(1);
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	LED_R_OFF;
+	LED_R_OFF;
+	
+	for(int i=0;i<16;i++)
+	{
+		LED_R_ON;
+	}
 }
 
 void sendeArray(unsigned int array[])

@@ -159,7 +159,7 @@ void *fifth_thread(void *arg)			//sendet 20fps ans led band
 
 int main(void)
 {
-	int retVal = 0;
+/*	int retVal = 0;
 	
 	// DIO 11, auf dem board, neben der rgb-led, 6. von oben
 	retVal = gpio_init(1, GPIO_DIR_OUT, GPIO_PULLDOWN);
@@ -168,30 +168,30 @@ int main(void)
 	{
 		puts("GPIO_init pin Failed");
 		return -1;
-	}
+	}*/
 	
 	resetArray(colorArray);
 	
 	(void) thread_create(
             t2_stack, sizeof(t2_stack),
-            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
             second_thread, NULL, "nr2");
             
         
         (void) thread_create(
             t3_stack, sizeof(t3_stack),
-            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
             third_thread, NULL, "nr3");
    
     	
     	(void) thread_create(
             t4_stack, sizeof(t4_stack),
-            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
             fourth_thread, NULL, "nr4");
 
 	(void) thread_create(
             t5_stack, sizeof(t5_stack),
-            THREAD_PRIORITY_MAIN - 1, CREATE_WOUT_YIELD | CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
             fifth_thread, NULL, "nr5");
     	
     	while(1)
