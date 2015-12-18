@@ -29,6 +29,7 @@
 #include "periph/gpio.h"
 #include "ledcontrol.h"
 #include "tcs37727.h"
+#include "coSensor.h"
 
 #define SLEEP       (1000 * 1000U)
 
@@ -40,21 +41,40 @@ char t5_stack[THREAD_STACKSIZE_MAIN];
 
 unsigned int colorArray[30];
 
-void *second_thread(void *arg)			//sendet 20fps ans led band
+void *second_thread(void *arg)			//wertet den Kohlenmonoxid-Sensor aus
 {
     (void) arg;
+    int value=0;
+    float x = 0.0f;
+
+    printf("Initializing ADC_%i @ %i bit resolution", 0, (6 + (2* RES)));
+    if (adc_init(0, RES) == 0)
+    {
+        puts("    ...[ok]");
+    }
+    else
+    {
+        puts("    ...[failed]");
+        return 1;
+    }
+
+    puts("\n");
     
     while(1)
     {
-    	sendeArray(colorArray);
-    	xtimer_usleep(50000);
+    	value = adc_sample(0, 0);
+    	printf("adc-wert: %i \n", value);
+
+    	x=adcCoCalc(value);
+    	printf("berechneter Kohlenmonoxid-Wert: %.3f ppm\n", x);
+    	xtimer_usleep(500000);
     }
     
     return NULL;
 }
 
 
-void *third_thread(void *arg)			//verändert das led-color-array
+void *third_thread(void *arg)			//verändert das led-color-array und sendet es ans Ledband
 {
     (void) arg;
     int index = 0;
@@ -77,7 +97,7 @@ void *third_thread(void *arg)			//verändert das led-color-array
 			resetArray(colorArray);
 			index=0;
 		}
-		
+		sendeArray(colorArray);
 		xtimer_usleep(50000);
 
 	}
@@ -122,7 +142,7 @@ void *fourth_thread(void *arg)			//init hdc1000 und temp auslesen
 }
 
 
-void *fifth_thread(void *arg)			//sendet 20fps ans led band
+void *fifth_thread(void *arg)			//liest tcs37727 aus
 {
     (void) arg;
     
@@ -159,16 +179,6 @@ void *fifth_thread(void *arg)			//sendet 20fps ans led band
 
 int main(void)
 {
-/*	int retVal = 0;
-	
-	// DIO 11, auf dem board, neben der rgb-led, 6. von oben
-	retVal = gpio_init(1, GPIO_DIR_OUT, GPIO_PULLDOWN);
-	
-	if(retVal!=0)
-	{
-		puts("GPIO_init pin Failed");
-		return -1;
-	}*/
 	
 	resetArray(colorArray);
 	
