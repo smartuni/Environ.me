@@ -36,8 +36,8 @@ int main(void) {
 
     // Initializse sensors
     if (!init_sensors()) {
-    	puts("[main] ERROR: Sensor initializition failed");
-    	return -1;
+        puts("[main] ERROR: Sensor initializition failed");
+        return -1;
     }
 
     // start LED control
@@ -55,37 +55,37 @@ int main(void) {
 
 static int measure_temperature(int argc, char **argv) {
     printf("[main] INFO:  Temperature = %d / 100 degree Celsius\n",
-	       get_temperature());
+           get_temperature());
     return 0;
 }
 
 static int measure_humidity(int argc, char **argv) {
     printf("[main] INFO:  Humidity = %d / 100 Percent\n",
-	       get_humidity());
+           get_humidity());
     return 0;
 }
 
 static int measure_illuminance(int argc, char **argv) {
     printf("[main] INFO:  Illuminance = %ld lux\n",
-	       get_illuminance());
+           get_illuminance());
     return 0;
 }
 
 static int control_led(int argc, char **argv) {
     if (argc != 2) {
-    	puts("[main] INFO:  Usage: led <mode>");
-    	puts("[main] INFO:         mode = 0 (off), 1 (left), 2 (right)");
-    	return 1;
+        puts("[main] INFO:  Usage: led <mode>");
+        puts("[main] INFO:         mode = 0 (off), 1 (left), 2 (right)");
+        return 1;
     }
     switch (argv[1][0]) {
         case '1':
-	        set_led(LED_MODE_LEFT);
-	        break;
+            set_led(LED_MODE_LEFT);
+            break;
         case '2':
-	        set_led(LED_MODE_RIGHT);
-	        break;
+            set_led(LED_MODE_RIGHT);
+            break;
         default:
-	        set_led(LED_MODE_OFF);
+            set_led(LED_MODE_OFF);
     }
     return 0;
 }
