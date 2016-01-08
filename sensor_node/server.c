@@ -137,7 +137,7 @@ static void *server(void *arg) {
             dump(server_buffer, recv_len, true);
             inet_ntop(AF_INET6, &(client_addr.sin6_addr), client_addr_str,
                       sizeof(client_addr_str));
-            printf("\nFrom: %s\n", client_addr_str);
+            printf("\nFrom: [%s]:%u\n", client_addr_str, ntohs(client_addr.sin6_port));
             if (0 != (rc = coap_parse(&inpkt, server_buffer, recv_len))) {
                 printf("[coap_server] ERROR: Bad packet rc=%d\n", rc);
             } else {
@@ -176,11 +176,13 @@ static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_l
         return 1;
     }
     
+    //client_addr->sin6_port = htons((uint16_t)PORT);
+    
     inet_ntop(AF_INET6, &(client_addr->sin6_addr), addr_str, sizeof(addr_str));
     puts("[coap_server]  INFO: Sending response:");
     printf("[coap_server]  INFO:     Data = ");
     dump(rsp, rsp_len, true);
-    printf("\n[coap_server]  INFO:   Client = [%s]:%u\n", addr_str, client_addr->sin6_port);
+    printf("\n[coap_server]  INFO:   Client = [%s]:%u\n", addr_str, ntohs(client_addr->sin6_port));
     
     if((send_len = sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)client_addr,
               client_addr_len)) < 0) {
