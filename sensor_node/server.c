@@ -15,6 +15,10 @@
 // led control header
 #include "ledcontrol.h"
 
+#ifndef THREAD_CREATE_STACKTEST 
+#define THREAD_CREATE_STACKTEST CREATE_STACKTEST
+#endif
+
 #define BUFFER_SIZE       (256)
 #define MSG_QUEUE_SIZE    (64)
 #define PORT              (5683)
@@ -35,6 +39,10 @@ static int get_illuminance_handle(coap_rw_buffer_t *scratch,
                                   const coap_packet_t *inpkt,
                                   coap_packet_t *outpkt,
                                   uint8_t id_hi, uint8_t id_lo);
+static int get_all_handle(coap_rw_buffer_t *scratch,
+                          const coap_packet_t *inpkt,
+                          coap_packet_t *outpkt,
+                          uint8_t id_hi, uint8_t id_lo);
 static int put_led_handle(coap_rw_buffer_t *scratch,
                           const coap_packet_t *inpkt,
                           coap_packet_t *outpkt,
@@ -47,12 +55,14 @@ static void dumpPacket(coap_packet_t *pkt);
 static const coap_endpoint_path_t temperature_path = {1, {"temperature"}};
 static const coap_endpoint_path_t humidity_path = {1, {"humidity"}};
 static const coap_endpoint_path_t illuminance_path = {1, {"illuminance"}};
+static const coap_endpoint_path_t all_path = {1, {"all"}};
 static const coap_endpoint_path_t led_path = {1, {"led"}};
 const coap_endpoint_t endpoints[] =
 {
     {COAP_METHOD_GET, get_temperature_handle, &temperature_path, "ct=0"},
     {COAP_METHOD_GET, get_humidity_handle, &humidity_path, "ct=0"},
     {COAP_METHOD_GET, get_illuminance_handle, &illuminance_path, "ct=0"},
+    {COAP_METHOD_GET, get_all_handle, &all_path, "ct=0"},
     {COAP_METHOD_PUT, put_led_handle, &led_path, "ct=0"},
     {(coap_method_t)0, NULL, NULL, NULL}
 };
@@ -155,19 +165,30 @@ static void *server(void *arg) {
 static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_len) {
     size_t client_addr_len = sizeof(*client_addr);
     int rsp_socket = -1;
-    printf("client_addr_len = %d\nclient_addr = ", client_addr_len);
-    dump((uint8_t *)client_addr, client_addr_len, true);
-    puts("");
+    
+    char addr_str[IPV6_ADDR_MAX_STR_LEN+4];
+    int send_len = -2;
+    
     rsp_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (rsp_socket < 0) {
         puts("[coap_server] ERROR: Initializing rsp socket failed");
         rsp_socket = 0;
         return 1;
     }
-    if(sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)client_addr,
-              client_addr_len) < 0) {
+    
+    inet_ntop(AF_INET6, &(client_addr->sin6_addr), addr_str, sizeof(addr_str));
+    puts("[coap_server]  INFO: Sending response:");
+    printf("[coap_server]  INFO:     Data = ");
+    dump(rsp, rsp_len, true);
+    printf("\n[coap_server]  INFO:   Client = [%s]:%u\n", addr_str, client_addr->sin6_port);
+    
+    if((send_len = sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)client_addr,
+              client_addr_len)) < 0) {
         puts("[coap_server] ERROR: Sending response failed");
     }
+    
+    printf("[coap_server]  INFO: Send %d bytes\n", send_len);
+    
     close(rsp_socket);
     return 0;
 }
@@ -208,6 +229,23 @@ static int get_illuminance_handle(coap_rw_buffer_t *scratch,
     puts("[coap_server] INFO: Handling get illuminance response");
     illuminance = get_illuminance();
     sprintf(response, "%ld", illuminance);
+    return coap_make_response(scratch, outpkt, (const uint8_t *)response,
+                              strlen(response), id_hi, id_lo,
+                              &inpkt->tok, COAP_RSPCODE_CONTENT,
+                              COAP_CONTENTTYPE_TEXT_PLAIN);
+}
+
+
+static int get_all_handle(coap_rw_buffer_t *scratch,
+                          const coap_packet_t *inpkt,
+                          coap_packet_t *outpkt,
+                          uint8_t id_hi, uint8_t id_lo) {
+    puts("[coap_server] INFO: Handling get all response");
+    int temp;
+    int hum;
+    long lux;
+    get_all(&temp, &hum, &lux);
+    sprintf(response, "%d,%d,%ld", temp, hum, lux);
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
                               strlen(response), id_hi, id_lo,
                               &inpkt->tok, COAP_RSPCODE_CONTENT,

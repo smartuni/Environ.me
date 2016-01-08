@@ -15,6 +15,10 @@
 #define PORT              (5683)
 #define MAX_RESPONSE_SIZE (64)
 
+#ifndef THREAD_CREATE_STACKTEST 
+#define THREAD_CREATE_STACKTEST CREATE_STACKTEST
+#endif
+
 static void *client_recv(void *arg);
 static int request_temperature(int argc, char **argv);
 static void dumpHeader(coap_header_t *hdr);
@@ -48,7 +52,7 @@ int main(void) {
     puts("[main] ================");
 
     thread_create(thread_stack, sizeof(thread_stack), THREAD_PRIORITY_MAIN,
-		  CREATE_STACKTEST, client_recv, NULL, "client_receiver");
+		  THREAD_CREATE_STACKTEST, client_recv, NULL, "client_receiver");
     
 
     // start shell

@@ -4,14 +4,14 @@
 #include "board.h"
 #include "xtimer.h"
 #include "hdc1000.h"
-#include "tcs37727.h"
+//#include "tcs37727.h"
 
 #ifndef INT32_MIN
 #define INT32_MIN -2147483648
 #endif
 
 static hdc1000_t hdcDev;
-static tcs37727_t tcsDev;
+//static tcs37727_t tcsDev;
 
 static void hdc1000_measure(int *temp, int *hum);
 
@@ -23,14 +23,14 @@ int init_sensors(void) {
         puts("[sensors] ERROR: HDC1000 initialisation failed");
         return 0;
     }
-    // illuminance sensor
+    /*// illuminance sensor
     if (tcs37727_init(&tcsDev, 0, TCS37727_I2C_ADDRESS, TCS37727_ATIME_DEFAULT)
             == 0) {
         puts("[sensors] INFO: TCS37727 initialisation success");
     } else {
         puts("[sensors] ERROR: TCS37727 initialisation failed");
         return 0;
-    }
+    }*/
     return 1;
 }
 
@@ -62,7 +62,7 @@ void hdc1000_measure(int *temp, int *hum) {
 }
 
 long get_illuminance(void) {
-    tcs37727_data_t data;
+    /*tcs37727_data_t data;
     if (tcs37727_set_rgbc_active(&tcsDev) != 0) {
         puts("[sensors] ERROR: TCS37727 activation failed");
         return -1;
@@ -81,5 +81,11 @@ long get_illuminance(void) {
     if (tcs37727_set_rgbc_standby(&tcsDev) != 0) {
         puts("[sensors] ERROR: TCS37727 deactivation failed");
     }
-    return data.lux;
+    return data.lux;*/
+    return 0;
+}
+
+void get_all(int *temp, int *hum, long *lux) {
+    hdc1000_measure(temp, hum);
+    *lux = get_illuminance();
 }

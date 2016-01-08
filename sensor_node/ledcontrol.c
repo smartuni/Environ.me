@@ -8,6 +8,10 @@
 #include "ledcontrol.h"
 #include "board.h"
 
+#ifndef THREAD_CREATE_STACKTEST 
+#define THREAD_CREATE_STACKTEST CREATE_STACKTEST
+#endif
+
 #define MSG_QUEUE_SIZE (64)
 #define LED_ARRAY_SIZE (30)
 
