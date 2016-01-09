@@ -21,7 +21,7 @@ void resetArray(unsigned int array[])	//writes all data in given array to zero
 }
 
 
-void sendeNull(void)	//sends bit pattern needed for detecting one logic Low (450ns High >0.7V, 800ns Low <0.3V) on led pin,
+void sendeNull(void)	//sends bit pattern needed for detecting one logic Low (350ns High [>0.7V / +-150ns], 800ns Low [<0.3V / +-150ns]) on led pin,
 			//timings change frequently with updates of Riot, so the ugly coding style means the only way to keep timings in needed conditions
 {
 	LED_R_OFF;
@@ -47,7 +47,7 @@ void sendeNull(void)	//sends bit pattern needed for detecting one logic Low (450
 	}
 }
 
-void sendeEins(void)	//sends bit pattern needed for detecting one logic High (850ns High >0.7V, 400ns Low <0.3V) on led pin,
+void sendeEins(void)	//sends bit pattern needed for detecting one logic High (700ns High [>0.7V / +-150ns], 600ns Low [<0.3V / +-150ns]) on led pin,
 			//timings change frequently with updates of Riot, so the ugly coding style means the only way to keep timings in needed conditions
 {
 	LED_R_OFF;
