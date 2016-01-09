@@ -25,7 +25,6 @@
 #include "xtimer.h"
 #include "thread.h"
 #include "hdc1000.h"
-//#include "periph/spi.h"
 #include "periph/gpio.h"
 #include "ledcontrol.h"
 #include "tcs37727.h"
@@ -41,7 +40,7 @@ char t5_stack[THREAD_STACKSIZE_MAIN];
 
 unsigned int colorArray[30];
 
-void *second_thread(void *arg)			//wertet den Kohlenmonoxid-Sensor aus
+void *second_thread(void *arg)			//reads carbon monoxide sensor's value on adc pin and displays calculated ppm value
 {
     (void) arg;
     int value=0;
@@ -63,10 +62,10 @@ void *second_thread(void *arg)			//wertet den Kohlenmonoxid-Sensor aus
     while(1)
     {
     	value = adc_sample(0, 0);
-    	printf("adc-wert: %i \n", value);
+    	printf("adc value: %i \n", value);
 
     	x=adcCoCalc(value);
-    	printf("berechneter Kohlenmonoxid-Wert: %.3f ppm\n", x);
+    	printf("calculated CO value: %.3f ppm\n", x);
     	xtimer_usleep(500000);
     }
     
@@ -74,7 +73,7 @@ void *second_thread(void *arg)			//wertet den Kohlenmonoxid-Sensor aus
 }
 
 
-void *third_thread(void *arg)			//verändert das led-color-array und sendet es ans Ledband
+void *third_thread(void *arg)			//continously changes color values in colorArray and sends it to the led stripe
 {
     (void) arg;
     int index = 0;
@@ -82,11 +81,6 @@ void *third_thread(void *arg)			//verändert das led-color-array und sendet es a
     
     while(1)
 	{
-		/*
-		if(index>0)
-		{
-			writeLed(colorArray,index-1,0,0,0);
-		}*/
 		resetArray(colorArray);
 		writeLed(colorArray,index,0,10,0);
 		writeLed(colorArray,index+1,0,50,0);
@@ -104,7 +98,7 @@ void *third_thread(void *arg)			//verändert das led-color-array und sendet es a
     return NULL;
 }
 
-void *fourth_thread(void *arg)			//init hdc1000 und temp auslesen
+void *fourth_thread(void *arg)			//inits hdc1000, reads temperature value and displays raw and calculated temp data
 {
     	(void) arg;
    	hdc1000_t devHdc;
@@ -142,7 +136,7 @@ void *fourth_thread(void *arg)			//init hdc1000 und temp auslesen
 }
 
 
-void *fifth_thread(void *arg)			//liest tcs37727 aus
+void *fifth_thread(void *arg)			//inits tcs37727, reads light data and displays values
 {
     (void) arg;
     
@@ -177,7 +171,7 @@ void *fifth_thread(void *arg)			//liest tcs37727 aus
 }
 
 
-int main(void)
+int main(void)		//only used to generate independent threads and sleep in while loop
 {
 	
 	resetArray(colorArray);
