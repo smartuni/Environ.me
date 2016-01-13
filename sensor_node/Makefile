@@ -26,7 +26,7 @@ USEMODULE += shell_commands
 USEMODULE += ps
 # Add sensor modules
 USEMODULE += hdc1000
-#USEMODULE += tcs37727
+#USEMODULE += tcs37727	# not supported in RIOT 2015.09-branch
 # Timer
 USEMODULE += xtimer
 

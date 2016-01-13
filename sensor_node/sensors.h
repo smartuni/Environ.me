@@ -1,3 +1,10 @@
+/**
+ * @brief  Header for the sensors module.
+ * 
+ * @author Ruediger Bartz
+ * @author Timo Gerken
+ */
+
 #ifndef SENSORS_H
 #define SENSORS_H
 

@@ -1,3 +1,10 @@
+/**
+ * @brief  CoAP server module of the sensor node.
+ * 
+ * @author Ruediger Bartz
+ * @author Timo Gerken
+ */
+
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,20 +15,18 @@
 #include <unistd.h>
 #include "thread.h"
 #include "coap.h"
-// own header
 #include "server.h"
-// sensors header
 #include "sensors.h"
-// led control header
 #include "ledcontrol.h"
 
+// RIOT changed the constants name during development
 #ifndef THREAD_CREATE_STACKTEST 
 #define THREAD_CREATE_STACKTEST CREATE_STACKTEST
 #endif
 
 #define BUFFER_SIZE       (256)
 #define MSG_QUEUE_SIZE    (64)
-#define PORT              (5683)
+#define PORT              (5683)    // receive UDP port for the CoAP server
 #define RSP_BUFFER_SIZE   (64)
 
 static void *server(void *arg);
@@ -52,11 +57,13 @@ static void dump(const uint8_t *buf, size_t buflen, bool bare);
 static void dumpOptions(coap_option_t *opts, size_t numopt);
 static void dumpPacket(coap_packet_t *pkt);
 
+// define the CoAP paths
 static const coap_endpoint_path_t temperature_path = {1, {"temperature"}};
 static const coap_endpoint_path_t humidity_path = {1, {"humidity"}};
 static const coap_endpoint_path_t illuminance_path = {1, {"illuminance"}};
 static const coap_endpoint_path_t all_path = {1, {"all"}};
 static const coap_endpoint_path_t led_path = {1, {"led"}};
+// define supported CoAP requests with their handler
 const coap_endpoint_t endpoints[] =
 {
     {COAP_METHOD_GET, get_temperature_handle, &temperature_path, "ct=0"},
@@ -75,7 +82,7 @@ static coap_rw_buffer_t scratch_buffer = {scratch_raw,  sizeof(scratch_raw)};
 static char response[RSP_BUFFER_SIZE];
 
 /**
- * @brief start CoAP server thread
+ * @brief Start CoAP server thread.
  */
 void start_server(void) {
     thread_create(thread_stack, sizeof(thread_stack), THREAD_PRIORITY_MAIN,
@@ -83,7 +90,7 @@ void start_server(void) {
 }
 
 /**
- * @brief CoAP server thread
+ * @brief CoAP server thread.
  *
  * @param[in] arg   unused
  */
@@ -98,30 +105,33 @@ static void *server(void *arg) {
         puts("[coap_server] ERROR: Invalid port specified");
         return NULL;
     }
+    // create posix IPv6 UDP socket
     server_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (server_socket < 0) {
         puts("[coap_server] ERROR: Initializing server socket failed");
         server_socket = 0;
         return NULL;
     }
+    // configure the servers IPv6 address structure
     server_addr.sin6_family = AF_INET6;
     memset(&server_addr.sin6_addr, 0, sizeof(server_addr.sin6_addr));
     server_addr.sin6_port = htons(port);
+    // bind the socket to the UDP port
     if (bind(server_socket, (struct sockaddr *)&server_addr,
-         sizeof(server_addr)) < 0) {
+             sizeof(server_addr)) < 0) {
         server_socket = -1;
         puts("[coap_server] ERROR: Binding socket failed");
         return NULL;
     }
     printf("[coap_server] INFO: Started CoAP server on port %" PRIu16 "\n",
            port);
+    // infinit loop to receive CoAP packages
     while (1) {
         int recv_len;
         size_t buffer_size = sizeof(server_buffer);
         int rc;
         struct sockaddr_in6 client_addr;
         socklen_t client_addr_len = sizeof(struct sockaddr_in6);
-        char client_addr_str[IPV6_ADDR_MAX_STR_LEN];
         // blocking receive, waiting for data
         if ((recv_len = recvfrom(server_socket, server_buffer, buffer_size, 0,
                                  (struct sockaddr *)&client_addr,
@@ -131,20 +141,19 @@ static void *server(void *arg) {
         else if (recv_len == 0) {
             puts("[coap_server] INFO: Peer did shut down");
         }
-        else { // CoAP part
+        else {
+            // CoAP part
             coap_packet_t inpkt;
-            puts("[coap_server] INFO: Received packet: ");
-            dump(server_buffer, recv_len, true);
-            inet_ntop(AF_INET6, &(client_addr.sin6_addr), client_addr_str,
-                      sizeof(client_addr_str));
-            printf("\nFrom: [%s]:%u\n", client_addr_str, ntohs(client_addr.sin6_port));
+            // check if the received data is a CoAP package
             if (0 != (rc = coap_parse(&inpkt, server_buffer, recv_len))) {
                 printf("[coap_server] ERROR: Bad packet rc=%d\n", rc);
             } else {
                 coap_packet_t outpkt;
                 puts("Content:");
                 dumpPacket(&inpkt);
+                // handle the CoAP request and create the response
                 coap_handle_req(&scratch_buffer, &inpkt, &outpkt);
+                // copy the CoAP response packages raw bytes into server buffer
                 if (0 != (rc = coap_build(server_buffer, &buffer_size,
                                           &outpkt))) {
                     printf("[coap_server] ERROR: coap_build failed rc=%d\n",
@@ -154,21 +163,29 @@ static void *server(void *arg) {
                     dump(server_buffer, buffer_size, true);
                     puts("\nContent:");
                     dumpPacket(&outpkt);
+                    // send the response to the client
                     send_rsp(&client_addr, server_buffer, buffer_size);
                 }
             }
         }
     }
-    return NULL;
+    return NULL;    // should never be reached
 }
 
+/**
+ * @brief Send the data in the response buffer to the client via a posix UDP socket.
+ * 
+ * @param[in] client_addr IPv6 address structure of the client to whom the data will be send to
+ * @param[in] rsp the response buffer whose data is send
+ * @param[in] rsp_len the number of bytes that will be send
+ * @return non 0 on error
+ */
 static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_len) {
     size_t client_addr_len = sizeof(*client_addr);
     int rsp_socket = -1;
-    
     char addr_str[IPV6_ADDR_MAX_STR_LEN+4];
-    int send_len = -2;
     
+    // create posix IPv6 UDP socket
     rsp_socket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
     if (rsp_socket < 0) {
         puts("[coap_server] ERROR: Initializing rsp socket failed");
@@ -176,6 +193,7 @@ static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_l
         return 1;
     }
     
+    // Uncomment when using the coap_client (workaround for a bug in the test client)
     //client_addr->sin6_port = htons((uint16_t)PORT);
     
     inet_ntop(AF_INET6, &(client_addr->sin6_addr), addr_str, sizeof(addr_str));
@@ -183,61 +201,103 @@ static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_l
     printf("[coap_server]  INFO:     Data = ");
     dump(rsp, rsp_len, true);
     printf("\n[coap_server]  INFO:   Client = [%s]:%u\n", addr_str, ntohs(client_addr->sin6_port));
-    
-    if((send_len = sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)client_addr,
-              client_addr_len)) < 0) {
+    // send CoAP response package to the client
+    if((sendto(rsp_socket, rsp, rsp_len, 0, (struct sockaddr *)client_addr,
+               client_addr_len)) < 0) {
         puts("[coap_server] ERROR: Sending response failed");
     }
-    
-    printf("[coap_server]  INFO: Send %d bytes\n", send_len);
-    
+    // cleanup
     close(rsp_socket);
     return 0;
 }
 
+/**
+ * @brief Handler for a GET /temperatur CoAP request.
+ *
+ * @param[in] scratch the scratch buffer needed for coap_make_response()
+ * @param[in] inpkt the received CoAP request package
+ * @param[out] outpkt the created CoAP response package
+ * @param[in] id_hi high byte of the CoAP message ID
+ * @param[in] id_lo low byte of the CoAP message ID
+ */
 static int get_temperature_handle(coap_rw_buffer_t *scratch,
                                   const coap_packet_t *inpkt,
                                   coap_packet_t *outpkt,
                                   uint8_t id_hi, uint8_t id_lo) {
     int temperature;
     puts("[coap_server] INFO: Handling get temperature response");
+    // measure the temperature
     temperature = get_temperature();
+    // copy temperature data into response buffer
     sprintf(response, "%d", temperature);
+    // create response package
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
                               strlen(response), id_hi, id_lo,
                               &inpkt->tok, COAP_RSPCODE_CONTENT,
                               COAP_CONTENTTYPE_TEXT_PLAIN);
 }
 
+/**
+ * @brief Handler for a GET /humidity CoAP request.
+ *
+ * @param[in] scratch the scratch buffer needed for coap_make_response()
+ * @param[in] inpkt the received CoAP request package
+ * @param[out] outpkt the created CoAP response package
+ * @param[in] id_hi high byte of the CoAP message ID
+ * @param[in] id_lo low byte of the CoAP message ID
+ */
 static int get_humidity_handle(coap_rw_buffer_t *scratch,
                                const coap_packet_t *inpkt,
                                coap_packet_t *outpkt,
                                uint8_t id_hi, uint8_t id_lo) {
     int humidity;
     puts("[coap_server] INFO: Handling get humidity response");
+    // measure the humidity
     humidity = get_humidity();
+    // copy humidity data into response buffer
     sprintf(response, "%d", humidity);
+    // create response package
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
                               strlen(response), id_hi, id_lo,
                               &inpkt->tok, COAP_RSPCODE_CONTENT,
                               COAP_CONTENTTYPE_TEXT_PLAIN);
 }
 
+/**
+ * @brief Handler for a GET /illuminace CoAP request.
+ *
+ * @param[in] scratch the scratch buffer needed for coap_make_response()
+ * @param[in] inpkt the received CoAP request package
+ * @param[out] outpkt the created CoAP response package
+ * @param[in] id_hi high byte of the CoAP message ID
+ * @param[in] id_lo low byte of the CoAP message ID
+ */
 static int get_illuminance_handle(coap_rw_buffer_t *scratch,
                                   const coap_packet_t *inpkt,
                                   coap_packet_t *outpkt,
                                   uint8_t id_hi, uint8_t id_lo) {
     long illuminance;
     puts("[coap_server] INFO: Handling get illuminance response");
+    // measure the illuminance
     illuminance = get_illuminance();
+    // copy illuminance data into response buffer
     sprintf(response, "%ld", illuminance);
+    // create response package
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
                               strlen(response), id_hi, id_lo,
                               &inpkt->tok, COAP_RSPCODE_CONTENT,
                               COAP_CONTENTTYPE_TEXT_PLAIN);
 }
 
-
+/**
+ * @brief Handler for a GET /all CoAP request.
+ *
+ * @param[in] scratch the scratch buffer needed for coap_make_response()
+ * @param[in] inpkt the received CoAP request package
+ * @param[out] outpkt the created CoAP response package
+ * @param[in] id_hi high byte of the CoAP message ID
+ * @param[in] id_lo low byte of the CoAP message ID
+ */
 static int get_all_handle(coap_rw_buffer_t *scratch,
                           const coap_packet_t *inpkt,
                           coap_packet_t *outpkt,
@@ -246,19 +306,33 @@ static int get_all_handle(coap_rw_buffer_t *scratch,
     int temp;
     int hum;
     long lux;
+    // measure all parameter
     get_all(&temp, &hum, &lux);
+    // copy all data into response buffer
     sprintf(response, "%d,%d,%ld", temp, hum, lux);
+    // create response package
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
                               strlen(response), id_hi, id_lo,
                               &inpkt->tok, COAP_RSPCODE_CONTENT,
                               COAP_CONTENTTYPE_TEXT_PLAIN);
 }
 
+/**
+ * @brief Handler for a PUT /led CoAP request.
+ *
+ * @param[in] scratch the scratch buffer needed for coap_make_response()
+ * @param[in] inpkt the received CoAP request package
+ * @param[out] outpkt the created CoAP response package
+ * @param[in] id_hi high byte of the CoAP message ID
+ * @param[in] id_lo low byte of the CoAP message ID
+ */
 static int put_led_handle(coap_rw_buffer_t *scratch,
                           const coap_packet_t *inpkt,
                           coap_packet_t *outpkt,
                           uint8_t id_hi, uint8_t id_lo) {
     puts("[coap_server] INFO: Handling put led response");
+    // set the mode of the LED band based on the first character
+    // in the payload of the CoAP request package
     if (inpkt->payload.len > 0) {
         if ((char)*(inpkt->payload.p) == '1') {
             set_led(LED_MODE_LEFT);
@@ -270,12 +344,18 @@ static int put_led_handle(coap_rw_buffer_t *scratch,
     } else {
         set_led(LED_MODE_OFF);
     }
+    // create response package
     return coap_make_response(scratch, outpkt, (const uint8_t *)response,
                               0, id_hi, id_lo,
                               &inpkt->tok, COAP_RSPCODE_CHANGED,
                               COAP_CONTENTTYPE_TEXT_PLAIN);
 }
 
+/**
+ * @brief Print the content of a CoAP header.
+ *
+ * @param[in] hdr CoAP header to print
+ */
 void dumpHeader(coap_header_t *hdr) {
     printf("Header:\n");
     printf("  ver  0x%02X\n", hdr->ver);
@@ -285,7 +365,13 @@ void dumpHeader(coap_header_t *hdr) {
     printf("  id   0x%02X%02X\n", hdr->id[0], hdr->id[1]);
 }
 
-
+/**
+ * @brief Print a buffer.
+ * 
+ * @param[in] buf the buffer to print
+ * @param[in] buflen number of bytes to print from the buffer
+ * @param[in] bare only print the buffers raw data
+ */
 void dump(const uint8_t *buf, size_t buflen, bool bare) {
     if (bare) {
         while(buflen--) {
@@ -300,6 +386,12 @@ void dump(const uint8_t *buf, size_t buflen, bool bare) {
     }
 }
 
+/**
+ * @brief Print CoAP options.
+ * 
+ * @param[in] opts CoAP options to print
+ * @param[in] numopt number of CoAp options to print
+ */
 void dumpOptions(coap_option_t *opts, size_t numopt) {
     size_t i;
     printf(" Options:\n");
@@ -310,6 +402,11 @@ void dumpOptions(coap_option_t *opts, size_t numopt) {
     }
 }
 
+/**
+ * @brief Print CoAP package.
+ * 
+ * @param[in] pkt CoAP package to print
+ */
 void dumpPacket(coap_packet_t *pkt) {
     dumpHeader(&pkt->hdr);
     dumpOptions(pkt->opts, pkt->numopts);

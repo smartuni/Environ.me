@@ -1,3 +1,10 @@
+/**
+ * @brief  Header for the led control module.
+ * 
+ * @author Ruediger Bartz
+ * @author Timo Gerken
+ */
+
 #ifndef LEDCONTROL_H
 #define LEDCONTROL_H
 

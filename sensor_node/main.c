@@ -1,8 +1,15 @@
+/**
+ * @brief  Main modlue of the Sensor node that initialies all other modules
+ *         and containes the shell.
+ * 
+ * @author Ruediger Bartz
+ * @author Timo Gerken
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "shell.h"
-
 #include "server.h"
 #include "sensors.h"
 #include "ledcontrol.h"
@@ -12,6 +19,7 @@ static int measure_humidity(int argc, char **argv);
 static int measure_illuminance(int argc, char **argv);
 static int control_led(int argc, char **argv);
 
+// definition of shell commands
 static const shell_command_t shell_commands[] =
 {
     {"temperature", "measure the temperature", measure_temperature},
@@ -22,7 +30,7 @@ static const shell_command_t shell_commands[] =
 };
 
 /**
- * @brief the main programm loop
+ * @brief The main programm loop
  *
  * @return non zero on error
  */
@@ -40,37 +48,65 @@ int main(void) {
         return -1;
     }
 
-    // start LED control
+    // start the LED control module
     start_led_control();
 
-    // start CoAP server
+    // start the CoAP server
     start_server();
 
-    // start shell
+    // start the shell
     char line_buf[SHELL_DEFAULT_BUFSIZE];
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 
-    return 0;
+    return 0;    // should never be reached
 }
 
+/**
+ * @brief Handler for the shell command to measure and print the temperature.
+ * 
+ * @param[in] argc number of argument strings
+ * @param[in] argv array of argument strings
+ * @return non 0 on error
+ */
 static int measure_temperature(int argc, char **argv) {
     printf("[main] INFO:  Temperature = %d / 100 degree Celsius\n",
            get_temperature());
     return 0;
 }
 
+/**
+ * @brief Handler for the shell command to measure and print the humidity.
+ * 
+ * @param[in] argc number of argument strings
+ * @param[in] argv array of argument strings
+ * @return non 0 on error
+ */
 static int measure_humidity(int argc, char **argv) {
     printf("[main] INFO:  Humidity = %d / 100 Percent\n",
            get_humidity());
     return 0;
 }
 
+/**
+ * @brief Handler for the shell command to measure and print the illuminance.
+ * 
+ * @param[in] argc number of argument strings
+ * @param[in] argv array of argument strings
+ * @return non 0 on error
+ */
 static int measure_illuminance(int argc, char **argv) {
     printf("[main] INFO:  Illuminance = %ld lux\n",
            get_illuminance());
     return 0;
 }
 
+/**
+ * @brief Handler for the shell command to change the mode of the LED band.
+ * 
+ * @param[in] argc number of argument strings
+ * @param[in] argv array of argument strings
+ * @return non 0 on error
+ */
 static int control_led(int argc, char **argv) {
     if (argc != 2) {
         puts("[main] INFO:  Usage: led <mode>");
