@@ -1,13 +1,5 @@
-/*
- * Copyright (C) 2014 Freie Universität Berlin
- *
- * This file is subject to the terms and conditions of the GNU Lesser
- * General Public License v2.1. See the file LICENSE in the top level
- * directory for more details.
- */
-
 /**
- * @ingroup     examples
+ * @ingroup     examples of how to use gas, light, temp, humidity sensors and ws2812 led stripe
  * @{
  *
  * @file
