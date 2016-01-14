@@ -91,7 +91,7 @@ void *third_thread(void *arg)			//continously changes color values in colorArray
 			resetArray(colorArray);
 			index=0;
 		}
-		sendeArray(colorArray);
+		sendArray(colorArray);
 		xtimer_usleep(50000);
 
 	}
