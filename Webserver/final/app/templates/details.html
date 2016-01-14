@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="shortcut icon" href="{{ url_for('static',filename="favicon.ico")}}" type="image/x-icon" />
+	<link rel="icon" href="{{ url_for('static',filename="favicon.ico")}}" type="image/x-icon" />
+      {% if title %}
+	<title>{{ title }}</title>
+      {% else %}
+	<title>Standard-Title</title>
+      {% endif %}
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+	window.onload = function () {
+
+		// dataPoints
+		var dataPoints1 = [];
+		var dataPoints2 = [];
+
+		var chart = new CanvasJS.Chart("chartContainer",{
+			zoomEnabled: true,
+			title: {
+				text: "{{ title }}"		
+			},
+			toolTip: {
+				shared: true
+				
+			},
+			legend: {
+				verticalAlign: "top",
+				horizontalAlign: "center",
+                                fontSize: 14,
+				fontWeight: "bold",
+				fontFamily: "calibri",
+				fontColor: "dimGrey"
+			},
+			axisX: {
+				title: ""
+			},
+			axisY:{
+				suffix: '°C',
+				includeZero: false
+			}, 
+			data: [{ 
+				// dataSeries1
+				type: "spline",
+				xValueType: "number",
+				showInLegend: true,
+				name: "Sensor 1",
+				dataPoints: dataPoints1
+			},
+			{				
+				// dataSeries2
+				type: "spline",
+				xValueType: "number",
+				showInLegend: true,
+				name: "Sensor 2" ,
+				dataPoints: dataPoints2
+			}],
+          legend:{
+            cursor:"pointer",
+            itemclick : function(e) {
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else {
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+		});
+
+
+
+		var updateInterval = 3000;
+		// initial value
+		var yValue1 = 640; 
+		var yValue2 = 604;
+		var t = 0;
+		var time = new Date;
+		time.setHours(9);
+		time.setMinutes(30);
+		time.setSeconds(00);
+		time.setMilliseconds(00);
+		// starting at 9.30 am
+
+		var updateChart = function (count) {
+			count = count || 1;
+			// count is number of times loop runs to generate random dataPoints. 
+
+			for (var i = 0; i < count; i++) {
+ 				
+ 				// add interval duration to time				
+ 				time.setTime(time.getTime()+ updateInterval);
+
+ 				// pushing the new values
+				if ({{temp10}} > -30000) {
+					dataPoints1.push({
+						x: 0,
+						y: {{temp10}}/100
+					});
+				}
+				if ({{temp11}} > -30000) {
+					dataPoints1.push({
+						x: 1,
+						y: {{temp11}}/100
+					});
+				}
+				if ({{temp12}} > -30000) {
+					dataPoints1.push({
+						x: 2,
+						y: {{temp12}}/100
+					});
+				}
+				if ({{temp13}} > -30000) {
+					dataPoints1.push({
+						x: 3,
+						y: {{temp13}}/100
+					});
+				}
+				if ({{temp14}} > -30000) {
+					dataPoints1.push({
+						x: 4,
+						y: {{temp14}}/100
+					});
+				}
+				if ({{temp15}} > -30000) {
+					dataPoints1.push({
+						x: 5,
+						y: {{temp15}}/100
+					});
+				}
+				if ({{temp16}} > -30000) {
+					dataPoints1.push({
+						x: 6,
+						y: {{temp16}}/100
+					});
+				}
+				if ({{temp17}} > -30000) {
+					dataPoints1.push({
+						x: 7,
+						y: {{temp17}}/100
+					});
+				}
+				if ({{temp18}} > -30000) {
+					dataPoints1.push({
+						x: 8,
+						y: {{temp18}}/100
+					});
+				}
+				if ({{temp19}} > -30000) {
+					dataPoints1.push({
+						x: 9,
+						y: {{temp19}}/100
+					});
+				}
+				
+				
+				if ({{temp20}} > -30000) {
+					dataPoints2.push({
+						x: 0,
+						y: {{temp20}}/100
+					});
+				}
+				if ({{temp21}} > -30000) {
+					dataPoints2.push({
+						x: 1,
+						y: {{temp21}}/100
+					});
+				}
+				if ({{temp22}} > -30000) {
+					dataPoints2.push({
+						x: 2,
+						y: {{temp22}}/100
+					});
+				}
+				if ({{temp23}} > -30000) {
+					dataPoints2.push({
+						x: 3,
+						y: {{temp23}}/100
+					});
+				}
+				if ({{temp24}} > -30000) {
+					dataPoints2.push({
+						x: 4,
+						y: {{temp24}}/100
+					});
+				}
+				if ({{temp25}} > -30000) {
+					dataPoints2.push({
+						x: 5,
+						y: {{temp25}}/100
+					});
+				}
+				if ({{temp26}} > -30000) {
+					dataPoints2.push({
+						x: 6,
+						y: {{temp26}}/100
+					});
+				}
+				if ({{temp27}} > -30000) {
+					dataPoints2.push({
+						x: 7,
+						y: {{temp27}}/100
+					});
+				}
+				if ({{temp28}} > -30000) {
+					dataPoints2.push({
+						x: 8,
+						y: {{temp28}}/100
+					});
+				}
+				if ({{temp29}} > -30000) {
+					dataPoints2.push({
+						x: 9,
+						y: {{temp29}}/100
+					});
+				}
+ 
+ 			};
+ 
+ 			// updating legend text with  updated with y Value 
+ 			chart.options.data[0].legendText = "Sensor 1";
+ 			chart.options.data[1].legendText = "Sensor 2"; 
+ 
+ 			chart.render();
+ 
+ 		};
+ 
+ 		// generates first set of dataPoints
+ 		updateChart(1);	
+ 		 
+ 		// update chart after specified interval 
+ 		//setInterval(function(){updateChart()}, updateInterval);
+ 	}
+ 	</script>
+	<script type="text/javascript" src="/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+<div id="home">
+<a href="/index"><button>Home</button></a></p>
+</div>
+<div id="ti">
+<h1>{{ title }}</h1></p>
+</div>
+
+{{temp09}}
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+</body>
+</html>

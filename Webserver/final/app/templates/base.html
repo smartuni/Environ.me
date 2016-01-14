@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+   <head>
+	<link rel="shortcut icon" href="{{ url_for('static',filename="favicon.ico")}}" type="image/x-icon" />
+	<link rel="icon" href="{{ url_for('static',filename="favicon.ico")}}" type="image/x-icon" />
+      {% if title %}
+	<title>{{ title }}</title>
+      {% else %}
+	<title>Standard-Title</title>
+      {% endif %}
+   </head>
+
+   <body>
+      <div><a href="/index"><button>Home</button></a></div>
+      {% if title %}
+	<h1>{{ title }}</h1>
+      {% else %}
+        <h1>Environ.me!!!</h1>
+      {% endif %}
+      <h2>The date and time on the server is: {{ time }}</h2>
+      <img src="{{ url_for('static',filename="raumplan2.PNG")}}" width="400" height="300"/>
+	  <img src="{{ url_for('static',filename="logo-large.png")}}" width="195" height="88"/>
+      <hr>
+      {% block content %}{% endblock %}
+   </body>
+</html>

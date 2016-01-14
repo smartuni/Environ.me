@@ -1,0 +1,76 @@
+Meine DB heisst Environme, aber dass kann ich in Python schnell anpassen.
+Ich hatte einen User 'monitor' mit PW 'Raspberry' angelegt, lässt sich aber auch schnell anpassen.
+Hier die Tabellen, aber humidity habe ich noch nicht benutzt und sensorValues ist alt und wird nicht mehr benutzt:
+
+SHOW TABLES;
++---------------------+
+| Tables_in_Environme |
++---------------------+
+| --humidity            |
+|-------- sensorValues        |
+| sensors             |
+| temperatures        |
++---------------------+
+
+
+show fields in sensors;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| ipv6     | varchar(50) | YES  |     | NULL    |                |
+| Position | varchar(50) | YES  |     | NULL    |                |
+| led      | int(11)     | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+
+SELECT * FROM sensors;
++----+-----------------------------------------+------------------+------+
+| id | ipv6                                    | Position         | led  |
++----+-----------------------------------------+------------------+------+
+|  1 | 2001:0db8:85a3:08d3:1319:8a2e:0370:7344 | R07.61 BT7       |    0 |
+|  2 | 3001:0db8:85a3:08d3:1319:8a2e:0370:7344 | Flur 7.Stock BT7 |    0 |
++----+-----------------------------------------+------------------+------+
+
+
+
+show fields in temperatures;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+| sensor_id   | int(11)     | YES  | MUL | NULL    |                |
+| dt          | varchar(16) | YES  |     | NULL    |                |
+| temperature | int(11)     | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+
+SELECT * FROM temperatures;
++----+-----------+------------------+-------------+
+| id | sensor_id | dt               | temperature |
++----+-----------+------------------+-------------+
+|  1 |         1 | 2016-01-13 12:00 |        2250 |
+|  2 |         2 | 2016-01-13 12:00 |        1715 |
+|  3 |         1 | 2016-01-13 12:02 |        2360 |
+|  4 |         2 | 2016-01-13 12:02 |        1747 |
++----+-----------+------------------+-------------+
+
+
+show fields in humidity;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| sensor_id | int(11)     | YES  | MUL | NULL    |                |
+| dt        | varchar(16) | YES  |     | NULL    |                |
+| humidity  | int(11)     | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+SELECT * FROM humidity;
++----+-----------+------------------+----------+
+| id | sensor_id | dt               | humidity |
++----+-----------+------------------+----------+
+|  1 |         1 | 2016-01-13 12:00 |     4075 |
+|  2 |         2 | 2016-01-13 12:00 |     4316 |
+|  3 |         1 | 2016-01-13 12:02 |     4089 |
+|  4 |         2 | 2016-01-13 12:02 |     4328 |
++----+-----------+------------------+----------+

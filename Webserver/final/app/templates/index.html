@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Sensors</h1>
+	<!--- table with all sensors and buttons to switch led-mode -->
+	 <table>
+		<tr>
+		<td width="50"><b>ID</b></td><td width="350"><b>ipv6</b></td><td width="200"><b>Position</b></td><td width="100"><b>LED-Status</b></td><td width="100"><b>LEDs off</b></td><td width="100"><b>LEDs left</b></td><td width="100"><b>LEDs right</b></td>
+		</tr> 
+		{% for row in rows %}
+			<tr>
+				<td><b>{{ row[0] }}</b></td>
+				<td>{{ row[1] }}</td>
+				<td>{{ row[2] }}</td>
+				<td>{{ row[3] }}</td>
+				<td><input type="button" onclick="location.href='/writeLED_off'" name="OFF{{row[0]}}" value="LED{{row[0]}} off" {{ LED_off }}></td>
+				<td><input type="button" onclick="location.href='/writeLED_left'" name="LEFT{{row[0]}}" value="LED{{row[0]}} left" {{ LED_left }}></td>
+				<td><input type="button" onclick="location.href='/writeLED_right'" name="RIGHT{{row[0]}}" value="LED{{row[0]}} right" {{ LED_right }}></td>
+			</tr>
+		{% endfor %}
+	</table>
+	<div><a href="/details">Details</a></div>
+    <hr>
+	<!--- table with latest temperatures from each sensor -->
+    <h1>Latest Temperatures</h1>
+	<table>
+		<tr>
+		<td width="100"><b>Sensor ID</b></td><td width="200"><b>Datum+Zeit</b></td><td width="100"><b>Temperature</b></td>
+		</tr> 
+		{% for value1 in values1 %}
+			<tr>
+				<td><b>{{ value1[0] }}</b></td><td>{{ value1[1] }}</td><td>{{ value1[2]/100 }}°C</td>
+			</tr>
+		{% endfor %}
+		{% for value2 in values2 %}
+		<tr>
+			<td><b>{{ value2[0] }}</b></td><td>{{ value2[1] }}</td><td>{{ value2[2]/100 }}°C</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<hr>
+    <!--- table with maximum temperatures from each sensor -->
+	<h1>Maximum Temperatures</h1>
+	<table>
+		<tr>
+		<td width="100"><b>Sensor ID</b></td><td width="200"><b>Datum+Zeit</b></td><td width="100"><b>Temperature</b></td>
+		</tr>
+		{% for mt1 in maxt1 %}
+			<tr>
+				<td><b>{{ mt1[0] }}</b></td><td>{{ mt1[1] }}</td><td>{{ mt1[2]/100 }}°C</td>
+			</tr>
+		{% endfor %}
+		
+		{% for mt2 in maxt2 %}
+			<tr>
+				<td><b>{{ mt2[0] }}</b></td><td>{{ mt2[1] }}</td><td>{{ mt2[2]/100 }}°C</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
