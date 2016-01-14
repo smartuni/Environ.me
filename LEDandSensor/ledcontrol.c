@@ -1,3 +1,10 @@
+/*
+imlementation of functions to control the ws2812 stripe
+timings correct for RIOT branch 2015.9
+
+author Kai
+*/
+
 #include "ledcontrol.h"
 #include <string.h>
 #include <stdlib.h>
