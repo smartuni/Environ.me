@@ -21,37 +21,28 @@ void resetArray(unsigned int array[])	//writes all data in given array to zero
 }
 
 
-void sendeNull(void)	//sends signal to led-controller which creates bit pattern needed for detecting one logic Low (350ns High [>0.7V / +-150ns], 800ns Low [<0.3V / +-150ns]) on led pin,
+void sendZero(void)	//sends signal to led-controller which creates bit pattern needed for detecting one logic Low (350ns High [>0.7V / +-150ns], 800ns Low [<0.3V / +-150ns]) on led pin,
 			//timings change frequently with updates of Riot, so the ugly coding style means the only way to keep timings in needed conditions
 {
-	for(int i=0;i<7;i++)
-	{
-		LED_R_OFF;
-	}
-	
-
-	for(int i=0;i<15;i++)
-	{
-		LED_R_ON;
-	}
-}
-
-void sendeEins(void)	//sends signal to led-controller which creates bit pattern needed for detecting one logic High (700ns High [>0.7V / +-150ns], 600ns Low [<0.3V / +-150ns]) on led pin,
-			//timings change frequently with updates of Riot, so the ugly coding style means the only way to keep timings in needed conditions
-{
-	for(int i=0;i<7;i++)
-	{
-		LED_G_OFF;
-	}
-	
-	
 	for(int i=0;i<15;i++)
 	{
 		LED_G_ON;
 	}
+	
+	LED_R_TOGGLE;
 }
 
-void sendeArray(unsigned int array[])		//sends every bit in given data array on led pin
+void sendOne(void)	//sends signal to led-controller which creates bit pattern needed for detecting one logic High (700ns High [>0.7V / +-150ns], 600ns Low [<0.3V / +-150ns]) on led pin,
+			//timings change frequently with updates of Riot, so the ugly coding style means the only way to keep timings in needed conditions
+{
+	for(int i=0;i<15;i++)
+	{
+		LED_G_OFF;
+	}
+	LED_R_TOGGLE;
+}
+
+void sendArray(unsigned int array[])		//sends every bit in given data array on led pin
 {
 	for(int ledPosition=0;ledPosition<30;ledPosition++)
 		{
@@ -59,11 +50,11 @@ void sendeArray(unsigned int array[])		//sends every bit in given data array on 
 			{
 				if(((array[ledPosition]>>(23-bitPosition))&1)==1)
 				{
-					sendeEins();
+					sendOne();
 				}
 				else
 				{
-					sendeNull();
+					sendZero();
 				
 				}
 			}
