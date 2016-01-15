@@ -78,4 +78,8 @@ Possible solutions:
 
 * Check the timing with an oscilloscope and adjust the LED control module.
 * Use a second microcontroller for the control of the LED band.
-* Use the SPI MOSI line instead of the GPIO.
+* Use the SPI MOSI line instead of the GPIO. (Idle state must be LOW)
+
+### Response port ###
+
+The sensor node sends the response to the fixed client port 5683. Using the received client port did not work.
