@@ -1,5 +1,19 @@
 included files implement the usage of the temperature, humidity, light, gas sensor and the usage of the WS2812 led stripe:
 
+Hardware:
+Phytec Phywave kw2x, MQ-7 gas sensor, Ws2812 Led stripe.
+
+Software:
+RIOT OS branch 2015.09
+
+compile and flash via terminal command:
+(sudo) BOARD=pba-d-01-kw2x make flash
+
+for displaying data use terminal, open via terminal command:
+(sudo) BOARD=pba-d-01-kw2x make term
+
+
+
 writeLed(...) writes GRB-values for one led in corresponding array,
 
 resetArray(...) writes all values in led array to zero,
