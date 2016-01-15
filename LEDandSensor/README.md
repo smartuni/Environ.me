@@ -1,9 +1,9 @@
 included files implement the usage of the temperature, humidity, light, gas sensor and the usage of the WS2812 led stripe:
 
-Hardware:
+# Hardware:
 Phytec Phywave kw2x, MQ-7 gas sensor, Ws2812 Led stripe.
 
-Software:
+# Software:
 RIOT OS branch 2015.09
 
 compile and flash via terminal command:
