@@ -1,5 +1,5 @@
 /**
- * @ingroup     examples of how to use gas, light, temp, humidity sensors and ws2812 led stripe
+ * @ingroup     LED-COntrol.h
  * @{
  *
  * @file
