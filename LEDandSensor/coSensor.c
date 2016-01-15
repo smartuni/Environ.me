@@ -1,7 +1,7 @@
 /*
 implementation of the function to calculate the corresponding gas sensors ppm value to given adc value
 
-author Kai
+author Kai and Jens
 */
 
 #include "coSensor.h"
