@@ -1,3 +1,15 @@
+/**
+ * @ingroup     examples of how to use gas, light, temp, humidity sensors and ws2812 led stripe
+ * @{
+ *
+ * @file
+ * @brief       test app phytec board
+ *
+ * @author      Kai and Jens
+ *
+ * @}
+ */
+ 
 #ifndef LEDCONTROL_H
 #define LEDCONTROL_H
 
