@@ -121,66 +121,34 @@ void set_led(uint32_t new_mode) {
 
 /**
  * @brief Sends a 0 bit to the LED band via the GPIO of the red board LED.
+ 
+ * Sends bit pattern needed for detecting one logic Low (350ns High [>0.7V / +-150ns],
+ * 800ns Low [<0.3V / +-150ns]) on led pin, timings change frequently with updates of Riot,
+ * so the ugly coding style means the only way to keep timings in needed conditions.
  */
 static void send_zero(void) {
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    
-    
-    for(int i = 0; i < 16; i++) {
+    for(int i = 0; i < 3; i++) {
+        LED_R_OFF;
+    }
+
+    for(int i = 0; i < 10; i++) {
         LED_R_ON;
     }
 }
 
 /**
- * @brief Sends a 1 bit to the LED band via the GPIO of the red board LED
+ * @brief Sends a 1 bit to the LED band via the GPIO of the red board LED.
+ * 
+ * Sends bit pattern needed for detecting one logic High (700ns High [>0.7V / +-150ns],
+ * 600ns Low [<0.3V / +-150ns]) on led pin, timings change frequently with updates of Riot,
+ * so the ugly coding style means the only way to keep timings in needed conditions.
  */
 static void send_one(void) {
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
+    for(int i = 0; i < 4; i++) {
+        LED_R_OFF;
+    }
     
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    LED_R_OFF;
-    
-    LED_R_OFF;
-    LED_R_OFF;
-    
-    for(int i = 0; i < 16; i++) {
+    for(int i = 0; i < 10; i++) {
         LED_R_ON;
     }
 }
