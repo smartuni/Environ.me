@@ -1,9 +1,14 @@
-/*
-imlementation of functions to control the ws2812 stripe
-timings correct for RIOT branch 2015.9
-
-author Kai
-*/
+/**
+ * @ingroup     LED-Control
+ * @{
+ *
+ * @file
+ * @brief       test app phytec board
+ *
+ * @author      Kai and Jens
+ *
+ * @}
+ */
 
 #include "ledcontrol.h"
 #include <string.h>
