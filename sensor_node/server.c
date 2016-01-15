@@ -194,7 +194,7 @@ static int send_rsp(struct sockaddr_in6 *client_addr, uint8_t *rsp, size_t rsp_l
     }
     
     // Uncomment when using the coap_client (workaround for a bug in the test client)
-    //client_addr->sin6_port = htons((uint16_t)PORT);
+    client_addr->sin6_port = htons((uint16_t)PORT);
     
     inet_ntop(AF_INET6, &(client_addr->sin6_addr), addr_str, sizeof(addr_str));
     puts("[coap_server]  INFO: Sending response:");
