@@ -24,6 +24,10 @@
 
 #define SLEEP       (1000 * 1000U)
 
+#ifndef THREAD_CREATE_STACKTEST
+#define THREAD_CREATE_STACKTEST CREATE_STACKTEST
+#endif
+
 
 char t2_stack[THREAD_STACKSIZE_MAIN];
 char t3_stack[THREAD_STACKSIZE_MAIN];
@@ -170,24 +174,24 @@ int main(void)		//only used to generate independent threads and sleep in while l
 	
 	(void) thread_create(
             t2_stack, sizeof(t2_stack),
-            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_STACKTEST,
             second_thread, NULL, "nr2");
             
         
         (void) thread_create(
             t3_stack, sizeof(t3_stack),
-            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1,  THREAD_CREATE_STACKTEST,
             third_thread, NULL, "nr3");
    
     	
     	(void) thread_create(
             t4_stack, sizeof(t4_stack),
-            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1,  THREAD_CREATE_STACKTEST,
             fourth_thread, NULL, "nr4");
 
 	(void) thread_create(
             t5_stack, sizeof(t5_stack),
-            THREAD_PRIORITY_MAIN - 1, THREAD_CREATE_WOUT_YIELD | THREAD_CREATE_STACKTEST,
+            THREAD_PRIORITY_MAIN - 1,  THREAD_CREATE_STACKTEST,
             fifth_thread, NULL, "nr5");
     	
     	while(1)
